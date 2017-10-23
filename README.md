@@ -9,10 +9,10 @@ This code is just for my own learning purpose.
 
 4. Self-work R
 
-5. Jupyter : Jupyter documents
+5. Jupyter :
 
-..* Examples
-..* Self-work
+* Examples
+* Self-work
 
 6. TensorFlow : working with TensorFlow library
 
