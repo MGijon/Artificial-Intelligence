@@ -33,7 +33,7 @@ adalineGD <- function(X, y, n_iter = 10, eta = 0.01) {
       
       # compute net imput 
       z <- sum(w * X[j, ])
-      
+    
       # quantizer
       if (z < 0.0) {
         ypred <- -1

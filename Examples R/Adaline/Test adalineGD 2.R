@@ -177,3 +177,28 @@ g_std <- ggplot(df_stdlong, aes(x=epoch, y=value)) +
 
 # print plots
 print(g)
+
+# standarized data
+print(g_std)
+
+# Standardized vs non-standard data: Cost and error function
+eta <- 0.0001
+n_iter <- 300
+result1 <- adalineGD(Xns, yns, n_iter, eta)
+label <- rep("non-standard", dim(result1)[1])
+result1 <- cbind(label, result1)
+result2 <- adalineGD(Xns_std, yns, n_iter, eta)
+label <- rep("standard", dim(result2)[1])
+result2 <- cbind(label, result2)
+
+df <- rbind(result1, result2)
+
+# long format of data frame
+dflong <- melt(df, id.vars=c("epoch", "label"))
+head(dflong)
+
+ggplot(dflong, aes(x=epoch, y=value)) + 
+  geom_line(aes(color=label, linetype=label), size = 1) +
+  facet_grid(variable ~ ., scales = "free") + xlab("Epoch #") + ylab("") +
+  ggtitle("Cost and error function for a non-separable dataset \n and its standardized form: eta = 0.0001")
+
