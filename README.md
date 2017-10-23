@@ -1,20 +1,24 @@
 # Machine-Learning
 This code is just for my own learning purpose.
 
-1. Examples Python : a collection of examples writen in Python
+***
 
-2. Self-work Python 
+1. **Examples Python** : a collection of examples writen in Python
 
-3. Examples R : a collection of examples writen in R
+2. **Self-work Python** : working in ML with Python.
 
-4. Self-work R
+3. **Examples R** : a collection of examples writen in R.
 
-5. Jupyter :
+4. **Self-work R** : working in ML whit R.
 
-* Examples
-* Self-work
+5. **Jupyter** :
 
-6. TensorFlow : working with TensorFlow library
+* Examples : different examples of related topics commented.
 
+
+* Self-work : working with Jupiter Notebook in ML, commented work.
+
+
+6. **TensorFlow** : working with TensorFlow library.
 
 
