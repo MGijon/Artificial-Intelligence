@@ -11,18 +11,9 @@ print(X.shape)          # (442, 10)
 print(y.shape)          # (442,)
 
 
-#print(diabetes.DESCR) # raise attribute error(key)
-#print(diabetes.feature_names)
-
-
-
-
-
-
-
-
-
-
+print("we can print for instane the ? of the first 50 samples:\n")
+#print(len([X[i, 0] for i in range (50)]))        # 50 elements
+print([X[i, 0] for i in range (50)])
 
 
 
