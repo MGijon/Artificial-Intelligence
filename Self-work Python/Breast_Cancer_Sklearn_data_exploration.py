@@ -1,6 +1,6 @@
 from sklearn import datasets
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 ## information about the data : https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 ##                            : http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html#sklearn.datasets.load_breast_cancer
@@ -60,9 +60,71 @@ print(len(y))               # 569
 #print(np.corrcoef(X[:,0], X[:,1])) # between 'mean texture' and 'mean radius' there is a 0.32378189 coef correlation of Pearsons
 
 
+print("Print the 25th first values of the 'mean radius' variable:\n")
+print([X[i, 0] for i in range(25)])
 
+X_mean_radius_100 = [X[i, 0] for i in range(100)]
+X_mean_perimeter_100 = [X[i, 2] for i in range(100)]
 
+y_100 = y[0:100]
 
+# print(len(y_100))     # 100
+
+X_mean_radius_100_sick = [X_mean_radius_100[i] for i in range(100) if y_100[i] == 0]
+X_mean_radius_100_OK = [X_mean_radius_100[i] for i in range(100) if y_100[i] == 1]
+
+X_mean_perimeter_100_sick = [X_mean_perimeter_100[i] for i in range(100) if y_100[i] == 0]
+X_mean_perimeter_100_OK = [X_mean_perimeter_100[i] for i in range(100) if y_100[i] == 1]
+
+plt.scatter(X_mean_radius_100_sick, X_mean_perimeter_100_sick, color = 'red', label = 'sick')
+plt.scatter(X_mean_radius_100_OK, X_mean_perimeter_100_OK, color = 'green', label = 'ok')
+plt.xlabel('Radius')
+plt.ylabel('Perimeter')
+plt.title('Breast Cancer data set exploration 1')
+plt.legend() # add the 'label' attirbutes to the picture
+plt.savefig('Breast Cancer data set exploration 1.png')
+plt.show()
+
+## ------------------------
+## Now for all the data set:
+## ========================
+
+X_mean_radius_sick = [X[i, 0] for i in range(len(y)) if y[i] == 0]
+X_mean_radius_OK = [X[i, 0] for i in range(len(y)) if y[i] == 1]
+
+X_mean_perimeter_sick = [X[i, 2] for i in range(len(y)) if y[i] == 0]
+X_mean_perimeter_OK = [X[i, 2] for i in range(len(y)) if y[i] == 1]
+
+plt.scatter(X_mean_radius_OK, X_mean_perimeter_OK, color = 'green', label = 'ok')
+plt.scatter(X_mean_radius_sick , X_mean_perimeter_sick, color = 'red', label = 'sick')
+
+plt.xlabel('Radius')
+plt.ylabel('Perimeter')
+plt.title('Breast Cancer data set exploration 2')
+plt.legend() # add the 'label' attirbutes to the picture
+plt.savefig('Breast Cancer data set exploration 2.png')
+plt.show()
+
+# ------------------------
+## Now for all the data set and mean area:
+## ========================
+
+X_mean_area_sick = [X[i, 3] for i in range(len(y)) if y[i] == 0]
+X_mean_area_OK = [X[i, 3] for i in range(len(y)) if y[i] == 1]
+
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection = '3d')
+ax.scatter(X_mean_radius_OK, X_mean_perimeter_OK, X_mean_area_OK, color = 'green', label = 'ok')
+ax.scatter(X_mean_radius_sick, X_mean_perimeter_sick, X_mean_area_sick, color = 'red', label = 'sick')
+ax.set_xlabel('Radius')
+ax.set_ylabel('Perimeter')
+ax.set_zlabel('Area')
+plt.title('Breast Cancer data set exploration 3')
+plt.legend() # add the 'label' attirbutes to the picture
+plt.savefig('Breast Cancer data set exploration 3.png')
+plt.show()
 
 '''
 
