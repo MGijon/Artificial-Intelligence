@@ -22,3 +22,4 @@ This code is just for my own learning purpose.
 6. **TensorFlow** : working with TensorFlow library.
 
 
+* Embeddings : different examples of embeddings.
