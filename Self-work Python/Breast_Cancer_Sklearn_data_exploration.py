@@ -126,6 +126,7 @@ plt.legend() # add the 'label' attirbutes to the picture
 plt.savefig('Breast Cancer data set exploration 3.png')
 plt.show()
 
+
 '''
 
 https://github.com/scikit-learn/scikit-learn/blob/b661a9c8/sklearn/datasets/base.py#L390
