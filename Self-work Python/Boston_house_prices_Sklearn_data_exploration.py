@@ -1,6 +1,6 @@
 from sklearn import datasets
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 bh = datasets.load_boston()
 
@@ -11,37 +11,53 @@ print(bh.feature_names)     # ['CRIM' 'ZN' 'INDUS' 'CHAS' 'NOX' 'RM' 'AGE' 'DIS'
 
 #print(bh.DESCR)             # data set description
 
-import seaborn as sns
-
-sns.set(style = 'whitegrid', context = 'notebook')
-
-columns = ['CRIM', 'AGE', 'PTRATIO']
-
-## CRIM :     per capita crime rate by town
-## AGE :      proportion of owner-occupied units built prior to 1940
-## PTRATIO :  pupil-teacher ratio by town
-
-CRIM = X[:, 0]
-AGE = X[:, 6]
-PTRATIO = X[:, 10]
-
-print(type(CRIM))           # <class 'numpy.ndarray'>
+columnas = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
 
 
+print(type(y))   # <class 'numpy.ndarray'>
+print(y.shape)   # (506,)
+print(X.shape)   #( 506, 13)
 
+# Prices histogram
+plt.hist(y, 50)
+plt.title('Boston Houses Prices')
+plt.ylabel('Prices')
+plt.xlabel('')
+plt.savefig('Boston_house_prices_data_exploration_1.png')
+plt.show()
 
+# Scatterplot Crim/Age/Dis vs. prices
+plt.scatter(X[:, 0], y, c = 'b', label = 'Crime', marker = '^')
+plt.scatter(X[:, 6], y, c = 'r', label = 'Age', marker = 'o')
+plt.scatter(X[:, 7], y, c = 'g', label = 'Dis', marker  = (5, 1))
+plt.legend()
+plt.title('Prices against some variables')
+plt.xlabel('Variables')
+plt.ylabel('Prices')
+plt.savefig('Boston_house_prices_data_exploration_2.png')
+plt.show()
 
+# looking for correlation between crime and the others variables:
+Correlations =  [np.corrcoef(X[:, 0], X[:, i])[0, 1] for i in range(1,X.shape[1])]
 
+print(np.where(Correlations == max(Correlations)))   # (array([7]),)
 
+print(Correlations[7])                               # 0.62202890894
 
+# now looking for the correlations between every pair of variables:
+Correlations_matrix = np.ndarray((X.shape[1], X.shape[1])) # create a two dimensional array for every coeficient
+for i in range(X.shape[1]):
+    for j in range(X.shape[1]):
+        Correlations_matrix[i, j] = np.corrcoef(X[:, i], X[:, j])[0, 1]
 
+print(Correlations_matrix)
 
+# eliminate the 1's from the diagonal
+for i in range(X.shape[1])_
+    Correlations_matrix[i, i] = 0
 
-
-
-
-
-
+# look for the maximun value:
+# tengo que usar reshape y buscar los valores, o puedo directamente??
 '''
 
 
