@@ -31,6 +31,8 @@ for i, word in enumerate(words):
 plt.title('Some sentences of "The Room" (2003)')
 plt.show()
 
+print(model.most_similar('doggy'))
+print(model.most_similar(positive = ['doggy', 'men'], negative = ['assholes'])) # perro - gilipollas + hombre
 
 # source : https://machinelearningmastery.com/develop-word-embeddings-python-gensim/
 # source sentences : The Room (2003)
