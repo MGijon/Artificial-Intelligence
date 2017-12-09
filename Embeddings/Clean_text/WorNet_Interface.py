@@ -1,5 +1,9 @@
 from nltk.corpus import wordnet as wn
 
+### SYNSET: a set of synonyms that share a common meaning
+### ======
+### =====================================================
+
 wn.synsets('dog')
 
 ## The 'synsets' function has an optional argument that lests you constrain the part of
@@ -47,6 +51,10 @@ dog[0].examples()
 type(dog[0].examples())
 len(dog[0].examples())
 
+## LEMMA: represent a specifuc sense o a specific word
+## =====
+## ---------------------------------------------------
+
 dog[0].lemmas()
 type(dog[0].lemmas())
 len(dog[0].lemmas())
@@ -55,3 +63,14 @@ for w in dog[0].lemmas():
 
 wn.lemma('dog.n.01.dog')
 wn.lemma('dog.n.01.dog').synset()
+
+#######################################################
+
+print(wn.synset('dog.n.02'.definition())) # doesn't exist
+
+for i in wn.synsets('dog'):
+    print(i)
+
+print(wn.synset('frump.n.01').definition())
+for i in wn.synsets('dog'):
+    print(i.definition())
