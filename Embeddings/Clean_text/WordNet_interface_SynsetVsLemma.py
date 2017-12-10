@@ -22,16 +22,17 @@ for sense in cake_synsets:
     lemmas =  [l.name() for l in sense.lemmas()]
     print('Lemmas for sense : ' + sense.name() + ' ( ' + sense.definition() + ' ) - ' + str(lemmas))
 
-
-
-
-
-
-
-
-
-
-
-
-
 # source : http://justanoderbit.blogspot.com.es/2017/10/synset-vs-lemma.html
+
+################################################################################
+
+rocket_synsets = wn.synsets('rocket')
+
+for sense in rocket_synsets:
+    lemmas = [l.name() for l in sense.lemmas()]
+    print('Lemmas for sense : ' + sense.name() + ' ( ' + sense.definition() + ' ) - ' + str(lemmas))
+
+# how it works?
+print(rocket_synsets[0].lemmas())
+print(rocket_synsets[0].lemmas()[0])
+print(rocket_synsets[0].lemmas()[0].name())
