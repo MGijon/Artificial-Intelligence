@@ -88,3 +88,21 @@ car.member_meronyms()
 
 
 ################################################################################
+
+wn.synsets('men', pos = wn.NOUN)
+wn.synset('man.n.03').definition()
+
+man = wn.synset('man.n.03')
+
+man.hypernyms()
+
+man.hyponyms()
+
+man.member_holonyms()
+
+man.member_meronyms()
+
+
+
+
+################################################################################
