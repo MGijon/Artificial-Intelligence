@@ -33,6 +33,9 @@ for sense in rocket_synsets:
     print('Lemmas for sense : ' + sense.name() + ' ( ' + sense.definition() + ' ) - ' + str(lemmas))
 
 # how it works?
+print(rocket_synsets)
+print(rocket_synsets[0])
+print(rocket_synsets[0].definition())
 print(rocket_synsets[0].lemmas())
 print(rocket_synsets[0].lemmas()[0])
 print(rocket_synsets[0].lemmas()[0].name())
