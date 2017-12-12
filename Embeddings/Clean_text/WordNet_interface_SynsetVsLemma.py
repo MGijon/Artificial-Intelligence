@@ -34,8 +34,53 @@ for sense in rocket_synsets:
 
 # how it works?
 print(rocket_synsets)
+for i in rocket_synsets:
+    print(i)
 print(rocket_synsets[0])
 print(rocket_synsets[0].definition())
 print(rocket_synsets[0].lemmas())
 print(rocket_synsets[0].lemmas()[0])
 print(rocket_synsets[0].lemmas()[0].name())
+print(rocket_synsets[0].lemmas()[1].name())
+
+
+
+print(rocket_synsets[2])
+print(rocket_synsets[2].definition())
+print(rocket_synsets[2].lemmas())
+print(rocket_synsets[2].lemmas()[4])
+print(rocket_synsets[2].lemmas()[4].name())
+
+
+
+
+################################################################################
+ball_synsets = wn.synsets('ball')
+
+# list of words that have one common meaning with one of the aceptinos of 'dog'
+len(ball_synsets)
+
+for i in ball_synsets:
+    print(i)
+
+# somethin pretty stupid and odvious
+for i in ball_synsets:
+    print(i, i.name())
+
+
+for i in ball_synsets:
+    print(i.name())
+    print('---------')
+    for j in i.lemmas():
+        print(j)
+    print('_________\n')
+
+
+for i in ball_synsets:
+    print(i)
+    print('---------')
+    print('DEFINITION: ')
+    print(i.definition())
+    print('---------')
+    print(i.lemmas())
+    print('=========\n')
