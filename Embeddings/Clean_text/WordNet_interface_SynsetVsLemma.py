@@ -84,3 +84,45 @@ for i in ball_synsets:
     print('---------')
     print(i.lemmas())
     print('=========\n')
+
+
+
+################################################################################
+
+
+# so, given a word in cannonical form, for example 'house'
+# we can get a set of synonyms using:
+house_synsets = wn.synsets('house')
+
+# and for each one of this, we have a different meaning
+print([j.definition() for j in house_synsets])
+
+# and each one of this has its own unique 'name'
+print([j.name() for j in house_synsets])
+
+# and for each one of this, with its own name we can get access to its synonyms
+print(wn.synset(house_synsets[0].name()))
+
+# and more information: (using again the fact that it's a sysnset too)
+print(wn.synset(house_synsets[0].name()).name())
+print(wn.synset(house_synsets[0].name()).definition())
+
+# now on lemmas: they are methods of the synset object
+type(house_synsets[0])
+print(house_synsets[0].lemmas())
+
+# lemmas() gives us a list of the lemmas for this concrete synsets
+print(house_synsets[0].lemmas()[0])
+
+# it's a list of elemnts of the class lemma
+type(house_synsets[0].lemmas()[0])
+
+# This class has attributes, such as:
+    # COUNT: The frequency of this lemma in wordnet
+print(house_synsets[0].lemmas()[0].count())
+
+    # SYNSET: synset
+print(house_synsets[0].lemmas()[0].synset())
+
+    # NAME: the cannonical name of this lemma
+print(house_synsets[0].lemmas()[0].name())
