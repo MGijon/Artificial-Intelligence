@@ -50,8 +50,18 @@ head(Ligas)
 Ligas$V2 <- NULL
 head(Ligas)
 
+# también: names(Ligas)
 colnames(Ligas) <- c('Rank', 'Team', 'Matches', 'Victories', 'Defeats', 'Ties', 'Goals', 'V9', 'Score', 'Year')
 head(Ligas)
 
 # el cambio de nombres se ha efectuado correctamente, nos resta convertir las varibles al tipo correcto, y 
 # quizás, dividir los goles en contra y a favor, creando dos nuevas varibles
+
+Ligas$Goals[1]
+class(Ligas$Goals[1][1])
+
+
+
+
+# Guardo el data.frame una vez creado y arreglado
+save(Ligas, file = "LigasESP.RData")
