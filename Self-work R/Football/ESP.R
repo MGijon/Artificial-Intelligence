@@ -12,7 +12,12 @@ liga15[1,] # ganador de la liga
 
 for (i in 1987:2015){
   url <- paste0("http://www.livefutbol.com/calendario/esp-primera-division-", toString(i), "-", toString(i + 1), "-spieltag/38/")
-  datos[i - 1987] <- readHTMLTable(url, header = TRUE)[[4]]
+  print(url)
+  #datos[i - 1987] <- readHTMLTable(url, header = TRUE)[[4]]
 }
 
 
+
+url88 <- "http://www.livefutbol.com/calendario/esp-primera-division-1987-1988-spieltag/38/"
+liga88 <- readHTMLTable(url88, header = TRUE)[[4]]
+liga88
