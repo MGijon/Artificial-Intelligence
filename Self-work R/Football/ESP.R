@@ -79,6 +79,15 @@ length(strsplit(Ligas$GPositive[1], ':'))
 test <- unique(strsplit(Ligas$GPositive[1], ':'))[[1]]
 test
 length(test)
+test[1]
+test[2]
+
+temporal <- unique(strsplit(Ligas$GPositive[1], ':'))[[1]]
+Ligas$GPositive <- temporal[1]
+
+Ligas$GNegative <- temporal[2]
+
+head(Ligas)
 
 
 # Guardo el data.frame una vez creado y arreglado
