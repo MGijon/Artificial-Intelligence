@@ -27,6 +27,31 @@ for (i in 1987:2015){
   Ligas <- rbind.data.frame(Ligas, datos)
 }
 
+
 summary(Ligas)
 str(Ligas)
 
+# Ahora que sabemos que el data.frame se ha creado correctamente, vamos a darle nombre apropiado a sus culumnas:
+head(Ligas)
+# -------------------------------------------------------
+# v1 : Rank
+# v2 : será eliminada, no contiene información
+# v3 : Team
+# v4 : Matches
+# V5 : Victories
+# v6 : Defeats
+# v7 : Ties 
+# v8 : Goals
+# v9 : ?, por el momento la dejaré intacta
+# v10 : Score
+# -------------------------------------------------------
+
+# Elimino primero v2
+Ligas$V2 <- NULL
+head(Ligas)
+
+colnames(Ligas) <- c('Rank', 'Team', 'Matches', 'Victories', 'Defeats', 'Ties', 'Goals', 'V9', 'Score', 'Year')
+head(Ligas)
+
+# el cambio de nombres se ha efectuado correctamente, nos resta convertir las varibles al tipo correcto, y 
+# quizás, dividir los goles en contra y a favor, creando dos nuevas varibles
