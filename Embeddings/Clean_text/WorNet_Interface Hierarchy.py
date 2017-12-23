@@ -124,8 +124,22 @@ cow.member_holonyms()
 # components or substances of the item
 cow.member_meronyms()
 
-#
 print([cow.lowest_common_hypernyms(i) for i in wn.synsets('dog')])
+
+cow.hypernym_distances()
+
+Hyper_Distances = cow.hypernym_distances()
+
+type(Hyper_Distances)
+
+for i in Hyper_Distances:
+    print(i[0].name())
+    print('\n ========== \n')
+    print(i[0].definition())
+    print('\n ========== \n')
+    print('Distance  =  ' + str(i[1]))
+    print('\n ======================== \n')
+
 
 
 ################################################################################
