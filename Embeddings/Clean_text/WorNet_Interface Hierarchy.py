@@ -124,7 +124,8 @@ cow.member_holonyms()
 # components or substances of the item
 cow.member_meronyms()
 
-
+#
+print([cow.lowest_common_hypernyms(i) for i in wn.synsets('dog')])
 
 
 ################################################################################
