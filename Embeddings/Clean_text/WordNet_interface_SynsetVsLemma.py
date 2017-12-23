@@ -126,3 +126,12 @@ print(house_synsets[0].lemmas()[0].synset())
 
     # NAME: the cannonical name of this lemma
 print(house_synsets[0].lemmas()[0].name())
+
+
+
+################################################################################
+
+# cannonical form: cat
+cat_synsets = wn.synsets('cat')
+
+cat_synsets[1].lemmas()
