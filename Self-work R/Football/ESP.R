@@ -57,22 +57,13 @@ head(Ligas)
 # el cambio de nombres se ha efectuado correctamente, nos resta convertir las varibles al tipo correcto, y 
 # quizás, dividir los goles en contra y a favor, creando dos nuevas varibles
 
-#Ligas$Goals[1]
-#class(Ligas$Goals[1][1])
 
-#Ligas[, which(names(Ligas) == 'Goals')][1] # 106:41
-#class(Ligas[, which(names(Ligas) == 'Goals')][1]) # "factor"
-#test <- as.character(Ligas[, which(names(Ligas) == 'Goals')][1])
-#class(test)
-#as.character(Ligas[, which(names(Ligas) == 'Goals')])
-#class(Ligas[, which(names(Ligas) == 'Goals')][1])
 Ligas$GPositive <- as.character(Ligas[, which(names(Ligas) == 'Goals')])
 class(Ligas$GPositive)
 head(Ligas)
 Ligas$GNegative <- Ligas$GPositive
 head(Ligas)
 
-Ligas$GPositive[1].split(":")
 
 class(strsplit(Ligas$GPositive[1], ':'))
 length(strsplit(Ligas$GPositive[1], ':'))
