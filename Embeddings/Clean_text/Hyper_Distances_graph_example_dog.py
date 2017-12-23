@@ -38,3 +38,7 @@ G.add_weighted_edges_from(Edges)
 nx.draw(G)
 plt.savefig('Hyper_Distances_graph_example_dog_1.png')
 plt.show()
+
+nx.draw(G, with_labels = True)
+plt.savefig('Hyper_Distances_graph_example_dog_2.png')
+plt.show()
