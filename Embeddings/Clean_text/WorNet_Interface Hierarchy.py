@@ -79,7 +79,6 @@ car.hypernyms()
 
 car.hyponyms()
 
-
 car.member_holonyms()
 
 car.member_meronyms()
@@ -101,6 +100,29 @@ man.hyponyms()
 man.member_holonyms()
 
 man.member_meronyms()
+
+
+
+
+################################################################################
+
+wn.synsets('cow', pos = wn.NOUN)
+
+wn.synset('cow.n.01').definition()
+
+cow = wn.synset('cow.n.01')
+
+# more general
+cow.hypernyms()
+
+# more specific
+cow.hyponyms()
+
+# item contained in
+cow.member_holonyms()
+
+# components or substances of the item
+cow.member_meronyms()
 
 
 
