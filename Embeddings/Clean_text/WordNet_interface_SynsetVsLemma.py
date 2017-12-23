@@ -132,6 +132,14 @@ print(house_synsets[0].lemmas()[0].name())
 ################################################################################
 
 # cannonical form: cat
-cat_synsets = wn.synsets('cat')
+cat_synsets = wn.synsets('cat')       # set of synonyms of cat
 
-cat_synsets[1].lemmas()
+# each one, with a different meaning
+print([j.definition() for j in cat_synsets])
+
+# each one with an unique 'name' in WordNet
+print([j.name() for j in cat_synsets])
+
+# for each one, we can access to the set of its synonyms    > AQUÍ HAY ALGO QUE NO ME ACABA DE CUADRAR
+print(wn.synset(cat_synsets[0].name()))
+print(wn.synset(cat_synsets[1].name()))
