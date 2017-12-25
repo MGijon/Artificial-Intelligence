@@ -27,3 +27,13 @@ for n in second_brach:
             second_Origins.append(m[0].name())
 
 # Define the edges
+first_Edges = [(first_Origin[0], s[0].name(), s[1]) for s in first_branch]
+
+second_Edges = []
+for n in second_brach:
+    temporal = 0
+    for m in n:
+        for j in second_Origins:
+            second_Edges.append(())
+
+second_brach
