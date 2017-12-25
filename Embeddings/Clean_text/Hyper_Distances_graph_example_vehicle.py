@@ -6,7 +6,9 @@ Vehicle = wn.synsets('vehicle')[0]
 
 # set of tuples (synset, distances)
 first_branch = Vehicle.hypernym_distances()
-second_brach = [i[0].hypernym_distances() for i in first_branch]
+#second_brach = [i[0].hypernym_distances() for i in first_branch]
+# tuple (origin, lista((synset, distances)))
+second_brach = [(i[0], list(i[0].hypernym_distances())) for i in first_branch]
 
 # create an object Graph
 G = nx.Graph()
@@ -19,21 +21,19 @@ second_Nodes = []
 for n in second_brach:
     for m in n:
         second_Nodes.append(m[0].name())
-
+'''
 second_Origins = []
 for n in second_brach:
     for m in n:
         if m[1] == 0:
             second_Origins.append(m[0].name())
-
+'''
 # Define the edges
 first_Edges = [(first_Origin[0], s[0].name(), s[1]) for s in first_branch]
 
+# ARREGLAR ESTE DESAGISADO MAÑANA
 second_Edges = []
 for n in second_brach:
-    temporal = 0
-    for m in n:
-        for j in second_Origins:
-            second_Edges.append(())
-
-second_brach
+    for m in n[1]:
+        if list(m)[1] == 0:
+            second_Edges.append([m[0], s[0].name(), s[1]] for s in n[1])
