@@ -37,3 +37,12 @@ for n in second_brach:
     for m in n[1]:
         if list(m)[1] == 0:
             second_Edges.append([m[0], s[0].name(), s[1]] for s in n[1])
+
+
+G.add_nodes_from(first_Nodes)
+G.add_nodes_from(second_Nodes)
+G.add_weighted_edges_from(first_Edges)
+# FALTA AÑADIR LA SEGUNDA GENERACIÓN DE EJES
+
+nx.draw(G, with_labels = True, node_color = 'yellow')
+plt.show()
