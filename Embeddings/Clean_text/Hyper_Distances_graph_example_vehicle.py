@@ -10,6 +10,12 @@ first_branch = Vehicle.hypernym_distances()
 # tuple (origin, lista((synset, distances)))
 second_brach = [(i[0], list(i[0].hypernym_distances())) for i in first_branch]
 
+type(second_brach)
+type(second_brach[0])
+type(second_brach[0][0])
+type(second_brach[0][1])
+type(second_brach[0][1][2])
+
 # create an object Graph
 G = nx.Graph()
 
@@ -18,9 +24,10 @@ first_Nodes = [j[0].name() for j in first_branch]
 first_Origin = [j[0].name() for j in first_branch if j[1] == 0]
 
 second_Nodes = []
-for n in second_brach:
+for n in second_brach: # n is a tuple (synset, list of tuples)
     for m in n:
-        second_Nodes.append(m[0].name())
+        for h in m[1]:
+            second_Nodes.append(m[1].name())
 '''
 second_Origins = []
 for n in second_brach:
