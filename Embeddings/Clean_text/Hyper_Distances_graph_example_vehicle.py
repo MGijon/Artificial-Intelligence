@@ -47,18 +47,26 @@ for n in second_brach:
 # Define the edges
 first_Edges = [(first_Origin[0], s[0].name(), s[1]) for s in first_branch]
 
-# ARREGLAR ESTE DESAGISADO MAÑANA
-second_Edges = []
+# ARREGLAR ESTE DESAGISADO
+second_Edges = []     # la construiré como una lista de listas
 for n in second_brach:
-    for m in n[1]:
-        if list(m)[1] == 0:
-            second_Edges.append([m[0], s[0].name(), s[1]] for s in n[1])
+    #print(n[0])
+    #print(n[1])
+    second_Edges.append((n[0],n[1]))
+    #second_Edges.append([n[0][0], s[1].name(), s[1]] for s in n[0][0][1])
 
+# ----------------------------
+second_Edges
+first_Edges
+
+# ----------------------------
 
 G.add_nodes_from(first_Nodes)
 G.add_nodes_from(second_Nodes)
 G.add_weighted_edges_from(first_Edges)
 # FALTA AÑADIR LA SEGUNDA GENERACIÓN DE EJES
+for j in second_Edges:
+    G.add_weighted_edges_from(j)
 
-nx.draw(G, with_labels = True, node_color = 'yellow')
+znx.draw(G, with_labels = True, node_color = 'yellow')
 plt.show()
