@@ -159,3 +159,12 @@ type(dance_synset[0].lemmas())
 print([j for j in dance_synset[0].lemmas()])
 
 print(dance_synset[0].lemmas()[0])
+print(dance_synset[0].lemmas()[0].name())
+
+type(dance_synset[0])
+print(dance_synset[0].name())
+print(dance_synset[0].definition())
+
+
+
+################################################################################
