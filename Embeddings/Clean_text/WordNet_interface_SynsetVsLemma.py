@@ -140,6 +140,22 @@ print([j.definition() for j in cat_synsets])
 # each one with an unique 'name' in WordNet
 print([j.name() for j in cat_synsets])
 
-# for each one, we can access to the set of its synonyms    > AQUÍ HAY ALGO QUE NO ME ACABA DE CUADRAR
-print(wn.synset(cat_synsets[0].name()))
-print(wn.synset(cat_synsets[1].name()))
+
+################################################################################
+
+
+# cannonical form: dance
+dance_synset = wn.synsets('dance')
+
+# each one, with a different meaning
+print([j.definition() for j in dance_synset])
+
+# each one with an unique 'name' in WordNet
+print([j.name() for j in dance_synset])
+
+# lemmas:
+print([j.lemmas() for j in dance_synset])
+type(dance_synset[0].lemmas())
+print([j for j in dance_synset[0].lemmas()])
+
+print(dance_synset[0].lemmas()[0])
