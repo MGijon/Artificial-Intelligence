@@ -173,3 +173,32 @@ hell_synsets = wn.synsets('hell')
 
 for i in hell_synsets:
     print(i)
+
+for i in hell_synsets:
+    print(i.definition())
+
+for i in hell_synsets:
+    print(i.lemmas())
+
+for i in hell_synsets:
+        for j in i.lemmas():
+            print(j)
+
+for i in hell_synsets:
+    print(i)
+    print('*********')
+    for j in i.lemmas():
+        print(j)
+    print('*********')
+
+for i in hell_synsets:
+    print(i.name())
+    print('*********')
+    for j in i.lemmas():
+        print(j.name())
+    print('*********')
+
+
+
+
+    
