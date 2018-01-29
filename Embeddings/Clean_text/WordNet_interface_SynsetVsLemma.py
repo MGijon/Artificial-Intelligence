@@ -168,3 +168,8 @@ print(dance_synset[0].definition())
 
 
 ################################################################################
+
+hell_synsets = wn.synsets('hell')
+
+for i in hell_synsets:
+    print(i)
