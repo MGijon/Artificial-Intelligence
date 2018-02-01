@@ -13,7 +13,7 @@ This code is just for my own learning purpose.
 
 5. **TensorFlow** : working with TensorFlow library.
 
-6. **Embeddings** : different examples and self-work whit embeddings.
+6. **Embeddings** : different examples and self-work with embeddings.
 
 7. **Kaggle** : works in Kaggle.
 
