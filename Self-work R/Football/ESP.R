@@ -83,3 +83,6 @@ head(Ligas)
 
 # Guardo el data.frame una vez creado y arreglado
 save(Ligas, file = "LigasESP.RData")
+load("LigasESP.RData")
+Ligas
+
