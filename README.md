@@ -11,15 +11,10 @@ This code is just for my own learning purpose.
 
 4. **Self-work R** : working in ML whit R.
 
-5. **Jupyter** :
+5. **TensorFlow** : working with TensorFlow library.
 
-* Examples : different examples of related topics commented.
+6. **Embeddings** : different examples and self-work whit embeddings.
 
+7. **Kaggle** : works in Kaggle.
 
-* Self-work : working with Jupiter Notebook in ML, commented work.
-
-
-6. **TensorFlow** : working with TensorFlow library.
-
-
-7. **Embeddings** : different examples and self-work whit embeddings. Some of then part of my masters tesis.
+   [My profile in Kaggle](https://www.kaggle.com/mgijon)
