@@ -1,4 +1,4 @@
-# Machine-Learning: Embeddings
+# Machine-Learning: Embeddings and manipulation of text 
 
 ***
 
@@ -14,7 +14,7 @@
 
 3. **TextBlob**:
 
-    Working with TextBlob package (Python).
+    Working with TextBlob package (Python).
 
 4. **Word2Vec**:
 
