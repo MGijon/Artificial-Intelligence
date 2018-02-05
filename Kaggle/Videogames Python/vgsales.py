@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Importamos los datos desde un archivo de excell
-file = 'vgsales.csv'
+file = 'Data/vgsales.csv'
 datos = pd.read_csv(file)
 
 # Visualizamos la cabecera para asegurarnos de  que la importación se ha realizado
