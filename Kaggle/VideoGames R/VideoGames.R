@@ -6,7 +6,7 @@ library(wesanderson)
 
 
 # Load the data.set
-videogames <- read.csv('vgsales.csv')
+videogames <- read.csv('Data/vgsales.csv', stringsAsFactors = FALSE)
 
 summary(videogames)
 str(videogames)
