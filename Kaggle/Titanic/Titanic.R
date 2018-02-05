@@ -9,8 +9,8 @@ library('mice') # imputation
 library('randomForest') # classification algorithm
 
 # load the data
-train <- read.csv('train.csv', stringsAsFactors = FALSE)
-test <- read.csv('test.csv', stringsAsFactors = FALSE)
+train <- read.csv('Data/train.csv', stringsAsFactors = FALSE)
+test <- read.csv('Data/test.csv', stringsAsFactors = FALSE)
 full_model <- bind_rows(train, test)
 
 # check the data
