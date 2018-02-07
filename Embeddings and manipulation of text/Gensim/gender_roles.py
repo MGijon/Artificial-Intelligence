@@ -16,3 +16,10 @@ print(model.most_similar( positive = ['woman', 'leader'], negative = ['man'], to
 print(model.most_similar( positive = ['woman', 'wise'], negative = ['man'], topn = 1))
 print(model.most_similar( positive = ['woman', 'intelligent'], negative = ['man'], topn = 1))
 print(model.most_similar( positive = ['woman', 'clever'], negative = ['man'], topn = 1))
+print(model.most_similar( positive = ['woman', 'usefull'], negative = ['man'], topn = 1))
+print(model.most_similar( positive = ['woman', 'useless'], negative = ['man'], topn = 1)) # grave
+print(model.most_similar( positive = ['woman', 'graduated'], negative = ['man'], topn = 1))
+print(model.most_similar( positive = ['woman', 'god'], negative = ['man'], topn = 1))
+print(model.most_similar( positive = ['woman', 'good'], negative = ['man'], topn = 1)) # grave
+print(model.most_similar( positive = ['woman', 'bad'], negative = ['man'], topn = 1))  # grave
+print(model.most_similar( positive = ['woman', 'worst'], negative = ['man'], topn = 1))  # grave
