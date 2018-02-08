@@ -17,4 +17,4 @@ data['Resoult'][0] = resultado
 data['Word'][0] = resultado[0][0]
 data['Distance'][0] = resultado[0][1]
 
-data.head()
+data.to_csv(filepath, sep = ';')
