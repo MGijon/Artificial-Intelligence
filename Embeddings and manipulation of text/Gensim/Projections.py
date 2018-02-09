@@ -5,8 +5,10 @@ from matplotlib import pyplot as plt
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
+type(model.wv.vocab)
+model.wv.vocab
 # fit a 2d PCA model to the vectors
-X = model[model.wv.vocab]
+#X = model[model.wv.vocab]
 pca = PCA(n_components = 2)
 result = pca.fit_transform(X)
 
