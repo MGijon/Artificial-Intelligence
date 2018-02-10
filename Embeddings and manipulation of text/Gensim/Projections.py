@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
+# creamos un diccionario con las palabras que printaremos
+
 words_list = ['man', 'women', 'king', 'queen']
 
 dict = {}
@@ -20,6 +22,7 @@ result = pca.fit_transform(X)
 plt.scatter(result[:, 0], result[:, 1])
 words = list(model.wv.vocab)
 for i, word in enumerate(words):
+	print(i, word)
 	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
 
 plt.savefig('Man-King.png')
