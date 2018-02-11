@@ -27,16 +27,16 @@ result = pca.fit_transform(X)
 ## (4): Imprimimos los resultados:
 ## ===
 
-plt.scatter(result[:, 0], result[:, 1])
-#words = list(model.wv.vocab)
-words = list(dict)
-for i, word in enumerate(words):
-	print(i, word)
-	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
+def funcion1():
 
-plt.savefig('Man-King.png')
-plt.title('Words')
-plt.show()
+	plt.scatter(result[:, 0], result[:, 1])
+	words = list(dict)
+	for i, word in enumerate(words):
+		print(i, word)
+		plt.annotate(word, xy = (result[i, 0], result[i, 1]))
 
-#print(model.most_similar('doggy'))
-#print(model.most_similar(positive = ['doggy', 'men'], negative = ['assholes'])) # perro - gilipollas + hombre
+	plt.savefig('Man-King.png')
+	plt.title('Words')
+	plt.show()
+
+funcion1()
