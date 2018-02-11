@@ -40,3 +40,19 @@ def funcion1():
 	plt.show()
 
 funcion1()
+
+def funcion2():
+
+	plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'input')
+	plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'output')
+	words = list(dict)
+	for i, word in enumerate(words):
+		print(i, word)
+		plt.annotate(word, xy = (result[i, 0], result[i, 1]))
+
+	plt.legend(loc = 2)
+	plt.savefig('Man-King_V2.png')
+	plt.title('Words')
+	plt.show()
+
+funcion2()
