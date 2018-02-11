@@ -56,3 +56,23 @@ def funcion2():
 	plt.show()
 
 funcion2()
+
+
+def funcion3():
+
+	plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'input')
+	plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'output')
+	words = list(dict)
+	for i, word in enumerate(words):
+		print(i, word)
+		plt.annotate(word, xy = (result[i, 0], result[i, 1]))
+
+	plt.legend(loc = 2)
+	plt.annotate('texto', xy = (result[:,0][0], result[:, 1][3]), arrowprops = {'arrowstyle' : '->', 'connectionstyle' : 'arc3'} ) 
+	plt.savefig('Man-King_V3.png')
+	plt.title('Words')
+	plt.show()
+
+funcion3()
+
+print(result[:,0])
