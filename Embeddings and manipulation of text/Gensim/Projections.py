@@ -28,6 +28,16 @@ result = pca.fit_transform(X)
 ## ===
 
 def funcion1():
+	########################################################
+	# Esta función imprime un scatter plot con la palabras
+	# en la words_list sin colores diferenciados ni flechas.
+	# ------------------------------------------------------
+	# INPUT: ninguno
+	# ------
+	#
+	# OUTPUT: ninguno
+	# -------
+	########################################################
 
 	plt.scatter(result[:, 0], result[:, 1])
 	words = list(dict)
@@ -42,6 +52,16 @@ def funcion1():
 funcion1()
 
 def funcion2():
+	########################################################
+	# Esta función imprime un scatter plot con la palabras
+	# en la words_list con colores diferenciados y no flechas.
+	# --------------------------------------------------------
+	# INPUT: ninguno
+	# ------
+	#
+	# OUTPUT: ninguno
+	# -------
+	########################################################
 
 	plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'input')
 	plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'output')
@@ -59,6 +79,16 @@ funcion2()
 
 
 def funcion3():
+	########################################################
+	# Esta función imprime un scatter plot con la palabras
+	# en la words_list con colores diferenciados y flechas.
+	# ------------------------------------------------------
+	# INPUT: ninguno
+	# ------
+	#
+	# OUTPUT: ninguno
+	# -------
+	########################################################
 
 	plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'input')
 	plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'output')
