@@ -105,5 +105,3 @@ def funcion3():
 	plt.show()
 
 funcion3()
-
-print(result[:,0])
