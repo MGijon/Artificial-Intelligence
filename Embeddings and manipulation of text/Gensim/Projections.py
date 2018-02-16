@@ -98,10 +98,14 @@ def funcion3():
 		plt.annotate(word, xy = (result[i, 0], result[i, 1]))
 
 	plt.legend(loc = 2)
-	# flechas
-	plt.annotate('texto', xy = (result[:,0][0], result[:, 1][3]), arrowprops = {'arrowstyle' : '->', 'connectionstyle' : 'arc3'} )
+	# flechas man -> king, women -> queen
+	plt.annotate('texto', xy = (result[:,0][0], result[:, 1][3]),
+				  arrowprops = {'arrowstyle' : '->', 'connectionstyle' : 'arc3'} )
 	plt.savefig('Man-King_V3.png')
 	plt.title('Words')
 	plt.show()
 
 funcion3()
+
+########################
+result[0]
