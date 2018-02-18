@@ -119,3 +119,5 @@ result[:, 1][:2]
 
 result[:, 0][2:]
 result[:, 1][2:]
+
+print(model.most_similar( positive = ['Japan', 'France'], negative = ['Tokio'], topn = 1))
