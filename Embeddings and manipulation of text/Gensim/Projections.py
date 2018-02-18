@@ -129,3 +129,9 @@ print(model.most_similar( positive = ['surgeon', 'women'], negative = ['man'], t
 print(model.most_similar( positive = ['surgeon', 'mother'], negative = ['father'], topn = 1))
 
 print(model.most_similar( positive = ['doctor', 'mother'], negative = ['father'], topn = 1))
+
+print(model.most_similar( positive = ['doctor', 'she'], negative = ['he'], topn = 1))
+
+print(model.most_similar( positive = ['surgeon', 'she'], negative = ['he'], topn = 1))
+
+print(model.most_similar( positive = ['coward', 'she'], negative = ['he'], topn = 1))
