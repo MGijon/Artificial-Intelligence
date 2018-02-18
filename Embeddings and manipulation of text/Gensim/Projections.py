@@ -99,7 +99,7 @@ def funcion3():
 
 	plt.legend(loc = 2)
 	# flechas man -> king, women -> queen
-	plt.annotate('texto', xy = (result[:,0][0], result[:, 1][3]),
+	plt.annotate('texto', xy = result[1],
 				  arrowprops = {'arrowstyle' : '->', 'connectionstyle' : 'arc3'} )
 	plt.savefig('Man-King_V3.png')
 	plt.title('Words')
@@ -109,10 +109,10 @@ funcion3()
 
 ########################
 result
-result[0]
-result[1]
-result[2]
-result[3]
+result[0] # posición de 'man'
+result[1] # posición de
+result[2] # posición de
+result[3] # posición de 
 
 result[:, 0][:2]
 result[:, 1][:2]
