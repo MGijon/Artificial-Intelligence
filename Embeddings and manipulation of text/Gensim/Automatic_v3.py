@@ -17,7 +17,7 @@ i = 0
 
 while isinstance(data['Pos1'][i] , str):
 
-    if isinstance(data['R2'][i] , str) == False:
+    if isinstance(data['R1'][i] , str) == False:
 
         resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
                                         negative = [data['Neg'][i]], topn = 10)
