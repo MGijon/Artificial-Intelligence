@@ -2,13 +2,16 @@ import logging
 import pandas as pd
 import gensim.models as gm
 
+# logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+# charging data
 filepath = 'Data/Ofensivas.csv'
 data = pd.read_csv(filepath, sep = ';')
 logger.info('File imported')
 
+# model
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 logging.info('Model upload, starting with the process')
