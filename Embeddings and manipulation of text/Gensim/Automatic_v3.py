@@ -10,7 +10,7 @@ import gensim.models as gm
 filepath = 'Data/Ofensivas.csv'
 data = pd.read_csv(filepath, sep = ';')
 #logger.info('File imported')
-#data.head()
+data.head()
 
 # model
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
@@ -39,4 +39,4 @@ while isinstance(data['Pos1'][i] , str):
     i = i + 1
 
 #logging.info('Process finished')
-data.to_csv(filepath, sep = ';')
+data.to_csv(filepath, sep = ';', index = False)
