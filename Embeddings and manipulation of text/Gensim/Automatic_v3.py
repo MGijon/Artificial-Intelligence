@@ -6,7 +6,7 @@ import gensim.models as gm
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# charging data
+# charging data AQUÍ DEBO INCLUIR UN AÑADIDO PARA QUE NO ME CREÉ ÍNDICES DE NUEVO
 filepath = 'Data/Ofensivas.csv'
 data = pd.read_csv(filepath, sep = ';')
 logger.info('File imported')
