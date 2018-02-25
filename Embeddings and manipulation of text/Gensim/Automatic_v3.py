@@ -3,18 +3,19 @@ import pandas as pd
 import gensim.models as gm
 
 # logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger(__name__)
+#logger.setLevel(logging.INFO)
 
 # charging data AQUÍ DEBO INCLUIR UN AÑADIDO PARA QUE NO ME CREÉ ÍNDICES DE NUEVO
 filepath = 'Data/Ofensivas.csv'
 data = pd.read_csv(filepath, sep = ';')
-logger.info('File imported')
+#logger.info('File imported')
+#data.head()
 
 # model
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
-logging.info('Model upload, starting with the process')
+#logging.info('Model upload, starting with the process')
 
 i = 0
 
@@ -37,5 +38,5 @@ while isinstance(data['Pos1'][i] , str):
 
     i = i + 1
 
-logging.info('Process finished')
+#logging.info('Process finished')
 data.to_csv(filepath, sep = ';')
