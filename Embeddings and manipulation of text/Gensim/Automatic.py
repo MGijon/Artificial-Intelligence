@@ -23,4 +23,4 @@ while isinstance(data['Pos1'][i] , str):
     i = i + 1
 
 data.head()
-data.to_csv(filepath, sep = ';')
+data.to_csv(filepath, sep = ';', index = False)
