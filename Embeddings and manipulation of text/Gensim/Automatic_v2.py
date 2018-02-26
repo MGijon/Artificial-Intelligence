@@ -30,4 +30,8 @@ while isinstance(data['Pos1'][i] , str):
     i = i + 1
 
 logging.info('Process finished')
-data.to_csv(filepath, sep = ';')
+data.to_csv(filepath, sep = ';', index = False)
+
+''' PREGUNTAR A RAQUEL POR LO DOCUMENTAR EL CÓDIGO AUTOMÁTICAMENTE!!!!
+    HACER LA DOCUMENTACIÓN ADECUADAMENTE
+    ENSEÑARLE TENSORFLOW PLAYGROUND '''
