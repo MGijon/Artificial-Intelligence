@@ -5,14 +5,17 @@ import gensim.models as gm
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-filepath = 'Data/words_source_v2.csv'
+# ruta mac:
+# filepath = 'Data/words_source_v2.csv'
+# ruta windows:
+filepath = ''
 data = pd.read_csv(filepath, sep = ';')
 logger.info('File imported')
 
 # ruta mac:
 # route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 # ruta windows:
-route = ''
+route = ''   # tengo que descargar el puto archivo y hacer que funcione
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 logging.info('Model upload, starting with the process')
 

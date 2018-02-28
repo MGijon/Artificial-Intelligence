@@ -6,14 +6,19 @@ import gensim.models as gm
 #logger = logging.getLogger(__name__)
 #logger.setLevel(logging.INFO)
 
-# charging data AQUÍ DEBO INCLUIR UN AÑADIDO PARA QUE NO ME CREÉ ÍNDICES DE NUEVO
-filepath = 'Data/Ofensivas.csv'
+# ruta mac:
+# filepath = 'Data/Ofensivas.csv'
+# ruta windows:
+filepath = ''
 data = pd.read_csv(filepath, sep = ';')
 #logger.info('File imported')
 data.head()
 
 # model
-route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta mac:
+# route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta windows:
+route = ''
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 #logging.info('Model upload, starting with the process')
 
