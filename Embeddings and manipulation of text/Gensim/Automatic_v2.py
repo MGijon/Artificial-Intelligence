@@ -9,7 +9,10 @@ filepath = 'Data/words_source_v2.csv'
 data = pd.read_csv(filepath, sep = ';')
 logger.info('File imported')
 
-route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta mac:
+# route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta windows:
+route = ''
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 logging.info('Model upload, starting with the process')
 
