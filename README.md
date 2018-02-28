@@ -18,3 +18,5 @@ This code is just for my own learning purpose.
 7. **Kaggle** : works in Kaggle.
 
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
+
+8. **Algorithmics for Data Science**: Master in cosas varias bla bla bla 
