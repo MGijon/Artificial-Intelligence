@@ -1,6 +1,8 @@
 # Algorithmics for Data Science
 
-Descripción y añadir tópicos del índice
+Material from the subject 'Algorithmics for Data Science' from the MIRI (Master in Innovation and Research in Informatics).
 ***
 
-crear una carpeta para la sesión de hoy y describir aquí su contenido exacto o aproximado
+## Index:
+
+1. **First laboratory session**:
