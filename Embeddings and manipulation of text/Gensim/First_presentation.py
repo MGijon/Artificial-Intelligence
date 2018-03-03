@@ -31,8 +31,8 @@ def construct_word_dict(list):
     for i in list:
         dict[i] = model.wv.vocab[i]
     return dict
+words_dict = construct_word_dict(words_list)
 
-list_words[0][1]
 for i in words_list:
 
     words_list = [list_words[0][0], ]
