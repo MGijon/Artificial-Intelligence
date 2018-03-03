@@ -18,11 +18,13 @@ model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
 data = data[['Pos1', 'R1', 'R2', 'R3', 'R4', 'R5']]
 
+data.iloc[0]['R1']
+list_words = []
 
-
-
-
-words_list = ['man', 'women', 'king', 'queen']
+i = 0
+while isinstance(data['Pos1'][i] , str):
+    list_words.append(data.iloc[i])
+    i += 1
 
 def construct_word_dict(list):
     dict = {}
@@ -30,7 +32,12 @@ def construct_word_dict(list):
         dict[i] = model.wv.vocab[i]
     return dict
 
-words_dict = construct_word_dict(words_list)
+list_words[0][1]
+for i in words_list:
+
+    words_list = [list_words[0][0], ]
+
+    words_dict = construct_word_dict(words_list)
 
 
 X = model[words_dict]
@@ -38,11 +45,11 @@ pca = PCA(n_components = 2)
 result = pca.fit_transform(X)
 
 
-plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'input')
-plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'output')
+plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'Word')
+plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'Resoults')
 words = list(words_dict)
 for i, word in enumerate(words):
 	print(i, word)
 	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
-plt.legend(loc = 2)
+plt.legend()
 plt.show()
