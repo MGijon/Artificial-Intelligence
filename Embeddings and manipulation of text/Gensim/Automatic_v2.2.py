@@ -19,23 +19,19 @@ route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vec
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 logging.info('Model upload, starting with the process')
 
-#lista = model.most_similar( positive = ['Japan', 'France'], negative = ['Tokio'], topn = 3)
-
-#lista[0][0]
-
 i = 0
 
 while isinstance(data['Pos1'][i] , str):
 
-    if isinstance(data['R2'][i] , str) == False:
+    #if isinstance(data['R2'][i] , str) == False:
 
-        resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
-                                        negative = [data['Neg'][i]], topn = 5)
-        data[' R1'][i] = resultado[0][0]
-        data['R2'][i] = resultado[1][0]
-        data['R3'][i] = resultado[2][0]
-        data['R4'][i] = resultado[3][0]
-        data['R5'][i] = resultado[4][0]
+    resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
+                                    negative = [data['Neg'][i]], topn = 5)
+    data['R1'][i] = resultado[0][0]
+    data['R2'][i] = resultado[1][0]
+    data['R3'][i] = resultado[2][0]
+    data['R4'][i] = resultado[3][0]
+    data['R5'][i] = resultado[4][0]
 
     i = i + 1
 

@@ -4,7 +4,7 @@ from sklearn.decomposition import PCA
 from matplotlib import pyplot as plt
 
 # ruta mac:
-filepath = 'Data/words_source_v2.csv'
+filepath = 'Data/words_source_v2.2.csv'
 # ruta windows:
 # filepath = ''
 data = pd.read_csv(filepath, sep = ';')
