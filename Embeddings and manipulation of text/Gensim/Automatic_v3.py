@@ -28,7 +28,7 @@ while isinstance(data['Pos1'][i] , str):
 
     if isinstance(data['R1'][i] , str) == False:
         # añado un chivato para ver dónde está la palabra fuera del diccionario
-        print(data['Pos1'])
+        #print(data['Pos1'])
         resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
                                         negative = [data['Neg'][i]], topn = 10)
         data['R1'][i] = resultado[0]
