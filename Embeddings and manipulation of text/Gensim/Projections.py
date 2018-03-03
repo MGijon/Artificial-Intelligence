@@ -5,7 +5,10 @@ from matplotlib import pyplot as plt
 ## (1): Cargamos el modelo que utilizaremos:
 ## ===
 
-route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta mac:
+# route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
+# ruta windows:
+route = 'D:\GIT\Data\GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
 ## (2): Creamos un diccionario con las palabras que nos interesan:
@@ -112,7 +115,7 @@ result
 result[0] # posición de 'man'
 result[1] # posición de
 result[2] # posición de
-result[3] # posición de 
+result[3] # posición de
 
 result[:, 0][:2]
 result[:, 1][:2]
