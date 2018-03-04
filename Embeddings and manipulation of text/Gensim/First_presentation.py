@@ -10,30 +10,40 @@ filepath = 'Data/words_source_v2.2.csv'
 data = pd.read_csv(filepath, sep = ';')
 data.head()
 
+data = data[['Pos1', 'R1', 'R2', 'R3', 'R4', 'R5']]
+
 # ruta mac:
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 # ruta windows:
 # route = 'D:\GIT\Data\GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
-data = data[['Pos1', 'R1', 'R2', 'R3', 'R4', 'R5']]
 
-data.iloc[0]['R1']
-list_words = []
+#data.iloc[0]['R1']
+list_words_POS1 = []
 
+# aquí añadimos a la lista de palabras los elementos en la posición 1
 i = 0
 while isinstance(data['Pos1'][i] , str):
-    list_words.append(data.iloc[i])
+    list_words_POS1.append(data.iloc[i]['Pos1'])
     i += 1
 
+list_words_POS1
+
+
 def construct_word_dict(list):
+    ''' Construimos un diccionario en el formato que necesitamos para el PCA '''
     dict = {}
     for i in list:
         dict[i] = model.wv.vocab[i]
     return dict
-words_dict = construct_word_dict(words_list)
 
-for i in words_list:
+words_dict = construct_word_dict(list_words)
+words_dict
+
+
+'''
+for i in words:
 
     words_list = [list_words[0][0], ]
 
@@ -53,3 +63,4 @@ for i, word in enumerate(words):
 	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
 plt.legend()
 plt.show()
+'''
