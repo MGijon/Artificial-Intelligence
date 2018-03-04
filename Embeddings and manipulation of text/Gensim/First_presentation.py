@@ -3,6 +3,9 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from matplotlib import pyplot as plt
 
+## Cargamos los datos:
+## ===================
+
 # ruta mac:
 filepath = 'Data/words_source_v2.2.csv'
 # ruta windows:
@@ -12,14 +15,18 @@ data.head()
 
 data = data[['Pos1', 'R1', 'R2', 'R3', 'R4', 'R5']]
 
+## Cargamos el modelo:
+## ===================
+
 # ruta mac:
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 # ruta windows:
 # route = 'D:\GIT\Data\GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
+## Comenzamos con la representación:
+## =================================
 
-#data.iloc[0]['R1']
 list_words_POS1 = []
 list_words_R1 = []
 list_words_R2 = []
@@ -46,26 +53,48 @@ def construct_word_dict(list):
         dict[i] = model.wv.vocab[i]
     return dict
 
+def apply_PCA(dictionary):
+    ''' Devuelve el resultado de aplicar el PCA a un diccionario apropiado '''
+    X = model[dictionary]
+    pca = PCA(n_components = 2)
+    result = pca.fit_transform(X)
+    return result
 
-'''
-for i in words:
+def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
+    '''
+    Graficamos el resultado de aplicar el PCA
+    INPUT:
+    ------
+        - name: string, nombre del archivo a guardar (ruta incluída)
+        - result_POS:
+        - R1, ..., R5:
 
-    words_list = [list_words[0][0], ]
+    OUTPUT:
+        - None
+    -------
+    '''
 
-    words_dict = construct_word_dict(words_list)
+    plt.scatter(result_POS[:, 0][:2], POS[:, 1][:2], c = 'green', label = 'Word')
+    plt.scatter(R1[:, 0][:2], R1[:, 1][:2], c = 'red', label = 'First resoult')
+    plt.scatter(R2[:, 0][2:], R2[:, 1][2:], c = 'blue', label = 'other resoults')
+    plt.scatter(R3[:, 0][2:], R3[:, 1][2:], c = 'blue')
+    plt.scatter(R4[:, 0][2:], R4[:, 1][2:], c = 'blue')
+    plt.scatter(R5[:, 0][2:], R5[:, 1][2:], c = 'blue')
 
+    # función dentro de la principal para ahorrarme trabajo:
+    def lettering(dictionary):
+        words = list(dictionary)
+        for i, word in enumerate(words):
+        	print(i, word)
+        	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
 
-X = model[words_dict]
-pca = PCA(n_components = 2)
-result = pca.fit_transform(X)
+    lettering(result_POS)
+    lettering(R1)
+    lettering(R2)
+    lettering(R3)
+    lettering(R4)
+    lettering(R5)
 
-
-plt.scatter(result[:, 0][:2], result[:, 1][:2], c = 'green', label = 'Word')
-plt.scatter(result[:, 0][2:], result[:, 1][2:], c = 'red', label = 'Resoults')
-words = list(words_dict)
-for i, word in enumerate(words):
-	print(i, word)
-	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
-plt.legend()
-plt.show()
-'''
+    plt.legend()
+    plt.savefig(name)
+    plt.show()
