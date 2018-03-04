@@ -21,14 +21,22 @@ model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
 #data.iloc[0]['R1']
 list_words_POS1 = []
+list_words_R1 = []
+list_words_R2 = []
+list_words_R3 = []
+list_words_R4 = []
+list_words_R5 = []
 
 # aquí añadimos a la lista de palabras los elementos en la posición 1
 i = 0
 while isinstance(data['Pos1'][i] , str):
     list_words_POS1.append(data.iloc[i]['Pos1'])
+    list_words_R1.append(data.iloc[i]['R1'])
+    list_words_R2.append(data.iloc[i]['R2'])
+    list_words_R3.append(data.iloc[i]['R3'])
+    list_words_R4.append(data.iloc[i]['R4'])
+    list_words_R5.append(data.iloc[i]['R5'])
     i += 1
-
-list_words_POS1
 
 
 def construct_word_dict(list):
@@ -37,9 +45,6 @@ def construct_word_dict(list):
     for i in list:
         dict[i] = model.wv.vocab[i]
     return dict
-
-words_dict = construct_word_dict(list_words)
-words_dict
 
 
 '''
