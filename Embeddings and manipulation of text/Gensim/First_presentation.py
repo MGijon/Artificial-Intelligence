@@ -46,6 +46,12 @@ while isinstance(data['Pos1'][i] , str):
     i += 1
 
 
+## =============================================================================
+## Hasta aquí ya tenemos las palabras del csv organizadas en listas apropiadas,
+## nos resta ponerlos es en formato correcto (I) y aplicarles la función para
+## hacer la representación gráfica
+## =============================================================================
+
 def construct_word_dict(list):
     ''' Construimos un diccionario en el formato que necesitamos para el PCA '''
     dict = {}
@@ -60,6 +66,22 @@ def apply_PCA(dictionary):
     result = pca.fit_transform(X)
     return result
 
+## (I):
+## ====
+
+result_POS = apply_PCA(construct_word_dict(list_words_POS1))
+R1 = apply_PCA(construct_word_dict(list_words_R1))
+R2 = apply_PCA(construct_word_dict(list_words_R2))
+R3 = apply_PCA(construct_word_dict(list_words_R3))
+R4 = apply_PCA(construct_word_dict(list_words_R4))
+R5 = apply_PCA(construct_word_dict(list_words_R5))
+
+## (II):
+## =====
+
+R1[0][0]
+R1[0][1]
+R1[0]
 def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     '''
     Graficamos el resultado de aplicar el PCA
@@ -74,13 +96,13 @@ def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     -------
     '''
 
-    plt.scatter(result_POS[:, 0][:2], POS[:, 1][:2], c = 'green', label = 'Word')
-    plt.scatter(R1[:, 0][:2], R1[:, 1][:2], c = 'red', label = 'First resoult')
-    plt.scatter(R2[:, 0][2:], R2[:, 1][2:], c = 'blue', label = 'other resoults')
-    plt.scatter(R3[:, 0][2:], R3[:, 1][2:], c = 'blue')
-    plt.scatter(R4[:, 0][2:], R4[:, 1][2:], c = 'blue')
-    plt.scatter(R5[:, 0][2:], R5[:, 1][2:], c = 'blue')
-
+    plt.scatter(result_POS[0][0], result_POS[0][1], c = 'green', label = 'Word')
+    plt.scatter(R1[0][0], R1[0][1], c = 'red', label = 'First resoult')
+    plt.scatter(R2[0][0], R2[0][1], c = 'blue', label = 'other resoults')
+    plt.scatter(R3[0][0], R3[0][1], c = 'blue')
+    plt.scatter(R4[0][0], R4[0][1], c = 'blue')
+    plt.scatter(R5[0][0], R5[0][1], c = 'blue')
+    '''
     # función dentro de la principal para ahorrarme trabajo:
     def lettering(dictionary):
         words = list(dictionary)
@@ -94,7 +116,10 @@ def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     lettering(R3)
     lettering(R4)
     lettering(R5)
-
+    '''
     plt.legend()
-    plt.savefig(name)
+    #plt.savefig(name)
     plt.show()
+
+graphic_representation('test', result_POS[0], R1[0], R2[0],
+                        R3[0], R4[0], R5[0])
