@@ -109,23 +109,6 @@ graphic_representation('test', result_POS[0], R1[0], R2[0],
 
 ################################################################################
 
-
-'''
-    # función dentro de la principal para ahorrarme trabajo:
-    def lettering(dictionary):
-        words = list(dictionary)
-        for i, word in enumerate(words):
-        	print(i, word)
-        	plt.annotate(word, xy = (result[i, 0], result[i, 1]))
-
-    lettering(result_POS)
-    lettering(R1)
-    lettering(R2)
-    lettering(R3)
-    lettering(R4)
-    lettering(R5)
-'''
-
 def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
     '''
     Graficamos el resultado de aplicar el PCA
@@ -139,6 +122,20 @@ def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
         - None
     -------
     '''
+    # función dentro de la principal para ahorrarme trabajo:
+    def lettering(dictionary, pos):
+        words = list(dictionary)
+        for i, word in enumerate(words):
+        	print(i, word)
+        	plt.annotate(word, xy = (pos[0], pos[1]))
+
+    lettering(result_POS, construct_word_dict(list_words_POS1))
+    lettering(R1, construct_word_dict(list_words_R1))
+    lettering(R2, construct_word_dict(list_words_R2))
+    lettering(R3, construct_word_dict(list_words_R3))
+    lettering(R4, construct_word_dict(list_words_R4))
+    lettering(R5, construct_word_dict(list_words_R5))
+
     plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
     plt.scatter(R1[0], R1[1], c = 'red', label = 'First resoult')
     plt.scatter(R2[0], R2[1], c = 'blue', label = 'other resoults')
