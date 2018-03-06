@@ -125,9 +125,7 @@ def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
     # función dentro de la principal para ahorrarme trabajo:
     def lettering(dictionary, pos):
         words = list(dictionary)[0]
-        for i, word in enumerate(words):
-        	print(i, word)
-        	plt.annotate(word, xy = (pos[0], pos[1]))
+        plt.annotate(words, xy = (pos[0], pos[1]))
 
     lettering(construct_word_dict(list_words_POS1), result_POS)
     lettering(construct_word_dict(list_words_R1), R1)
