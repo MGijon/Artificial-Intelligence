@@ -79,9 +79,6 @@ R5 = apply_PCA(construct_word_dict(list_words_R5))
 ## (II):
 ## =====
 
-R3[0][0]
-R3[0][1]
-R3[0]
 def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     '''
     Graficamos el resultado de aplicar el PCA
@@ -96,6 +93,12 @@ def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     -------
     '''
     plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
+    plt.scatter(R1[0], R1[1], c = 'red', label = 'First resoult')
+    plt.scatter(R2[0], R2[1], c = 'blue', label = 'other resoults')
+    plt.scatter(R3[0], R3[1], c = 'blue')
+    plt.scatter(R4[0], R4[1], c = 'blue')
+    plt.scatter(R5[0], R5[1], c = 'blue')
+    plt.title(name)
     plt.legend()
     plt.show()
 
@@ -105,28 +108,8 @@ graphic_representation('test', result_POS[0], R1[0], R2[0],
 
 
 ################################################################################
-def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
-    '''
-    Graficamos el resultado de aplicar el PCA
-    INPUT:
-    ------
-        - name: string, nombre del archivo a guardar (ruta incluída)
-        - result_POS:
-        - R1, ..., R5:
 
-    OUTPUT:
-        - None
-    -------
-    '''
-    plt.scatter(result_POS, c = 'green', label = 'Word')
-'''
-    plt.scatter(result_POS[0][0], result_POS[0][1], c = 'green', label = 'Word')
-    plt.scatter(R1[0][0], R1[0][1], c = 'red', label = 'First resoult')
-    plt.scatter(R2[0][0], R2[0][1], c = 'blue', label = 'other resoults')
-    plt.scatter(R3[0][0], R3[0][1], c = 'blue')
-    plt.scatter(R4[0][0], R4[0][1], c = 'blue')
-    plt.scatter(R5[0][0], R5[0][1], c = 'blue')
-'''
+
 '''
     # función dentro de la principal para ahorrarme trabajo:
     def lettering(dictionary):
@@ -142,7 +125,29 @@ def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
     lettering(R4)
     lettering(R5)
 '''
-    plt.legend()
+
+def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
+    '''
+    Graficamos el resultado de aplicar el PCA
+    INPUT:
+    ------
+        - name: string, nombre del archivo a guardar (ruta incluída)
+        - result_POS:
+        - R1, ..., R5:
+
+    OUTPUT:
+        - None
+    -------
+    '''
+    plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
+    plt.scatter(R1[0], R1[1], c = 'red', label = 'First resoult')
+    plt.scatter(R2[0], R2[1], c = 'blue', label = 'other resoults')
+    plt.scatter(R3[0], R3[1], c = 'blue')
+    plt.scatter(R4[0], R4[1], c = 'blue')
+    plt.scatter(R5[0], R5[1], c = 'blue')
     plt.title(name)
-    #plt.savefig(name)
+    plt.legend()
     plt.show()
+
+graphic_representation_2('test', result_POS[0], R1[0], R2[0],
+                          R3[0], R4[0], R5[0])
