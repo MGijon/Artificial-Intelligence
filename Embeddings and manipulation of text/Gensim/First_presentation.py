@@ -95,7 +95,7 @@ def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
         - None
     -------
     '''
-    plt.scatter(result_POS[0][0],result_POS[0][1], c = 'green', label = 'Word')
+    plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
     plt.legend()
     plt.show()
 
@@ -103,6 +103,8 @@ graphic_representation('test', result_POS[0], R1[0], R2[0],
                         R3[0], R4[0], R5[0])
 
 
+
+################################################################################
 def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
     '''
     Graficamos el resultado de aplicar el PCA
