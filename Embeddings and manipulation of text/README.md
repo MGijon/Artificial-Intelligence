@@ -4,6 +4,8 @@
 
 ## **Index:**
 
+### Python
+
 1. **NLTK**:
 
     Working with NLTK ('Natural Language Toolkit') package in Python.
@@ -23,3 +25,7 @@
 5. **Gensim**:
 
     Working with Gensim package (Python).
+
+***
+
+### R
