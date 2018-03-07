@@ -146,3 +146,18 @@ def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
 
 graphic_representation_2('test', result_POS[0], R1[0], R2[0],
                           R3[0], R4[0], R5[0])
+
+################################################################################
+
+
+## El siguiente paso es automatizar el proceso para repetirlo por todo el
+## documento, generando una imágen de cada uno de los resultados y guardándolas
+## automáticamente en una carpeta, con el nombre de la palabra 'origen'.
+## =============================================================================
+
+# ruta mac:
+route = ''
+# ruta windows:
+route = ''
+# ruta linux:
+route = ''
