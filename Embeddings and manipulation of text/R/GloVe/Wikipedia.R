@@ -23,15 +23,20 @@ vocab <- prune_vocabulary(vocab, term_count_min = 5L)
 
 
 # Use our filtered vocabulary
+
 vectorizer <- vocab_vectorizer(vocab)
+
 # use window of 5 for context words
+
 tcm <- create_tcm(it, vectorizer, skip_grams_window = 5L)
 
 glove = GlobalVectors$new(word_vectors_size = 50, vocabulary = vocab, x_max = 10)
 glove$fit(tcm, n_iter = 20)
 
 glove = GlobalVectors$new(word_vectors_size = 50, vocabulary = vocab, x_max = 10)
-# `glove` object will be modified by `fit()` call !
+
+# `glove` object will be modified by `fit()` call!
+
 fit(tcm, glove, n_iter = 20)
 
 word_vectors <- glove$get_word_vectors()
