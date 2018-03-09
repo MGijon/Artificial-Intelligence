@@ -22,7 +22,14 @@ summary(videogames)
 videogames = videogames[videogames$Year < 2017,]
 summary(videogames)
 
+## Visualization
+## =============
+
 # plot the sales against the year
-plot(videogames$Year, videogames$Global_Sales, main = 'Year - Global_Sales')
-
-
+plot(videogames$Year, videogames$Global_Sales, main = 'Year - Global_Sales') 
+ggplot(videogames, aes(Year, Global_Sales)) + geom_point()
+ggplot(videogames, aes(Year, Global_Sales)) + geom_point(aes(colour = factor(Platform)), size = 2)
+Year_GS_Plot <- ggplot(videogames, aes(Year, Global_Sales, colour = Platform))  + geom_point() 
+print(Year_GS_Plot)
+print(Year_GS_Plot + ggtitle("Year against Global Sales"))  # adding title
+print(Year_GS_Plot  + labs(y = "Global Sales", x = "Year")) # adding labeled axes
