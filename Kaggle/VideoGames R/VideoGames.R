@@ -5,14 +5,22 @@ library(tidyr)
 library(wesanderson)
 
 
-# Load the data.set
+## Load the data.set
+## =================
+
 videogames <- read.csv('/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/Kaggle/VideoGames R/Data/vgsales.csv', stringsAsFactors = FALSE)
 
-summary(videogames)
-#str(videogames)
-#head(videogames)
+## Data preparation
+## ================
 
+summary(videogames)   # explore the data
+# We see that the variable year is taken as a character, we have to fix this
 videogames$Year = as.numeric(videogames$Year)
+summary(videogames)
+# Now we see that there are videogames untill 2020, another thing to fix.
+# We are gonna have dates until 2016
+videogames = videogames[videogames$Year < 2017,]
+summary(videogames)
 
 # plot the sales against the year
 plot(videogames$Year, videogames$Global_Sales, main = 'Year - Global_Sales')
