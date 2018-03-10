@@ -163,3 +163,47 @@ route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/E
 #route = ''
 # ruta linux:
 #route = ''
+
+def graphic_representation_3(name,result_POS, R1, R2, R3, R4, R5):
+    '''
+    Graficamos el resultado de aplicar el PCA
+    INPUT:
+    ------
+        - name: string, nombre del archivo a guardar (ruta incluída)
+        - result_POS:
+        - R1, ..., R5:
+
+    OUTPUT:
+        - None
+    -------
+    '''
+    # función dentro de la principal para ahorrarme trabajo:
+    def lettering(dictionary, pos):
+        words = list(dictionary)[0]
+        plt.annotate(words, xy = (pos[0], pos[1]))
+
+    lettering(construct_word_dict(list_words_POS1), result_POS)
+    lettering(construct_word_dict(list_words_R1), R1)
+    lettering(construct_word_dict(list_words_R2), R2)
+    lettering(construct_word_dict(list_words_R3), R3)
+    lettering(construct_word_dict(list_words_R4), R4)
+    lettering(construct_word_dict(list_words_R5), R5)
+
+    plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
+    plt.scatter(R1[0], R1[1], c = 'red', label = 'First resoult')
+    plt.scatter(R2[0], R2[1], c = 'blue', label = 'other resoults')
+    plt.scatter(R3[0], R3[1], c = 'blue')
+    plt.scatter(R4[0], R4[1], c = 'blue')
+    plt.scatter(R5[0], R5[1], c = 'blue')
+    plt.title(name)
+    plt.legend()
+    plt.savefig(name)
+    plt.show()
+
+
+j = 0
+while isinstance(data['Pos1'][j] , str):
+    nombre = data['Pos1'][j]
+    ruta = route + '/' + nombre
+    graphic_representation_3(ruta, result_POS[j], R1[j], R2[j],
+                              R3[j], R4[j], R5[j])
