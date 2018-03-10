@@ -100,6 +100,7 @@ def graphic_representation(name,result_POS, R1, R2, R3, R4, R5):
     plt.scatter(R5[0], R5[1], c = 'blue')
     plt.title(name)
     plt.legend()
+    plt.savefig('graphic_representation_test.png')
     plt.show()
 
 graphic_representation('test', result_POS[0], R1[0], R2[0],
@@ -142,6 +143,7 @@ def graphic_representation_2(name,result_POS, R1, R2, R3, R4, R5):
     plt.scatter(R5[0], R5[1], c = 'blue')
     plt.title(name)
     plt.legend()
+    plt.savefig('graphic_representation_2_test.png')
     plt.show()
 
 graphic_representation_2('test', result_POS[0], R1[0], R2[0],
@@ -156,8 +158,8 @@ graphic_representation_2('test', result_POS[0], R1[0], R2[0],
 ## =============================================================================
 
 # ruta mac:
-route = ''
+route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/Embeddings and manipulation of text/Python/Gensim/Data/E1'
 # ruta windows:
-route = ''
+#route = ''
 # ruta linux:
-route = ''
+#route = ''
