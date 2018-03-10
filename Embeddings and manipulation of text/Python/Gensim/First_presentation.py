@@ -158,7 +158,7 @@ graphic_representation_2('test', result_POS[0], R1[0], R2[0],
 ## =============================================================================
 
 # ruta mac:
-route_images = '/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/Embeddings and manipulation of text/Python/Gensim/Data/E1'
+route_images = 'Data/E1'
 # ruta windows:
 #route_images = ''
 # ruta linux:
@@ -205,5 +205,6 @@ j = 0
 while isinstance(data['Pos1'][j] , str):
     nombre = data['Pos1'][j]
     ruta = route + '/' + nombre
-    graphic_representation_3(route_images,nombre, result_POS[j], R1[j], R2[j],
+    graphic_representation_3(ruta, nombre, result_POS[j], R1[j], R2[j],
                               R3[j], R4[j], R5[j])
+    j = j + 1
