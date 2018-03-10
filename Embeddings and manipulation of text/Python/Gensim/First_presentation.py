@@ -158,13 +158,13 @@ graphic_representation_2('test', result_POS[0], R1[0], R2[0],
 ## =============================================================================
 
 # ruta mac:
-route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/Embeddings and manipulation of text/Python/Gensim/Data/E1'
+route_images = '/Users/manuelgijonagudo/Documents/Programación/GIT/Machine-Learning/Embeddings and manipulation of text/Python/Gensim/Data/E1'
 # ruta windows:
-#route = ''
+#route_images = ''
 # ruta linux:
-#route = ''
+#route_images = ''
 
-def graphic_representation_3(name,result_POS, R1, R2, R3, R4, R5):
+def graphic_representation_3(route, name,result_POS, R1, R2, R3, R4, R5):
     '''
     Graficamos el resultado de aplicar el PCA
     INPUT:
@@ -197,7 +197,7 @@ def graphic_representation_3(name,result_POS, R1, R2, R3, R4, R5):
     plt.scatter(R5[0], R5[1], c = 'blue')
     plt.title(name)
     plt.legend()
-    plt.savefig(name)
+    plt.savefig(route)
     plt.show()
 
 
@@ -205,5 +205,5 @@ j = 0
 while isinstance(data['Pos1'][j] , str):
     nombre = data['Pos1'][j]
     ruta = route + '/' + nombre
-    graphic_representation_3(ruta, result_POS[j], R1[j], R2[j],
+    graphic_representation_3(route_images,nombre, result_POS[j], R1[j], R2[j],
                               R3[j], R4[j], R5[j])
