@@ -204,7 +204,7 @@ def graphic_representation_3(route, name,result_POS, R1, R2, R3, R4, R5):
 j = 0
 while isinstance(data['Pos1'][j] , str):
     nombre = data['Pos1'][j]
-    ruta = route + '/' + nombre
+    ruta = route_images + '/' + nombre
     graphic_representation_3(ruta, nombre, result_POS[j], R1[j], R2[j],
                               R3[j], R4[j], R5[j])
     j = j + 1
