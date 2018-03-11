@@ -13,7 +13,7 @@ route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vec
 # ruta windows:
 #route = 'D:\GIT\Data\GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
-data.columns
+
 i = 0
 
 while isinstance(data['Pos1'][i] , str):
