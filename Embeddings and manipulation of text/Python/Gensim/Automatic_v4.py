@@ -18,19 +18,18 @@ i = 0
 
 while isinstance(data['Pos1'][i] , str):
 
-    if isinstance(data['R1'][i] , str) == False:
-        resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
+    resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
                                         negative = [data['Neg'][i]], topn = 5)
-        data['R1'][i] = resultado[0][0]
-        data['R2'][i] = resultado[1][0]
-        data['R3'][i] = resultado[2][0]
-        data['R4'][i] = resultado[3][0]
-        data['R5'][i] = resultado[4][0]
-        data['D1'][i] = resultado[0][1]
-        data['D2'][i] = resultado[1][1]
-        data['D3'][i] = resultado[2][1]
-        data['D4'][i] = resultado[3][1]
-        data['D5'][i] = resultado[4][1]
+    data['R1'][i] = resultado[0][0]
+    data['R2'][i] = resultado[1][0]
+    data['R3'][i] = resultado[2][0]
+    data['R4'][i] = resultado[3][0]
+    data['R5'][i] = resultado[4][0]
+    data['D1'][i] = resultado[0][1]
+    data['D2'][i] = resultado[1][1]
+    data['D3'][i] = resultado[2][1]
+    data['D4'][i] = resultado[3][1]
+    data['D5'][i] = resultado[4][1]
 
     i = i + 1
 
