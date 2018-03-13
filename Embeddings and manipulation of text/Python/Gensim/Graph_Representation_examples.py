@@ -21,4 +21,15 @@ dis_2_3 = model.similarity(node_2, node_3)
 dis_2_4 = model.similarity(node_2, node_4)
 dis_3_4 = model.similarity(node_3, node_4)
 
-edges = [dis_1_2, dis_1_3, dis_1_4, dis_2_3, dis_2_4, dis_3_4]
+edges = [((1, 2), dis_1_2), ((1, 3), dis_1_3), ((1, 4), dis_1_4),
+         ((2, 3), dis_2_3), ((2, 4), dis_2_4), ((3, 4), dis_3_4)]
+
+edges_2 = [x[0] for x in edges]
+
+G = nx.Graph()
+
+G.add_nodes_from(nodes)
+G.add_edges_from(edges_2)
+
+nx.draw(G)
+plt.show()
