@@ -27,11 +27,30 @@ edges = [((node_1, node_2), dis_1_2), ((node_1, node_3), dis_1_3),
 
 edges_2 = [x[0] for x in edges]
 
+edges_W = [(node_1, node_2, dis_1_2), (node_1, node_3, dis_1_3),
+          (node_1, node_4, dis_1_4), (node_2, node_3, dis_2_3),
+           (node_2, node_4, dis_2_4), (node_3, node_4, dis_3_4)]
+
+## EXAMPLE 1:
+## ==========
+
 plt.close()
 H = nx.Graph()
 H.add_nodes_from(nodes)
 print(H.nodes())
 H.add_edges_from(edges_2)
 print(H.nodes())
-nx.draw(H, pos = nx.circular_layout(G), nodecolor = 'r', edge_color = 'b')
+nx.draw(H, pos = nx.circular_layout(H), nodecolor = 'r', edge_color = 'b')
+plt.savefig('GRE_1.png')
+plt.show()
+
+## EXAMPLE 2:
+## ==========
+
+plt.close()
+G = nx.Graph()
+G.add_nodes_from(nodes)
+G.add_weighted_edges_from(edges_W)
+nx.draw(G, nodecolor = 'white', edge_color = 'b', with_labels = True)
+plt.savefig('GRE_2.png')
 plt.show()
