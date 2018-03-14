@@ -26,10 +26,11 @@ edges = [((1, 2), dis_1_2), ((1, 3), dis_1_3), ((1, 4), dis_1_4),
 
 edges_2 = [x[0] for x in edges]
 
-G = nx.Graph()
 
-G.add_nodes_from(nodes)
-G.add_edges_from(edges_2)
+H = nx.Graph()
+H.add_nodes_from(nodes)
+print(H.nodes())
+H.add_edges_from(edges_2)
 
-nx.draw(G)
+nx.draw(H, pos = nx.circular_layout(G), nodecolor = 'r', edge_color = 'b')
 plt.show()
