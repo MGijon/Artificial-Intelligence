@@ -54,3 +54,18 @@ G.add_weighted_edges_from(edges_W)
 nx.draw(G, nodecolor = 'white', edge_color = 'b', with_labels = True)
 plt.savefig('GRE_2.png')
 plt.show()
+
+
+## EXAMPLE 3:
+## ==========
+
+plt.close()
+I = nx.Graph()
+I.add_weighted_edges_from(edges_W)
+position = nx.circular_layout(I)
+nx.draw_networkx_nodes(I, position, nodelist = nodes,
+                       nodecolor = 'white', nodesize = 500,
+                       alpha = 0.8)
+edge_labels = nx.draw_networkx_edge_labels(I ,pos = position)
+plt.savefig('GRE_3.png')
+plt.show()
