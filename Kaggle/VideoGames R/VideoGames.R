@@ -33,3 +33,10 @@ Year_GS_Plot <- ggplot(videogames, aes(Year, Global_Sales, colour = Platform))  
 print(Year_GS_Plot)
 print(Year_GS_Plot + ggtitle("Year against Global Sales"))  # adding title
 print(Year_GS_Plot  + labs(y = "Global Sales", x = "Year")) # adding labeled axes
+
+# plot the global sales against the japanese sales
+Year_GS_JS <- ggplot(videogames, aes(JP_Sales, Global_Sales, colour = Platform))  + geom_point() 
+print(Year_GS_JS)
+print(Year_GS_JS + ggtitle("Global Sales against Japanese sales"))  # adding title
+print(Year_GS_JS + labs(y = "Global Sales", x = "Japanese Sales")) # adding labeled axes
+
