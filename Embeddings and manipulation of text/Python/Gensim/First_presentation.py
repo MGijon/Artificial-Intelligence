@@ -182,12 +182,12 @@ def graphic_representation_3(route, name,result_POS, R1, R2, R3, R4, R5):
         words = list(dictionary)[0]
         plt.annotate(words, xy = (pos[0], pos[1]))
 
-    lettering(construct_word_dict(list_words_POS1), result_POS)
-    lettering(construct_word_dict(list_words_R1), R1)
-    lettering(construct_word_dict(list_words_R2), R2)
-    lettering(construct_word_dict(list_words_R3), R3)
-    lettering(construct_word_dict(list_words_R4), R4)
-    lettering(construct_word_dict(list_words_R5), R5)
+    #lettering(construct_word_dict(list_words_POS1), result_POS)
+    #lettering(construct_word_dict(list_words_R1), R1)
+    #lettering(construct_word_dict(list_words_R2), R2)
+    #lettering(construct_word_dict(list_words_R3), R3)
+    #lettering(construct_word_dict(list_words_R4), R4)
+    #lettering(construct_word_dict(list_words_R5), R5)
 
     plt.scatter([result_POS[0]],[result_POS[1]], c = 'green', label = 'Word')
     plt.scatter(R1[0], R1[1], c = 'red', label = 'First resoult')
@@ -200,11 +200,17 @@ def graphic_representation_3(route, name,result_POS, R1, R2, R3, R4, R5):
     plt.savefig(route)
     plt.show()
 
-
 j = 0
+
 while isinstance(data['Pos1'][j] , str):
     nombre = data['Pos1'][j]
     ruta = route_images + '/' + nombre
     graphic_representation_3(ruta, nombre, result_POS[j], R1[j], R2[j],
                               R3[j], R4[j], R5[j])
     j = j + 1
+
+
+
+####
+
+list(construct_word_dict(list_words_POS1))
