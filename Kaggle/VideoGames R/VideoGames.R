@@ -40,3 +40,8 @@ print(Year_GS_JS)
 print(Year_GS_JS + ggtitle("Global Sales against Japanese sales"))  # adding title
 print(Year_GS_JS + labs(y = "Global Sales", x = "Japanese Sales")) # adding labeled axes
 
+# plot the global sales against the european sales
+Year_GS_EU <- ggplot(videogames, aes(EU_Sales, Global_Sales, colour = Platform))  + geom_point() 
+print(Year_GS_EU)
+print(Year_GS_EU + ggtitle("Global Sales against Japanese sales"))  # adding title
+print(Year_GS_EU + labs(y = "Global Sales", x = "Japanese Sales")) # adding labeled axes
