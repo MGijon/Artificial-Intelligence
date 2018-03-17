@@ -13,3 +13,8 @@ combats <- read.csv('Data/combats.csv', stringsAsFactors = FALSE)
 
 ## Data exploration
 ## ================
+
+summary(pokemon)
+head(pokemon, 3)
+
+# number of legendary pokemons
