@@ -33,5 +33,5 @@ plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
 plt.title('Linear Regression Diabetest Sklearn data set')
 plt.legend()
 
-plt.savefig("Linear_Regression_Diabetest_Sklearn_data_set.png")
+#plt.savefig("Linear_Regression_Diabetest_Sklearn_data_set.png")
 plt.show()
