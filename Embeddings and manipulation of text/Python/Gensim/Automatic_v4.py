@@ -16,7 +16,7 @@ model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
 i = 0
 
-while isinstance(data['Pos1'][i] , str):
+while isinstance(data['Pos1'][i] , str):    # FIX, IT DOESN'T WORK
 
     resultado = model.most_similar( positive = [data['Pos1'][i], data['Pos2'][i]],
                                         negative = [data['Neg'][i]], topn = 5)

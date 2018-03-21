@@ -83,3 +83,10 @@ nx.draw_networkx_nodes(J, position, nodelist = nodes,
 edge_labels = nx.draw_networkx_edge_labels(J ,pos = position)
 #plt.savefig('GRE_4.png')
 plt.show()
+
+# https://networkx.github.io/documentation/networkx-1.9/examples/drawing/weighted_graph.html
+# https://networkx.github.io/documentation/networkx-1.9/examples/drawing/labels_and_colors.html
+# https://networkx.github.io/documentation/networkx-1.9/examples/drawing/index.html
+# https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.drawing.nx_pylab.draw_networkx_edge_labels.html
+# https://networkx.github.io/documentation/networkx-1.7/reference/generated/networkx.drawing.nx_pylab.draw_networkx_nodes.html
+# https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.drawing.nx_pylab.draw_networkx_edge_labels.html
