@@ -117,6 +117,24 @@ def return_synsets_3_levels(W):
 
 len(return_synsets_3_levels('cat'))
 len(return_synsets_3_levels('dog'))
+len(return_synsets_3_levels('person'))
+len(return_synsets_3_levels('artifact'))
+len(return_synsets_3_levels('living_thing'))
+
+def return_synsets_4_levels(W):
+    T = return_synsets_3_levels(W)
+    T_h = T
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    return T_h
+
+len(return_synsets_4_levels('cat'))
+len(return_synsets_4_levels('dog'))
+len(return_synsets_4_levels('person'))
+len(return_synsets_4_levels('artifact'))
+len(return_synsets_4_levels('living_thing'))
+
 
 
 ## Threshold and loops
