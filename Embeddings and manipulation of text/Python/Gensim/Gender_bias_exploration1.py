@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import gensim.models as gm
 import matplotlib.pyplot as plt
+import seaborn as sn
 import logging
 from nltk.corpus import wordnet as wn
 
@@ -36,11 +37,38 @@ logger.info('Model loaded successfully\n')
 # cuya imagen por la regularidad tiene una o más palabras a esa distancia
 # por ahora eso, en el futuro ver cuántas palabras haya esa distancia
 
+# total_size = len(model.wv.vocab) it's too big, we must select appropiate subsetes
+
 ## Builting synsets
 ## ================
 
+A = wn.synsets('artifact')
+A
+A = wn.synset('artifact.n.01')
+len(A.hyponyms())
 
-total_size = len(model.wv.vocab)
+B = wn.synsets('living_thing')
+B
+B = wn.synset('living_thing.n.01')
+len([x.hyponyms() for x in B.hyponyms()])
+
+C = wn.synset('dog.n.01')
+len(C.hyponyms())
+
+D = wn.synset('cat.n.01')
+len(D.hyponyms())
+C.hyponyms()
+
+
+
+
+
+
+
+
+
+
+
 
 ## Threshold and loops
 ## ===================
