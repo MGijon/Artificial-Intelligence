@@ -60,10 +60,32 @@ len(D.hyponyms())
 C.hyponyms()
 
 
+E = wn.synsets('dog')
+E_h = []
+for i in E:
+    for j in i.hyponyms():
+        E_h.append(j)
+len(E_h)
 
+def check_ss(word):
+    T = wn.synsets(word)
+    T_h = []
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    print(len(T_h))
 
-
-
+check_ss('cat')
+check_ss('person')
+check_ss('living_thing')
+check_ss('artifact')
+check_ss('men')
+check_ss('women')
+check_ss('television')
+check_ss('good')
+check_ss('evil')
+check_ss('animal')
+check_ss('dog')
 
 
 
