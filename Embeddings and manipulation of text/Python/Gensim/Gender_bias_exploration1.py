@@ -87,9 +87,36 @@ check_ss('evil')
 check_ss('animal')
 check_ss('dog')
 
+def return_synsets(W):
+    T = wn.synsets(W)
+    T_h = []
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    return T_h
 
+return_synsets('cat')
 
+def return_synsets_2_levels(W):
+    T = return_synsets(W)
+    T_h = T
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    return T_h
 
+len(return_synsets_2_levels('cat'))
+
+def return_synsets_3_levels(W):
+    T = return_synsets_2_levels(W)
+    T_h = T
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    return T_h
+
+len(return_synsets_3_levels('cat'))
+len(return_synsets_3_levels('dog'))
 
 
 ## Threshold and loops
