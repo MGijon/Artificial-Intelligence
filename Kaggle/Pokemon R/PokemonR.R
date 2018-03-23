@@ -46,3 +46,36 @@ tapply(pokemon$Sp..Atk, pokemon$Type.2, mean)
 tapply(pokemon$Defense, pokemon$Type.2, mean)
 tapply(pokemon$Sp..Def, pokemon$Type.2, mean)
 tapply(pokemon$Speed, pokemon$Type.2, mean)
+  
+  # it would by very interesting to have both variables as one in order to see 
+  # how this properties distributed
+pokemon$Types <- as.character(paste(pokemon$Type.1, pokemon$Type.2, sep = '-'))
+
+Types <- levels(factor(pokemon$Types))
+Types
+
+  # now represent the best combination of types for each one of the combinations
+aux <- tapply(pokemon$HP, pokemon$Types, mean)
+aux[2]
+aux <- as.data.frame(aux)
+colnames(aux)
+which(aux$aux == max(aux$aux))
+
+
+
+tapply(pokemon$Attack, pokemon$Types, mean)
+tapply(pokemon$Sp..Atk, pokemon$Types, mean)
+tapply(pokemon$Defense, pokemon$Types, mean)
+tapply(pokemon$Sp..Def, pokemon$Types, mean)
+tapply(pokemon$Speed, pokemon$Types, mean)
+
+  # now represent the worst combination of types for each one of the combinations
+tapply(pokemon$HP, pokemon$Types, mean)
+tapply(pokemon$Attack, pokemon$Types, mean)
+tapply(pokemon$Sp..Atk, pokemon$Types, mean)
+tapply(pokemon$Defense, pokemon$Types, mean)
+tapply(pokemon$Sp..Def, pokemon$Types, mean)
+tapply(pokemon$Speed, pokemon$Types, mean)
+
+  # HP of legendary pokemon by type
+ggplot(pokemon, aes(x = Type.1, y = HP, fill = Legendary)) + geom_boxplot()
