@@ -79,3 +79,4 @@ tapply(pokemon$Speed, pokemon$Types, mean)
 
   # HP of legendary pokemon by type
 ggplot(pokemon, aes(x = Type.1, y = HP, fill = Legendary)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Attack, fill = Legendary)) + geom_boxplot()
