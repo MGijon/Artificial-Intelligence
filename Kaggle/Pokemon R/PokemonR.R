@@ -35,7 +35,7 @@ Type
     # HP
 length(pokemon$HP) 
 summary(pokemon$HP)
-table(pokemon$HP)
+table(pokemon$HP)     # too much information, not very useull
 range(pokemon$HP)
 var(pokemon$HP)
 sd(pokemon$HP)
@@ -43,7 +43,17 @@ quantile(pokemon$HP, 0.25) # first quantile
 quantile(pokemon$HP, 0.75) # third quantile
 IQR(pokemon$HP) # the interquartile range
 
+  # Attack
+summary(pokemon$Attack)
+range(pokemon$Attack)
+var(pokemon$Attack)
+sd(pokemon$Attack)
+quantile(pokemon$Attack, 0.25)
+quantile(pokemon$Attack, 0.75)
+IQR(pokemon$Attack)
 
+
+###############################################
   # means of different quantities by first type 
 tapply(pokemon$HP, pokemon$Type.1, mean)
 tapply(pokemon$Attack, pokemon$Type.1, mean)
@@ -91,6 +101,7 @@ tapply(pokemon$Defense, pokemon$Types, mean)
 tapply(pokemon$Sp..Def, pokemon$Types, mean)
 tapply(pokemon$Speed, pokemon$Types, mean)
 
+######################################
   # Graphics of some atributes by type
 ggplot(pokemon, aes(x = Type.1, y = HP)) + geom_boxplot()
 ggplot(pokemon, aes(x = Type.1, y = Attack)) + geom_boxplot()
