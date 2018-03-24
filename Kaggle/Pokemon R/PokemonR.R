@@ -30,6 +30,20 @@ head(combats)
 Type <- levels(factor(pokemon$Type.1))
 Type
 
+  # Descriptive analysis of some of the variables
+
+    # HP
+length(pokemon$HP) 
+summary(pokemon$HP)
+table(pokemon$HP)
+range(pokemon$HP)
+var(pokemon$HP)
+sd(pokemon$HP)
+quantile(pokemon$HP, 0.25) # first quantile
+quantile(pokemon$HP, 0.75) # third quantile
+IQR(pokemon$HP) # the interquartile range
+
+
   # means of different quantities by first type 
 tapply(pokemon$HP, pokemon$Type.1, mean)
 tapply(pokemon$Attack, pokemon$Type.1, mean)
@@ -54,7 +68,7 @@ pokemon$Types <- as.character(paste(pokemon$Type.1, pokemon$Type.2, sep = '-'))
 Types <- levels(factor(pokemon$Types))
 Types
 
-  # now represent the best combination of types for each one of the combinations
+  # now represent the best combination of types for each one of the combinations     <- NO ACABADO
 aux <- tapply(pokemon$HP, pokemon$Types, mean)
 aux[2]
 aux <- as.data.frame(aux)
@@ -92,3 +106,4 @@ ggplot(pokemon, aes(x = Type.1, y = Sp..Atk, fill = Legendary)) + geom_boxplot()
 ggplot(pokemon, aes(x = Type.1, y = Defense, fill = Legendary)) + geom_boxplot()
 ggplot(pokemon, aes(x = Type.1, y = Sp..Def, fill = Legendary)) + geom_boxplot()
 ggplot(pokemon, aes(x = Type.1, y = Speed, fill = Legendary)) + geom_boxplot() 
+
