@@ -77,6 +77,18 @@ tapply(pokemon$Defense, pokemon$Types, mean)
 tapply(pokemon$Sp..Def, pokemon$Types, mean)
 tapply(pokemon$Speed, pokemon$Types, mean)
 
-  # HP of legendary pokemon by type
+  # Graphics of some atributes by type
+ggplot(pokemon, aes(x = Type.1, y = HP)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Attack)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Sp..Atk)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Defense)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Sp..Def)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Speed)) + geom_boxplot()
+
+  # Differences between legendary and regular pokemon by type
 ggplot(pokemon, aes(x = Type.1, y = HP, fill = Legendary)) + geom_boxplot()
 ggplot(pokemon, aes(x = Type.1, y = Attack, fill = Legendary)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Sp..Atk, fill = Legendary)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Defense, fill = Legendary)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Sp..Def, fill = Legendary)) + geom_boxplot()
+ggplot(pokemon, aes(x = Type.1, y = Speed, fill = Legendary)) + geom_boxplot() 
