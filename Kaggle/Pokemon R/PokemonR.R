@@ -43,7 +43,7 @@ quantile(pokemon$HP, 0.25) # first quantile
 quantile(pokemon$HP, 0.75) # third quantile
 IQR(pokemon$HP) # the interquartile range
 
-  # Attack
+   # Attack
 summary(pokemon$Attack)
 range(pokemon$Attack)
 var(pokemon$Attack)
@@ -52,6 +52,41 @@ quantile(pokemon$Attack, 0.25)
 quantile(pokemon$Attack, 0.75)
 IQR(pokemon$Attack)
 
+  # Sp..Atk
+summary(pokemon$Sp..Atk)
+range(pokemon$Sp..Atk)
+var(pokemon$Sp..Atk)
+sd(pokemon$Sp..Atk)
+quantile(pokemon$Sp..Atk, 0.25)
+quantile(pokemon$Sp..Atk, 0.75)
+IQR(pokemon$Sp..Atk)
+
+  # Defense
+summary(pokemon$Defense)
+range(pokemon$Defense)
+var(pokemon$Defense)
+sd(pokemon$Defense)
+quantile(pokemon$Defense, 0.25)
+quantile(pokemon$Defense, 0.75)
+IQR(pokemon$Defense)
+
+  # Sp..Def
+summary(pokemon$Sp..Def)
+range(pokemon$Sp..Def)
+var(pokemon$Sp..Def)
+sd(pokemon$Sp..Def)
+quantile(pokemon$Sp..Def, 0.25)
+quantile(pokemon$Sp..Def, 0.75)
+IQR(pokemon$Sp..Def)
+
+  # Speed
+summary(pokemon$Speed)
+range(pokemon$Speed)
+var(pokemon$Speed)
+sd(pokemon$Speed)
+quantile(pokemon$Speed, 0.25)
+quantile(pokemon$Speed, 0.75)
+IQR(pokemon$Speed)
 
 ###############################################
   # means of different quantities by first type 
