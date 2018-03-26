@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
@@ -17,3 +18,6 @@ print(X[:, :2]) # two first features: sepal length (cm) and sepal width (cm)
 Sepal = X[:, :2]
 Sepal_length = Sepal[:, 0]
 Sepal_width = Sepal[:, 1]
+
+plt.scatter(Sepal_length, Sepal_width)
+plt.show()
