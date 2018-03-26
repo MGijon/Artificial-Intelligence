@@ -11,3 +11,9 @@ Y = iris.target
 
 flowers = iris.target_names
 features = iris.feature_names
+
+print(X[:, :2]) # two first features: sepal length (cm) and sepal width (cm)
+
+Sepal = X[:, :2]
+Sepal_length = Sepal[:, 0]
+Sepal_width = Sepal[:, 1]
