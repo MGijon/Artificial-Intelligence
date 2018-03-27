@@ -23,10 +23,9 @@ regression.fit(X_train, y_train)
 # prediction
 y_pred = regression.predict(X_test)
 
-# plotting
-print('Coeficients: \n', regression.coef_)                                  # [ 938.23786125]
+print('Coeficients: \n', regression.coef_)
 
-print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))   # 2548.07
+print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))
 
 print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))
 
