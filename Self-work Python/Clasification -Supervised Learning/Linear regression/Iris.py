@@ -44,6 +44,7 @@ plt.ylabel('Sepal Width')
 plt.show()
 
 ################################################################################
+
 # now we define the train and the test sets
 
 X_train = Sepal[:75] # 75% of the samples
@@ -66,12 +67,34 @@ print("Mean squared error: \n %.2f" % mean_squared_error(Y_test, y_pred))
 
 print('Variance Score: \n %.2f' %r2_score(Y_test, y_pred))
 
-plt.scatter(X_test[], Y_test, color = 'b', label = 'Data values')
+
+X = iris.data[:, np.newaxis, 2]
+#X = iris.data[:, :2]
+X.shape
+X_train = X[:-20]
+X_test = X[-20:]
+y_train = iris.target[:-20]
+y_test = iris.target[-20:]
+# creo que el problema es que he de limitar antes los datos con los que trabajo
+# regression object
+regression = linear_model.LinearRegression()
+
+# training
+regression.fit(X_train, y_train)
+
+# prediction
+y_pred = regression.predict(X_test)
+
+# plotting
+print('Coeficients: \n', regression.coef_)                                  # [ 938.23786125]
+
+print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))   # 2548.07
+
+print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))                  # 0.47
+
+
+plt.scatter(X_test, y_test, label = 'Data values')
 plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
-plt.title('Linear Regression Iris Sklearn data set')
+plt.title('Linear Regression Diabetest Sklearn data set')
 plt.legend()
-
-#plt.savefig("Linear_Regression_Diabetest_Sklearn_data_set.png")
 plt.show()
-
-# http://scikit-learn.org/stable/modules/linear_model.html
