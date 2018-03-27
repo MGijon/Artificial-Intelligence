@@ -44,7 +44,7 @@ plt.ylabel('Sepal Width')
 plt.show()
 
 ################################################################################
-
+'''
 # now we define the train and the test sets
 
 X_train = Sepal[:75] # 75% of the samples
@@ -66,19 +66,20 @@ print('Coeficients: \n', regression.coef_)
 print("Mean squared error: \n %.2f" % mean_squared_error(Y_test, y_pred))
 
 print('Variance Score: \n %.2f' %r2_score(Y_test, y_pred))
-
+'''
 
 X = iris.data[:, np.newaxis, 2]
-#X = iris.data[:, :2]
+X = X[:50]
 X.shape
 X_train = X[:-20]
 X_test = X[-20:]
-y_train = iris.target[:-20]
-y_test = iris.target[-20:]
+Y = iris.target[:50]
+y_train = Y[:-20]
+y_test = Y[-20:]
 # creo que el problema es que he de limitar antes los datos con los que trabajo
 # regression object
 regression = linear_model.LinearRegression()
-
+len(X)
 # training
 regression.fit(X_train, y_train)
 
@@ -93,7 +94,34 @@ print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))   # 25
 print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))                  # 0.47
 
 
-plt.scatter(X_test, y_test, label = 'Data values')
+#plt.scatter(X_test, y_test, label = 'Data values')
+plt.scatter(SL_Setosa, SW_Setosa, label = 'Setosa')
+plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
+plt.title('')
+plt.legend()
+plt.show()
+
+
+################################################################################
+diabetes = datasets.load_diabetes()
+
+X = diabetes.data[:, np.newaxis, 2]
+X_train = X[:-20]
+X_test = X[-20:]
+y_train = diabetes.target[:-20]
+y_test = diabetes.target[-20:]
+
+regression = linear_model.LinearRegression()
+
+regression.fit(X_train, y_train)
+
+y_pred = regression.predict(X_test)
+
+print('Coeficients: \n', regression.coef_)                                  # [ 938.23786125]
+print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))   # 2548.07
+print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))                  # 0.47
+
+plt.scatter(X_test, y_test, color = 'b', label = 'Data values')
 plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
 plt.title('Linear Regression Diabetest Sklearn data set')
 plt.legend()
