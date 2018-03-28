@@ -27,64 +27,47 @@ Sepal = X[:, :2]
 Sepal_length = Sepal[:, 0]
 Sepal_width = Sepal[:, 1]
 
-plt.figure(figsize = (10, 7.5))
-plt.scatter(Sepal_length[:50], Sepal_width[:50], label = 'Setosa')
-plt.scatter(Sepal_length[50:100], Sepal_width[50:100], label = 'Versicolor')
-plt.scatter(Sepal_length[100:], Sepal_width[100:], label = 'Virginica')
-plt.legend()
-plt.xlabel('Sepal length (cm)')
-plt.ylabel('Sepal Width (cm)')
-plt.show()
-
-# just selecting Setosa and Versicolor species
-
 SL_Setosa = Sepal_length[:50]
 SL_Versicolor = Sepal_length[50:100]
+SL_Virginica = Sepal_length[100:]
 SW_Setosa = Sepal_width[:50]
 SW_Versicolor = Sepal_width[50:100]
+SW_Viginica = Sepal_width[100:]
 
 plt.figure(figsize = (10, 7.5))
 plt.scatter(SL_Setosa, SW_Setosa, label = 'Setosa')
 plt.scatter(SL_Versicolor, SW_Versicolor, label = 'Versicolor')
+plt.scatter(SL_Virginica, SW_Viginica, label = 'Virginica')
 plt.legend()
 plt.xlabel('Sepal length (cm)')
 plt.ylabel('Sepal Width (cm)')
 plt.show()
 
-## LINEAR REGRESSION
-## =================
-
-# Petal length and width
-X = iris.data[:, :2]
-X = X[:100]
-X_train = X[:40]
-X_train
-len(X_train)
-np.insert(X_train, X[50:90])
-len(X_train)
 
 
 ################################################################################
-diabetes = datasets.load_diabetes()
+################################################################################
 
-X = diabetes.data[:, np.newaxis, 2]
-X_train = X[:-20]
-X_test = X[-20:]
-y_train = diabetes.target[:-20]
-y_test = diabetes.target[-20:]
+## ===== ##
+## PETAL ##
+## ===== ##
 
-regression = linear_model.LinearRegression()
+Petal = X[:, 2:]
+Petal_length = Petal[:, 0]
+Petal_width = Petal[:, 1]
 
-regression.fit(X_train, y_train)
+PL_Setosa = Petal_length[:50]
+PL_Versicolor = Petal_length[50:100]
+PL_Virginica = Petal_length[100:]
+PW_Setosa = Petal_width[:50]
+PW_Versicolor = Petal_width[50:100]
+PW_Viginica = Petal_width[100:]
 
-y_pred = regression.predict(X_test)
-
-print('Coeficients: \n', regression.coef_)                                  # [ 938.23786125]
-print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))   # 2548.07
-print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))                  # 0.47
-
-plt.scatter(X_test, y_test, color = 'b', label = 'Data values')
-plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
-plt.title('Linear Regression Diabetest Sklearn data set')
+plt.figure(figsize = (10, 7.5))
+plt.scatter(PL_Setosa, PW_Setosa, label = 'Setosa')
+plt.scatter(PL_Versicolor, PW_Versicolor, label = 'Versicolor')
+plt.scatter(PL_Virginica, PW_Viginica, label = 'Virginica')
 plt.legend()
+plt.xlabel('Petal length (cm)')
+plt.ylabel('Petal Width (cm)')
 plt.show()
