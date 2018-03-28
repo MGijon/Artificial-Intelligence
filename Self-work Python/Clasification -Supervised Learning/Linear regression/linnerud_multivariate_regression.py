@@ -28,15 +28,3 @@ print('Coeficients: \n', regression.coef_)
 print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))
 
 print('Variance Score: \n %.2f' %r2_score(y_test, y_pred))
-
-'''
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-ax.scatter(X_test[:,0], X_test[:,1], X_test[:,2])
-plt.scatter(X_test, y_test, color = 'b', label = 'Data values')
-plt.plot(X_test, y_pred, color = 'r', label = 'Predict values')
-plt.title('Linear Regression Diabetest Sklearn data set')
-plt.legend()
-
-plt.show()
-'''
