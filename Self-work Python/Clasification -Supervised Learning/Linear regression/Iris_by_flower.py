@@ -37,7 +37,7 @@ SW_Virginica = Sepal_width[100:]
 plt.figure(figsize = (10, 7.5))
 plt.scatter(SL_Setosa, SW_Setosa, label = 'Setosa')
 plt.scatter(SL_Versicolor, SW_Versicolor, label = 'Versicolor')
-plt.scatter(SL_Virginica, SW_Viginica, label = 'Virginica')
+plt.scatter(SL_Virginica, SW_Virginica, label = 'Virginica')
 plt.legend()
 plt.xlabel('Sepal length (cm)')
 plt.ylabel('Sepal Width (cm)')
@@ -156,6 +156,28 @@ plt.show()
 # ------ #
 # Setosa #
 # ------ #
+
+PL_Setosa_train = PL_Setosa[:40, np.newaxis]
+PL_Setosa_test = PL_Setosa[40:]
+PW_Setosa_train = PW_Setosa[:40, np.newaxis]
+PW_Setosa_test = PW_Setosa[40:]
+
+regression = linear_model.LinearRegression()
+regression.fit(PL_Setosa_train, SW_Setosa_train)
+prediction = regression.predict(SL_Setosa_test)
+
+print('Coeficients: \n', regression.coef_)
+print("Mean squared error: \n %.2f" % mean_squared_error(SW_Setosa_test, prediction))
+print('Variance Score: \n %.2f' %r2_score(SW_Setosa_test, prediction))
+
+plt.scatter(SL_Setosa_test, SW_Setosa_test, color = 'b', label = 'Data values')
+plt.plot(SL_Setosa_test, prediction, color = 'r', label = 'Predict values')
+plt.legend()
+plt.title('Petal Setosa size regression')
+plt.savefig('Petal Setosa regression')
+plt.show()
+
+
 
 # ---------- #
 # Versicolor #
