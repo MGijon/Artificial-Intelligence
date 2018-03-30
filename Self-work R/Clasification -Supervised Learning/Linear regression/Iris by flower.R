@@ -29,6 +29,7 @@ summary(regresion)
 
 plot(x = Setosa$sepal.length, y = Setosa$sepal.width, xlab = "Sepal length", ylab = "Sepal width")
 abline(regresion)
+graphics.off()
 
 #regresion$coefficients
 
@@ -46,7 +47,7 @@ summary(regresion)
 
 plot(x = Setosa$petal.length, y = Setosa$petal.width, xlab = "Petal length", ylab = "Petal width")
 abline(regresion)
-
+graphics.off()
 
 ###############
 ## VIRGINICA ##
@@ -61,19 +62,21 @@ cor(Virginica$sepal.length, Virginica$sepal.width)  # 0.4572278
 regresion <- lm(sepal.width ~ sepal.length, data = Virginica)
 summary(regresion)
 
-plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width") # error, margins too large!!
+plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width") 
 abline(regresion)
+graphics.off()
 
   ## PETAL:
   ## ======
 
 cor(Virginica$sepal.length, Virginica$sepal.width)   # 0.4572278
 
-regresion <- lm(petal.width, petal.length, data = Virginica)
+regresion <- lm(petal.width ~ petal.length, data = Virginica)
 summary(regresion)
 
-plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width") # figure margins too large
+plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width")
 abline(regresion)
+graphics.off()
 
 
 ################
@@ -84,7 +87,23 @@ abline(regresion)
   ## SEPAL:
   ## ======
 
-  
+cor(Versicolor$sepal.length, Versicolor$sepal.width) # 0.5259107
+
+regresion <- lm(sepal.width ~ sepal.length, data = Versicolor) 
+summary(regresion)
+
+plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width")
+abline(regresion)
+graphics.off()
+
   ## PETAL:
   ## ======
 
+cor(Versicolor$petal.length, Versicolor$petal.width) # 0.7866681
+
+regresion <- lm(petal.width ~ petal.length, data = Versicolor)
+summary(regresion)
+
+plot(x = Versicolor$petal.length, y = Versicolor$petal.width, xlab = "Petal length", ylab = "Petal widht")
+abline(regresion)
+graphics.off()
