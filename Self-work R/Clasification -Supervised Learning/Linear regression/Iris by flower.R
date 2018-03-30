@@ -56,8 +56,24 @@ abline(regresion)
   ## SEPAL:
   ## ======
 
+cor(Virginica$sepal.length, Virginica$sepal.width)  # 0.4572278
+
+regresion <- lm(sepal.width ~ sepal.length, data = Virginica)
+summary(regresion)
+
+plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width") # error, margins too large!!
+abline(regresion)
+
   ## PETAL:
   ## ======
+
+cor(Virginica$sepal.length, Virginica$sepal.width)   # 0.4572278
+
+regresion <- lm(petal.width, petal.length, data = Virginica)
+summary(regresion)
+
+plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width") # figure margins too large
+abline(regresion)
 
 
 ################
