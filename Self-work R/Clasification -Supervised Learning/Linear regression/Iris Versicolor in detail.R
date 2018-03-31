@@ -33,12 +33,12 @@ confint(regresion,level = .5) # confidence interval choosing it
 plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal length", ylab = "Petal width", main = "Versicolor petal linear regression")
 abline(regresion, col = 'red')
   
-# confidence intervals
+  # confidence intervals
 ic <- predict(regresion, new.flowers, interval = "confidence")
 lines(new.flowers$petal.length, ic[, 2], lty = 2, col = "blue")
 lines(new.flowers$petal.length, ic[, 3], lty = 2, col = "blue")
 
-# prediction intervals
+  # prediction intervals
 ic <- predict(regresion, nuevas.edades, interval = "prediction")
 lines(new.flowers$petal.length, ic[, 2], lty = 2, col = "red")
 lines(new.flowers$petal.length, ic[, 3], lty = 2, col = "red")
@@ -84,12 +84,12 @@ plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length
 abline(regresion, col = 'red')
 
 
-# confidence intervals
+  # confidence intervals
 ic <- predict(regresion, new.flowers, interval = "confidence")
 lines(new.flowers$sepal.length, ic[, 2], lty = 2, col = "blue")
 lines(new.flowers$sepal.length, ic[, 3], lty = 2, col = "blue")
 
-# prediction intervals
+  # prediction intervals
 ic <- predict(regresion, nuevas.edades, interval = "prediction")
 lines(new.flowers$sepal.length, ic[, 2], lty = 2, col = "red")
 lines(new.flowers$sepal.length, ic[, 3], lty = 2, col = "red")
