@@ -21,27 +21,24 @@ summary(regresion)
 plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width", main = "Versicolor petal linear regression")
 abline(regresion)
 
-# Predictions calculations
-
+# predictions calculations
 new.flowers <- data.frame(petal.length = seq(from = 4.5, to = 7, by = .25))
 predict(regresion, new.flowers)
 
 # inference from the model
-
 confint(regresion) # confidence intervals
 confint(regresion,level = .5) # confidence interval choosing it
 
 # graphic complete
-
-plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width", main = "Versicolor petal linear regression")
+plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal length", ylab = "Petal width", main = "Versicolor petal linear regression")
 abline(regresion, col = 'red')
   
-  # confidence intervals
+# confidence intervals
 ic <- predict(regresion, new.flowers, interval = "confidence")
 lines(new.flowers$petal.length, ic[, 2], lty = 2, col = "blue")
 lines(new.flowers$petal.length, ic[, 3], lty = 2, col = "blue")
 
-  # prediction intervals
+# prediction intervals
 ic <- predict(regresion, nuevas.edades, interval = "prediction")
 lines(new.flowers$petal.length, ic[, 2], lty = 2, col = "red")
 lines(new.flowers$petal.length, ic[, 3], lty = 2, col = "red")
@@ -51,4 +48,60 @@ lines(new.flowers$petal.length, ic[, 3], lty = 2, col = "red")
 ## ======================
 
 
+residuos <- rstandard(regresion)
+valores.ajustados <- fitted(regresion)
+plot(x = valores.ajustados, y = residuos, xlab = "Fitted values", ylab = "Residuals", main = "Standarized resuduals against fitted values")
 
+# normality hypotesis is check by a QQ plot of the residual
+qqnorm(residuos)
+qqline(residuos)
+
+
+###########
+## SEPAL ##
+###########
+
+cor(Versicolor$sepal.length, Versicolor$sepal.width) # 0.5259107
+
+# linear regression
+regresion <- lm(sepal.width ~ sepal.length, data = Versicolor)
+summary(regresion)
+
+# basic plot 
+plot(x = Versicolor$sepal.length, y = Versicolor$sepal.width, xlab = "Sepal length", ylab = "Sepal width", main = "Versicolor sepal linear regression")
+abline(regresion)
+
+# predictions calculation
+new.flowers <- data.frame(sepal.length = seq(from = 4.5, to = 7, by = .25))
+predict(regresion, new.flowers)
+
+# inference from the model
+confint(regresion) # confidence intervals
+confint(regresion,level = .5) # confidence interval choosing it
+
+# graphic complete
+plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width", main = "Versicolor sepal linear regression")
+abline(regresion, col = 'red')
+
+
+# confidence intervals
+ic <- predict(regresion, new.flowers, interval = "confidence")
+lines(new.flowers$sepal.length, ic[, 2], lty = 2, col = "blue")
+lines(new.flowers$sepal.length, ic[, 3], lty = 2, col = "blue")
+
+# prediction intervals
+ic <- predict(regresion, nuevas.edades, interval = "prediction")
+lines(new.flowers$sepal.length, ic[, 2], lty = 2, col = "red")
+lines(new.flowers$sepal.length, ic[, 3], lty = 2, col = "red")
+
+## Diagnosis of the model
+## ======================
+
+graphics.off()
+residuos <- rstandard(regresion)
+valores.ajustados <- fitted(regresion)
+plot(x = valores.ajustados, y = residuos, xlab = "Fitted values", ylab = "Residuals", main = "Standarized resuduals against fitted values")
+
+# normality hypotesis is check by a QQ plot of the residual
+qqnorm(residuos)
+qqline(residuos)
