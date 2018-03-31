@@ -144,7 +144,7 @@ PW_Virginica = Petal_width[100:]
 plt.figure(figsize = (10, 7.5))
 plt.scatter(PL_Setosa, PW_Setosa, label = 'Setosa')
 plt.scatter(PL_Versicolor, PW_Versicolor, label = 'Versicolor')
-plt.scatter(PL_Virginica, PW_Viginica, label = 'Virginica')
+plt.scatter(PL_Virginica, PW_Virginica, label = 'Virginica')
 plt.legend()
 plt.xlabel('Petal length (cm)')
 plt.ylabel('Petal Width (cm)')
@@ -158,8 +158,8 @@ plt.show()
 # ------ #
 
 PL_Setosa_train = PL_Setosa[:40, np.newaxis]
-PL_Setosa_test = PL_Setosa[40:]
-PW_Setosa_train = PW_Setosa[:40, np.newaxis]
+PL_Setosa_test = PL_Setosa[40:, np.newaxis]
+PW_Setosa_train = PW_Setosa[:40]
 PW_Setosa_test = PW_Setosa[40:]
 len(PL_Setosa_train)
 len(PL_Setosa_test)
@@ -176,16 +176,27 @@ plt.plot(PL_Setosa_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Setosa size regression')
 #plt.savefig('Petal Setosa regression')
-#plt.show()
+plt.show()
 
 # ---------- #
 # Versicolor #
 # ---------- #
 
+'''
+SL_Virginica_train = SL_Virginica[:40, np.newaxis] # 80% of the n_samples
+SW_Virginica_train = SW_Virginica[:40]
+SL_Virginica_test = SL_Virginica[40:, np.newaxis]
+SW_Virginica_test = SW_Virginica[40:]
+
+regression = linear_model.LinearRegression()
+regression.fit(SL_Virginica_train, SW_Virginica_train)
+prediction = regression.predict(SL_Virginica_test)
+
+'''
 PL_Versicolor_train = PL_Versicolor[:40, np.newaxis]
 PL_Versicolor_test = PL_Versicolor[40:, np.newaxis]
-PW_Versicolor_train = PW_Versicolor[:40, np.newaxis]
-PW_Versicolor_test = PW_Versicolor[40:, np.newaxis]
+PW_Versicolor_train = PW_Versicolor[:40]
+PW_Versicolor_test = PW_Versicolor[40:]
 
 regression = linear_model.LinearRegression()
 regression.fit(PL_Versicolor_train, PW_Versicolor_train)
@@ -199,8 +210,8 @@ plt.scatter(SL_Versicolor_test, SW_Versicolor_test, color = 'b', label = 'Data v
 plt.plot(SL_Versicolor_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Versicolor size regression')
-plt.savefig('Petal Versicolor regression')
-#plt.show()
+#plt.savefig('Petal Versicolor regression')
+plt.show()
 
 # --------- #
 # Virginica #
@@ -223,5 +234,5 @@ plt.scatter(PL_Virginica_train, PW_Virginica_train, color = 'b', label = 'Data v
 plt.plot(PL_Virginica_train, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Virginica size regression')
-plt.savefig('Petal Virginica regression')
+#plt.savefig('Petal Virginica regression')
 plt.show()
