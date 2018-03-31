@@ -182,17 +182,6 @@ plt.show()
 # Versicolor #
 # ---------- #
 
-'''
-SL_Virginica_train = SL_Virginica[:40, np.newaxis] # 80% of the n_samples
-SW_Virginica_train = SW_Virginica[:40]
-SL_Virginica_test = SL_Virginica[40:, np.newaxis]
-SW_Virginica_test = SW_Virginica[40:]
-
-regression = linear_model.LinearRegression()
-regression.fit(SL_Virginica_train, SW_Virginica_train)
-prediction = regression.predict(SL_Virginica_test)
-
-'''
 PL_Versicolor_train = PL_Versicolor[:40, np.newaxis]
 PL_Versicolor_test = PL_Versicolor[40:, np.newaxis]
 PW_Versicolor_train = PW_Versicolor[:40]
@@ -206,8 +195,8 @@ print('Coeficients: \n', regression.coef_)
 print("Mean squared error: \n %.2f" % mean_squared_error(SW_Versicolor_test, prediction))
 print('Variance Score: \n %.2f' %r2_score(SW_Versicolor_test, prediction))
 
-plt.scatter(SL_Versicolor_test, SW_Versicolor_test, color = 'b', label = 'Data values')
-plt.plot(SL_Versicolor_test, prediction, color = 'r', label = 'Predict values')
+plt.scatter(PL_Versicolor_test, PW_Versicolor_test, color = 'b', label = 'Data values')
+plt.plot(PL_Versicolor_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Versicolor size regression')
 #plt.savefig('Petal Versicolor regression')
@@ -219,19 +208,19 @@ plt.show()
 
 PL_Virginica_train = PL_Virginica[:40, np.newaxis]
 PL_Virginica_test = PL_Virginica[40:, np.newaxis]
-PW_Virginica_train = PW_Virginica[:40, np.newaxis]
-PW_Virginica_test = PW_Virginica[40:,np.newaxis]
-print(np.shape(PW_Virginica_train))
+PW_Virginica_train = PW_Virginica[:40]
+PW_Virginica_test = PW_Virginica[40:]
+
 regression = linear_model.LinearRegression()
 regression.fit(PL_Virginica_train, PW_Virginica_train)
-prediction = regression.predict(PL_Virginica_train)
+prediction = regression.predict(PL_Virginica_test)
 
 print('Coeficients: \n', regression.coef_)
-print("Mean squared error: \n %.2f" % mean_squared_error(PW_Virginica_train, prediction))
-print('Variance Score: \n %.2f' %r2_score(PW_Virginica_train, prediction))
+print("Mean squared error: \n %.2f" % mean_squared_error(PW_Virginica_test, prediction))
+print('Variance Score: \n %.2f' %r2_score(PW_Virginica_test, prediction))
 
-plt.scatter(PL_Virginica_train, PW_Virginica_train, color = 'b', label = 'Data values')
-plt.plot(PL_Virginica_train, prediction, color = 'r', label = 'Predict values')
+plt.scatter(PL_Virginica_test, PW_Virginica_test, color = 'b', label = 'Data values')
+plt.plot(PL_Virginica_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Virginica size regression')
 #plt.savefig('Petal Virginica regression')
