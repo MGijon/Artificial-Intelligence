@@ -18,11 +18,11 @@ regresion <- lm(petal.width ~ petal.length, data = Versicolor)
 summary(regresion)
 
 # basic plot
-plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal lenght", ylab = "Petal width", main = "Versicolor petal linear regression")
+plot(x = Versicolor$petal.length, y = Versicolor$petal.width, xlab = "Petal lenght", ylab = "Petal width", main = "Versicolor petal linear regression")
 abline(regresion)
 
 # predictions calculations
-new.flowers <- data.frame(petal.length = seq(from = 4.5, to = 7, by = .25))
+new.flowers <- data.frame(petal.length = seq(from = 3, to = 5, by = .25))
 predict(regresion, new.flowers)
 
 # inference from the model
@@ -30,7 +30,7 @@ confint(regresion) # confidence intervals
 confint(regresion,level = .5) # confidence interval choosing it
 
 # graphic complete
-plot(x = Virginica$petal.length, y = Virginica$petal.width, xlab = "Petal length", ylab = "Petal width", main = "Versicolor petal linear regression")
+plot(x = Versicolor$petal.length, y = Versicolor$petal.width, xlab = "Petal length", ylab = "Petal width", main = "Versicolor petal linear regression")
 abline(regresion, col = 'red')
   
   # confidence intervals
@@ -80,7 +80,7 @@ confint(regresion) # confidence intervals
 confint(regresion,level = .5) # confidence interval choosing it
 
 # graphic complete
-plot(x = Virginica$sepal.length, y = Virginica$sepal.width, xlab = "Sepal length", ylab = "Sepal width", main = "Versicolor sepal linear regression")
+plot(x = Versicolor$sepal.length, y = Versicolor$sepal.width, xlab = "Sepal length", ylab = "Sepal width", main = "Versicolor sepal linear regression")
 abline(regresion, col = 'red')
 
 
@@ -105,3 +105,4 @@ plot(x = valores.ajustados, y = residuos, xlab = "Fitted values", ylab = "Residu
 # normality hypotesis is check by a QQ plot of the residual
 qqnorm(residuos)
 qqline(residuos)
+
