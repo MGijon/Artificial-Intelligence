@@ -10,7 +10,7 @@ pairs(grasas)     # vemos que sí hay relación lineal entre las variables edad 
 cor(grasas)
 # edad y grasas = 0.8373534
 
-regresion <- lm(grasas ~ edad, data = grasas) # grasas = variable respueste, edad = variable regresora o independiente
+regresion <- lm(grasas ~ edad, data = grasas) # grasas = variable respuesta, edad = variable regresora o independiente
 summary(regresion)
 
 plot(grasas$edad, grasas$grasas, xlab = "Edad", ylab = "Grasas")
