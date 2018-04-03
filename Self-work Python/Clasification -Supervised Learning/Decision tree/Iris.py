@@ -66,3 +66,61 @@ clf_2.predict_proba(iris.data[50:100, :])
 
 clf_2.predict(iris.data[100:, :])
 clf_2.predict_proba(iris.data[100:, :])
+
+
+## MAX_DEPTH:
+## =========
+## The maximum depth of the tree. If None, then nodes are expanded
+## until all leaves are pure or until all leaves contain less than
+## min_samples_split samples.
+
+## (1) max_depth = 'None' (by default)
+## -------------
+
+# done
+
+## (2) max_depth = int
+## -------------
+
+clf_2 = tree.DecisionTreeClassifier(max_depth = 2)
+clf_2 = clf_2.fit(iris.data, iris.target)
+
+clf_2.predict(iris.data[:50, :])
+clf_2.predict_proba(iris.data[:50, :])
+
+clf_2.predict(iris.data[50:100, :])
+clf_2.predict_proba(iris.data[50:100, :])
+
+clf_2.predict(iris.data[100:, :])
+clf_2.predict_proba(iris.data[100:, :])
+
+
+clf_3 = tree.DecisionTreeClassifier(max_depth = 4)
+clf_3 = clf_3.fit(iris.data, iris.target)
+
+clf_3.predict(iris.data[:50, :])
+clf_3.predict_proba(iris.data[:50, :])
+
+clf_3.predict(iris.data[50:100, :])
+clf_3.predict_proba(iris.data[50:100, :])
+
+clf_3.predict(iris.data[100:, :])
+clf_3.predict_proba(iris.data[100:, :])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# source : http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
