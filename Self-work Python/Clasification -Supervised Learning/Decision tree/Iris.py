@@ -107,20 +107,6 @@ clf_3.predict_proba(iris.data[50:100, :])
 clf_3.predict(iris.data[100:, :])
 clf_3.predict_proba(iris.data[100:, :])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# There are more paramethers that i'll try in the future
 
 # source : http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
