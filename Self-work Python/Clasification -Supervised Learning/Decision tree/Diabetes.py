@@ -11,6 +11,7 @@ clf.predict(diabetes.data[:3, :])
 
 clf.predict(diabetes.data[:5, :])
 
+################################################################################
 # Now I'll train the model with less data
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(diabetes.data[:50, :], diabetes.target[:50])
