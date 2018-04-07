@@ -19,4 +19,4 @@ This code is just for my own learning purpose.
 
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
 
-8. **Algorithmics for Data Science**: Master in cosas varias bla bla bla 
+8. **Standford Coursera**: Coursera material
