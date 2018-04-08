@@ -5,15 +5,17 @@ syn = wn.synsets('dog')[0]
 
 lista = syn.hyponyms()
 
-print(len(conjunto))
-
 def adding_elements(syn):
+    '''
+    Añadimos ramas al conjunto para cada nodo
+    '''
     syn = syn.hyponyms()
     if syn != []:
         for i in syn:
             conjunto.append(i)
 
-for i in lista:
-    adding_elements(i)
-
-print(len(conjunto))
+def numero_ramas(syn):
+    '''
+    Calculamos el número de hijos de cada nodo del árbol
+    '''
+    return len(syn.hyponyms())
