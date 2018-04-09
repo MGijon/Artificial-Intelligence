@@ -2,7 +2,7 @@ from nltk.corpus import wordnet as wn
 
 SYN = wn.synsets('dog')[0]
 
-lista = syn.hyponyms()
+lista = SYN.hyponyms()
 
 def adding_elements(syn):
     '''
@@ -35,28 +35,17 @@ def Cest_fini(lista):
         lista = []
         return False
 
-def bucle_idiota(syn):
+def recursiva(syn):
     '''
     Función recursiva que devuelve una lista con los hypónimos al completo
     '''
     conjunto = []
-    conjunto.append(syn)
-    last_branches = [x for x in syn.hyponyms()]
-    while last_branches != []:
-        for i in last_branches:
-            conjunto.append(i)
-            last_branches.remove(i)
-            last_branches.append(i.hyponyms())
-
+    if numero_ramas(syn) == 0:
+        conjunto.append(syn)
+    else:
+        conjunto.append(syn)
+        for i in syn.hyponyms():
+            recursiva(i)
     return conjunto
 
-bucle_idiota(SYN)
-'''
-def fib(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fib(n-1) + fib(n-2)
-'''
+recursiva(SYN)
