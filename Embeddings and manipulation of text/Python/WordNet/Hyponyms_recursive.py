@@ -54,4 +54,6 @@ def recursiva(C_syn):
 recursiva([SYN])
 len(recursiva([SYN]))
 
-len(recursiva([wn.synsets('artifact')[0]]))
+Artifact = recursiva([wn.synsets('artifact')[0]])
+
+Artifact[0].lemma_names()
