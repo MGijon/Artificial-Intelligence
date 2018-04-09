@@ -34,18 +34,21 @@ def Cest_fini(lista):
     else:
         lista = []
         return False
-
-def recursiva(syn):
+################################################################################
+def recursiva(C_syn):
     '''
-    Función recursiva que devuelve una lista con los hypónimos al completo
+    Función recursiva que devuelve una lista con los hypónimos al completo.
+    INPUT: conjunto de synsets (1 elemento)
+    OUTPUT: lista de todos los synsets hipónimos
     '''
     conjunto = []
-    if numero_ramas(syn) == 0:
-        conjunto.append(syn)
-    else:
-        conjunto.append(syn)
-        for i in syn.hyponyms():
-            recursiva(i)
+    for j in C_syn:
+        if numero_ramas(j) == 0:
+            conjunto.append(j)
+        else:
+            conjunto.append(j)
+            for i in j.hyponyms():
+                recursiva(i)
     return conjunto
 
-recursiva(SYN)
+recursiva([SYN])
