@@ -135,19 +135,26 @@ len(return_synsets_4_levels('person'))
 len(return_synsets_4_levels('artifact'))
 len(return_synsets_4_levels('living_thing'))
 
+def return_synsets_5_levels(W):
+    T = return_synsets_4_levels(W)
+    T_h = T
+    for i in T:
+        for j in i.hyponyms():
+            T_h.append(j)
+    return T_h
 
+len(return_synsets_5_levels('cat'))
+len(return_synsets_5_levels('dog'))
+len(return_synsets_5_levels('person'))
+len(return_synsets_5_levels('artifact'))
+len(return_synsets_5_levels('living_thing'))
 
-## Threshold and loops
-## ===================
-threshold = 0.25
-logger.info('Threshold fixed at %s\n', threshold)
+print(len(return_synsets_4_levels('living_thing')) / len(return_synsets_5_levels('artifact')))
 
-
-## Statistics
-## ==========
-
-
-## Graphic representation
-## ======================
-
-#print(model.most_similar( positive = ['woman', 'doctor'], negative = ['man'], topn = 1))
+sub = [x.name() for x in return_synsets_4_levels('living_thing')[0:10]]
+sub_clean = []
+for i in sub:
+    pos = i.index('.')
+    aux = i[:pos]
+    sub_clean.append(aux)
+sub_clean
