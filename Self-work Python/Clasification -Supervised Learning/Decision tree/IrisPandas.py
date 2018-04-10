@@ -8,5 +8,3 @@ y = iris.target
 
 dtc = DecisionTreeClassifier()
 dtc = dtc.fit(df, y)
-
-dtc.predict()
