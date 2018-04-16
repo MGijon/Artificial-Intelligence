@@ -37,7 +37,8 @@ BALL = recursiva([SYN])
 len(BALL)
 
 BALL_small = [x.lemma_names() for x in BALL]
-BALL_small = BALL_small[0:500]
+BALL_small = BALL_small[0:-10]
+len(BALL_small)
 
 distancias = []
 
@@ -51,4 +52,30 @@ for i in BALL_small:
         pass
 
 
-set(distancias)
+if len(set(distancias)) == 1:
+    print('Hay un puto error por algún sitio')
+
+
+################################################################################
+
+LIVING = recursiva([wn.synsets('living_thing')[0]])
+len(LIVING)
+
+LIVING_small = [x.lemma_names() for x in LIVING]
+LIVING_small = LIVING[0:100]
+len(LIVING_small)
+
+distancias = []
+
+for i in LIVING_small:
+    try:
+        POS = ['women']
+        POS = POS.append(i)
+        result = model.most_similar(positive = POS, negative = ['men'], topn = 1)
+        distancias.append(result[0][1])
+    except KeyError:
+        pass
+
+distancias
+if len(set(distancias)) == 1:
+    print('Hay un puto error por algún sitio')
