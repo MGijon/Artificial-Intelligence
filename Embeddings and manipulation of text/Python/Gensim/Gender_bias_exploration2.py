@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 import seaborn as sn
 from nltk.corpus import wordnet as wn
 
+# Cargamos el modelo:
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
-SYN = wn.synsets('dog')[0]
+SYN = wn.synsets('ball')[0]
 lista = SYN.hyponyms()
 def numero_ramas(syn):
     '''
@@ -32,14 +33,13 @@ def recursiva(C_syn):
                 recursiva([i])
     return conjunto
 
-recursiva([SYN])
-len(recursiva([SYN]))
+BALL = recursiva([SYN])
+len(BALL)
 
-Artifact = recursiva([wn.synsets('artifact')[0]])
+BALL_small = [x.lemma_names() for x in BALL]
+BALL_small = BALL_small[0:100]
 
-Artifact[0].lemma_names()
-
-
+distancias = []
 
 result = model.most_similar(positive = ['women', 'king'], negative = ['men'], topn = 1)
 
