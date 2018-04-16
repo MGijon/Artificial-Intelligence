@@ -37,10 +37,18 @@ BALL = recursiva([SYN])
 len(BALL)
 
 BALL_small = [x.lemma_names() for x in BALL]
-BALL_small = BALL_small[0:100]
+BALL_small = BALL_small[0:500]
 
 distancias = []
 
-result = model.most_similar(positive = ['women', 'king'], negative = ['men'], topn = 1)
+for i in BALL_small:
+    try:
+        POS = ['women']
+        POS = POS.append(i)
+        result = model.most_similar(positive = POS, negative = ['men'], topn = 1)
+        distancias.append(result[0][1])
+    except KeyError:
+        pass
 
-result[0][0]
+
+set(distancias)
