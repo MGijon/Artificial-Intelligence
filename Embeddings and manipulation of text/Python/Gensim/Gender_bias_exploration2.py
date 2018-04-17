@@ -9,14 +9,12 @@ from nltk.corpus import wordnet as wn
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
-SYN = wn.synsets('ball')[0]
-lista = SYN.hyponyms()
 def numero_ramas(syn):
     '''
     Calculamos el número de hijos de cada nodo del árbol
     '''
     return len(syn.hyponyms())
-
+'''
 conjunto = []
 def recursiva(C_syn):
     '''
@@ -33,19 +31,24 @@ def recursiva(C_syn):
                 recursiva([i])
     return conjunto
 
+SYN = wn.synsets('ball')[0]
+SYN
+lista = SYN.hyponyms()
 BALL = recursiva([SYN])
 len(BALL)
 
-BALL_small = [x.lemma_names() for x in BALL]
-BALL_small = BALL_small[0:-10]
-len(BALL_small)
+BALL
+BALL = [x.lemma_names() for x in BALL]
+len(BALL)
 
+Ball = [i for i in BALL]
+Ball
 distancias = []
-
 for i in BALL_small:
     try:
         POS = ['women']
         POS = POS.append(i)
+        print(POS)
         result = model.most_similar(positive = POS, negative = ['men'], topn = 1)
         distancias.append(result[0][1])
     except KeyError:
@@ -79,3 +82,18 @@ for i in LIVING_small:
 distancias
 if len(set(distancias)) == 1:
     print('Hay un puto error por algún sitio')
+'''
+
+conjunto = []
+for s in wn.synsets('dog'):
+    for l in s.lemmas():
+        conjunto.append(l.name())
+conjunto
+for i in conjunto:
+    try:
+        result = model.most_similar(positive = ['women', i], negative = ['men'], topn = 1)
+        print(result[0][1])
+        distancias.append(result[0][1])
+    except KeyError:
+        print('no está en el vocabulario')
+        pass
