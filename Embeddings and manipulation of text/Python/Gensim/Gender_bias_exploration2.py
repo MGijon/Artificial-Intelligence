@@ -14,7 +14,7 @@ def numero_ramas(syn):
     Calculamos el número de hijos de cada nodo del árbol
     '''
     return len(syn.hyponyms())
-'''
+
 conjunto = []
 def recursiva(C_syn):
     '''
@@ -37,28 +37,29 @@ lista = SYN.hyponyms()
 BALL = recursiva([SYN])
 len(BALL)
 
-BALL
 BALL = [x.lemma_names() for x in BALL]
 len(BALL)
 
-Ball = [i for i in BALL]
+Ball = []
+for i in BALL:
+    for j in i:
+        Ball.append(j)
+
 Ball
 distancias = []
-for i in BALL_small:
+
+for i in Ball:
     try:
-        POS = ['women']
-        POS = POS.append(i)
-        print(POS)
-        result = model.most_similar(positive = POS, negative = ['men'], topn = 1)
+        result = model.most_similar(positive = ['women', i], negative = ['men'], topn = 1)
         distancias.append(result[0][1])
     except KeyError:
         pass
 
-
+distancias[0:10]
 if len(set(distancias)) == 1:
     print('Hay un puto error por algún sitio')
 
-
+'''
 ################################################################################
 
 LIVING = recursiva([wn.synsets('living_thing')[0]])
