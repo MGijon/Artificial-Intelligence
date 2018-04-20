@@ -26,5 +26,9 @@ len(valores)
 
 # hacemos una primera visualización de los datos mediante un simple histograma
 plt.figure(figsize = (10, 7.5))
+plt.xlabel('Distancias por la relación de género')
+plt.ylabel('Número de muestras')
+plt.title('Gender bias 1000 first words')
 valores.plot(kind = 'hist', bins = 50)
+plt.savefig('Data/1000_words_histogram.png')
 plt.show()
