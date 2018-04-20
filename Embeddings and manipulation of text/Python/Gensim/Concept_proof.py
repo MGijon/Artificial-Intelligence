@@ -2,6 +2,8 @@ import gensim.models as gm
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import scipy.stats as stats
+import seaborn as sn
 
 # ruta mac:
 route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vectors-negative300.bin.gz'
@@ -24,6 +26,9 @@ datos = pd.read_csv('Data/Concept_proof.csv')
 valores = datos['values']
 len(valores)
 
+## Histograma:
+## ==========
+
 # hacemos una primera visualización de los datos mediante un simple histograma
 plt.figure(figsize = (10, 7.5))
 plt.xlabel('Distancias por la relación de género')
@@ -32,3 +37,79 @@ plt.title('Gender bias 1000 first words')
 valores.plot(kind = 'hist', bins = 50)
 plt.savefig('Data/1000_words_histogram.png')
 plt.show()
+
+## Distribución de frecuencias:
+## ===========================
+
+# cremos los intervalos:
+intervalos = np.arange(0., 1., .1)
+# introducimos los datos en cada intervalo:
+frecuencias = pd.cut(valores, intervalos)
+# construimos la tabla de frecuencia contando los valores por intervalo:
+tabla_de_frecuencia = pd.value_counts(frecuencias)
+print(tabla_de_frecuencia)
+
+## Medias de tendencia central:
+## ===========================
+
+# (1) Media aritmética:
+# ---
+
+print(valores.mean())
+
+# (2) Media geométrica:
+# ---
+
+print(stats.gmean(valores))
+
+# (3) Media armónica:
+# ---
+
+print(stats.hmean(valores))
+
+# (4) Mediana:
+# ---
+
+print(valores.median())
+
+# (5) Moda:
+# ---
+
+print(valores.mode())
+
+# (6) Media truncada:
+# ---
+
+print(stats.trim_mean(valores, .1))
+
+## Medias de dispersión:
+## ====================
+
+# (1) Varianza:
+# ---
+
+print(valores.var())
+
+# (2) Desviación estándard:
+# ---
+
+print(valores.std())
+
+# (3) Cuartiles:
+# ---
+
+print(valores.quantile([.25, .5, .75]))
+
+# (4) Box plot:
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.title('Gender bias 1000 first words')
+sn.boxplot(valores)
+plt.savefig('Data/1000_words_boxplot.png')
+plt.show()
+
+## Resumen estadístico:
+## ===================
+
+print(valores.describe())
