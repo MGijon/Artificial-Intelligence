@@ -38,6 +38,20 @@ valores.plot(kind = 'hist', bins = 50)
 plt.savefig('Data/1000_words_histogram.png')
 plt.show()
 
+
+## Distribution plot:
+## =================
+
+# visualizamos la distribición que siguen los datos:
+plt.figure(figsize = (10, 7.5))
+plt.xlabel('Distancias por la relación de género')
+plt.ylabel('Número de muestras')
+plt.title('Gender bias 1000 first words')
+sn.distplot(valores)
+plt.savefig('Data/1000_words_distplot.png')
+plt.show()
+
+
 ## Distribución de frecuencias:
 ## ===========================
 
@@ -82,6 +96,17 @@ print(valores.mode())
 
 print(stats.trim_mean(valores, .1))
 
+# (7) Kurtosis:
+# ---
+
+print(stats.kurtosis(valores))
+
+# (8) Simetría:
+# ---
+
+print(stats.skew(valores))
+
+
 ## Medias de dispersión:
 ## ====================
 
@@ -113,3 +138,34 @@ plt.show()
 ## ===================
 
 print(valores.describe())
+
+## Otros:
+## =====
+
+# (1) Violin plot:
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.title('Gender bias 1000 first words')
+pal = sn.cubehelix_palette(8, rot = -.5, dark = .3)
+sn.violinplot(data = valores, palette = pal, inner = "points")
+plt.savefig('Data/1000_words_violinplot.png')
+plt.show()
+
+# (2) Distplot with rug = True
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.title('Gender bias 1000 first words')
+sn.distplot(valores, rug = True)
+plt.savefig('Data/1000_words_Rug_distplot.png')
+plt.show()
+
+# (3) Kernel density estimation
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.title('Gender bias 1000 first words')
+sn.distplot(valores, hist = False, rug = True)
+plt.savefig('Data/1000_words_Kernel.png')
+plt.show()
