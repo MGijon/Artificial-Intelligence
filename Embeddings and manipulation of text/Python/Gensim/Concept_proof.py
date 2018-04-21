@@ -152,7 +152,7 @@ sn.violinplot(data = valores, palette = pal, inner = "points")
 plt.savefig('Data/1000_words_violinplot.png')
 plt.show()
 
-# (2) Distplot with rug = True
+# (2) Distplot with rug = True:
 # ---
 
 plt.figure(figsize = (10, 7.5))
@@ -161,11 +161,35 @@ sn.distplot(valores, rug = True)
 plt.savefig('Data/1000_words_Rug_distplot.png')
 plt.show()
 
-# (3) Kernel density estimation
+# (3) Kernel density estimation:
 # ---
 
 plt.figure(figsize = (10, 7.5))
 plt.title('Gender bias 1000 first words')
 sn.distplot(valores, hist = False, rug = True)
 plt.savefig('Data/1000_words_Kernel.png')
+plt.show()
+
+# (4) kdeplot:
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.title('Gender bias 1000 first words')
+sn.kdeplot(valores, shade = True)
+plt.savefig('Data/1000_words_Rug_kdeplotShadow.png')
+plt.show()
+
+
+## Ajustando modelos a los datos:
+## =============================
+
+# (1) Gamma: 
+# ---
+
+plt.figure(figsize = (10, 7.5))
+plt.xlabel('Distancias por la relación de género, ajuste con Gamma')
+plt.ylabel('Número de muestras')
+plt.title('Gender bias 1000 first words')
+sn.distplot(valores, fit = stats.gamma)
+plt.savefig('Data/1000_words_distplot_fitGamma.png')
 plt.show()
