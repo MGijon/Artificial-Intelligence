@@ -11,5 +11,8 @@ data.describe()
 for i in set(data['Grupo municipal/Lista electoral']):
     print(i)
 
-data['Nombre completo'] = data['Nombre'] + data['Apellidos']
-print(len(set(data['Nombre completo'])))
+data['Nombre completo'] = data['Nombre'] + ' ' + data['Apellidos']
+
+data.describe()
+
+len(data['Nombre completo']) / len(set(data['Nombre completo']))
