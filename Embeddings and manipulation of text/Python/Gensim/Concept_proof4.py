@@ -16,4 +16,9 @@ def back_fort(word):
 
     return resultado[0]
 
-vocabulario = model.
+vocabulario = list(model.vocab)
+
+len(vocabulario)
+
+for v in vocabulario[0:10]:
+    print(back_fort(v))
