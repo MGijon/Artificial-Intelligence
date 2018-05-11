@@ -11,10 +11,10 @@ def back_fort(word):
     '''
     Devuelve una tupla: palabra, distancia
     '''
-    resultado = model.most_similar(positive = ['women', word], negative = ['men'])
-    resultado = model.most_similar(positive = ['men', resultado[0][0]], negative = ['women'])
+    resultado1 = model.most_similar(positive = ['women', word], negative = ['men'])
+    resultado2 = model.most_similar(positive = ['men', resultado1[0][0]], negative = ['women'])
 
-    return resultado[0]
+    return (resultado1[0], resultado2[0])
 
 vocabulario = list(model.vocab)
 
