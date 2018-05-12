@@ -7,6 +7,7 @@ route = '/Users/manuelgijonagudo/Documents/Programación/GIT/Data/GoogleNews-vec
 #route = 'D:\GIT\Data\GoogleNews-vectors-negative300.bin.gz'
 model = gm.KeyedVectors.load_word2vec_format(route, binary = True)
 
+print(model.vocab['Hello'])
 def back_fort(word):
     '''
     Devuelve una tupla: palabra, distancia
@@ -14,7 +15,8 @@ def back_fort(word):
     resultado1 = model.most_similar(positive = ['women', word], negative = ['men'])
     resultado2 = model.most_similar(positive = ['men', resultado1[0][0]], negative = ['women'])
 
-    return (resultado1[0], resultado2[0])
+    return (word, resultado1[0][0], resultado1[0][1],
+            resultado2[0][0], resultado2[0][1])
 
 vocabulario = list(model.vocab)
 
