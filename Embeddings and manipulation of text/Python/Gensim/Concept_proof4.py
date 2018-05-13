@@ -15,12 +15,11 @@ def back_fort(word):
     #index = model.vocab[word][1]
     word_vector = model.word_vec(word)
 
-    return (word, word_vec, count, index, resultado1[0][0], resultado1[0][1],
+    return (word, word_vector, resultado1[0][0], resultado1[0][1],
             resultado2[0][0], resultado2[0][1])
 
 vocabulario = list(model.vocab)
 
 len(vocabulario)
 
-for v in vocabulario[0:1]:
-    print(back_fort(v))
+back_fort('home')
