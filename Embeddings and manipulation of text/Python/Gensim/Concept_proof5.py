@@ -16,7 +16,7 @@ Fort_distance = []
 
 def back_fort(word):
     '''
-    Llena las lista con la info de la palabra que le pasemos
+    Llena las lista con la info de la palabra que le pasemos.
     '''
     Word.append(word)
     Word_vector.append(model.word_vec(word))
@@ -24,13 +24,25 @@ def back_fort(word):
     back = model.most_similar(positive = ['women', word], negative = ['men'])
     fort = model.most_similar(positive = ['men', back[0][0]], negative = ['women'])
 
-    back_vector = model.word_vec(back[0][0])
-    fort_vector = model.word_vec(fort[0][0])
-
-
     Back_resoult.append(back[0][0])
-    Back_vector = []
-    Back_distance = []
-    Fort_resoult = []
-    Fort_vector = []
-    Fort_distance
+    Back_vector.append(model.word_vec(back[0][0]))
+    Back_distance.append(back[0][1])
+
+    Fort_resoult.append(fort[0][0])
+    Fort_vector.append(model.word_vec(fort[0][0]))
+    Fort_distance.append(fort[0][1])
+
+def CSV(filepath):
+    '''
+    Crea un DataFrame y lo copia en un csv.
+    '''
+    df = pd.DataFrame()
+    df['Word'] = Word
+    df['Word_vector'] = Word_vector
+    df['Back_resoult'] = Back_resoult
+    df['Back_vector'] = Back_vector
+    df['Back_distance'] = Back_distance
+    df['Fort_resoult'] = Fort_resoult
+    df['Fort_vector'] = Fort_vector
+    df['Fort_distance'] = Fort_distance
+    df.to_csv(filepath)
