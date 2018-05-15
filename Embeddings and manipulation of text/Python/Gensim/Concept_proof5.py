@@ -46,3 +46,11 @@ def CSV(filepath):
     df['Fort_vector'] = Fort_vector
     df['Fort_distance'] = Fort_distance
     df.to_csv(filepath)
+
+
+test_list = ['king', 'computer', 'work', 'kind', 'house', 'dog']
+
+for i in test_list:
+    back_fort(i)
+
+CSV('Data/Concept_proof5')
