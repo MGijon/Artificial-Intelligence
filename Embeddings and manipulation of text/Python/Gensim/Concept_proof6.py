@@ -51,4 +51,7 @@ import pickle as pk
 
 pk.dump(df, open('Data/Concept_proof6.p', 'wb')) # the file is now created
 
-# df_recuperado = pk.load(open('Data/Concept_proof6.p', 'rb'))
+# test
+df_recuperado = pk.load(open('Data/Concept_proof6.p', 'rb'))
+
+df_recuperado.head()
