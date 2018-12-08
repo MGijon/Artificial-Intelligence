@@ -1,0 +1,94 @@
+---
+title: "Exercises"
+author: "Manuel Gijón Agudo"
+date: "8/12/2018"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 2
+lang: en # language,  en: english (default), es: espa?ol, ca: catalan, ...------
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Linear Models
+
+## Linear Regression
+  
+### Exercise 1
+    
+### Exercise 2
+    
+### Exercise 3
+    
+### Exercise 4
+    
+### Exercise 5
+    
+## One Way Anova
+  
+### Exercise 6
+    
+### Exercise 7
+    
+### Exercise 8
+    
+## Two way and more than Two way ANOVA
+  
+### Exercise 9
+    
+### Exercise 10
+    
+### Exercise 11
+    
+### Exercise 12
+    
+### Exercise 13
+    
+## ANCOVA: Analysis of covariance 
+  
+### Exercise 14
+    
+### Exercise 15
+    
+### Exercise 16
+
+# Generalized Linear Models
+  
+## General formulation
+
+### Exercise 17
+
+## Continuous models
+
+### Exercise 18
+
+### Exercise 19
+
+### Exercise 20
+
+### Exercise 21
+
+## Binomial and Poisson models 
+
+### Exercise 22
+
+### Exercise 23
+
+### Exercise 24
+
+### Exercise 25
+
+### Exercise 26
+
+## Advanced exercises
+
+### Exercise 27
+
+### Exercise 28
