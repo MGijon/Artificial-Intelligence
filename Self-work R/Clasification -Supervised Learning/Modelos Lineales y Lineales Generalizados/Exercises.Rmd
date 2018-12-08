@@ -3,10 +3,6 @@ title: "Exercises"
 author: "Manuel Gijón Agudo"
 date: "8/12/2018"
 output: 
-  html_document:
-    toc: yes
-    toc_depth: 2
-    toc_float: yes
   pdf_document:
     toc: yes
     toc_depth: 2
@@ -22,42 +18,1227 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Linear Regression
   
 ### Exercise 1
+
+  It is well known that the excess of weight is one of the factors that has a negative influence in the cholesterol level of human beings. In an experiment with children from 9 to 20 years old, measures of their cholesterol level (C), the weight (W) the height (H) and the age (A) have been recorded. The data appear in file COL.csv.
+  1. Compute the regression line for modeling the cholesterol as a function of weight.
+  2. Plot the regression line jointly with the confidence intervals and the prediction intervals.
+  3. Perform the appropriate plots to check:
+    1. Tendency and homogeneity of variances. Plot the residuals as a function of the predicted values.
+    2. Outliers. Plot the studentized residuals as a function of any of the predictors, observation number ... jointly with the horizontal lines at −2 and 2.
+    3. Influence values. Plot the dffits as a function of any of the following variables: predicted values, observation number ...; jointly with the horizontal lines at $2 \sqrt(\frac{p}{n})$
     
+```{r exercise1, echo=TRUE}
+COL <- read.csv2("./Data/COL.csv")
+p<-2
+n<-dim(COL)[1]
+library(car)
+library(HH)
+
+write("___________________________________________________________________","")
+write("a)","")
+
+# MODELO
+mod<-lm(C~W,COL)
+
+# RESUMEN DEL MODELO
+summary(mod)
+
+#Calculos opcionales: Intervalos de confiança de los parametros
+confint(mod,level=0.99)
+
+#Calculos opcionales: SS1 Test de los parametros con ordenacions predeterminada
+anova(mod)
+
+#Nota: SS3, los tests (F) siempre coinciden con los del resumen (t), F=t^2
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+#Gràfica con bandas de confianza i predicción
+ci.plot(mod)
+
+write("___________________________________________________________________","")
+write("c)","")
+
+# Diagnostico: TENDENCIAS
+plot(predict(mod),resid(mod))
+abline(h=0,lty=2)
+
+# Diagnostico: OUTLIERS (rstudent, rstandard)
+plot(rstandard(mod))
+abline(h=c(-2,0,2),lty=2)
+
+plot(rstudent(mod),main="rstudent")
+abline(h=c(-2,0,2),lty=2)
+
+# Diagnostico: LEVERAGE
+plot(hatvalues(mod))
+abline(h=c(0,2*mean(hatvalues(mod))),lty=2)
+
+# Diagnostico: INFLUENCIA (dffits, cooks.distance)
+plot(cooks.distance(mod))
+abline(h=c(0,4/n),lty=2)
+
+plot(dffits(mod),main="dffits")
+abline(h=c(-2*sqrt(p/n),0,2*sqrt(p/n)),lty=2)
+
+
+#Diagnosticos de R
+oldpar <- par( mfrow=c(2,2))
+plot(mod,ask=F)
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("d)","")
+
+COL$GA<-factor(COL$A)
+sp(C~W|GA,smooth=F,col=1:20, data=COL)
+
+#COL$GA<-factor(ceiling((COL$A-8)/2))
+#sp(C~W|GA,smooth=F, data=COL)
+```
+
 ### Exercise 2
     
+```{r exercise2, echo=TRUE}
+dd<-read.csv2("./Data/REG8.csv")
+p<-2
+library(car)
+library(HH)
+
+for (reg in 1:8){
+  write("===================================================================","")
+  write(paste("Reg",reg),"")
+  
+  Y<-dd[dd$REG==reg,"Y"]
+  X<-dd[dd$REG==reg,"X"]
+  n<-length(X)
+  
+  # Descriptiva
+  
+  scatterplot(X,Y,smooth=F,boxplots = F)
+  
+  write("___________________________________________________________________","")
+  write("a), b) & c)","")
+  
+  m<-lm(Y~X)
+  plot(ci.plot(m))
+  print(summary(m))
+  
+  write("___________________________________________________________________","")
+  write("d)","")
+  
+  oldpar <- par(mfrow=c(1,2))
+   plot(X,resid(m))  #o rstudent(m) , h=c(-2,0,2)
+   abline(h=0,lty=2)
+   plot(X,dffits(m))
+   abline(h=c(-2*sqrt(p/n),0,2*sqrt(p/n)),lty=2)
+   plot(m,ask=F)
+  par(oldpar)
+}
+```
+
+
 ### Exercise 3
     
+```{r exercise3, echo=TRUE}
+COL <- read.csv2("./Data/COL.csv")
+p<-4
+n<-dim(COL)[1]
+library(car)
+
+
+# MODELO
+mod<-lm(C~W+A+H,COL)
+
+write("___________________________________________________________________","")
+write("a), c)","")
+
+# RESUMEN DEL MODELO
+summary(mod)
+
+#Calculos opcionales: Intervalos de confiança de los parametros
+confint(mod,level=0.99)
+
+write("___________________________________________________________________","")
+write("b), d)","")
+
+#Calculos opcionales: SS1 Test de los parametros con ordenacions predeterminada
+anova(mod)
+anova(lm(C~H+W+A,COL))
+
+#Nota: SS3, los tests (F) siempre coinciden con los del resumen (t), F=t^2
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("f)","")
+
+# Diagnostico: TENDENCIAS
+plot(predict(mod),resid(mod))
+abline(h=0,lty=2)
+
+# Diagnostico: OUTLIERS (rstudent)
+plot(rstandard(mod))
+abline(h=c(-2,0,2),lty=2)
+
+plot(rstudent(mod),main="rstudent")
+abline(h=c(-2,0,2),lty=2)
+
+# Diagnostico: LEVERAGE
+plot(hatvalues(mod))
+abline(h=c(0,2*mean(hatvalues(mod))),lty=2)
+
+# Diagnostico: INFLUENCIA (dffits)
+plot(cooks.distance(mod))
+abline(h=c(0,4/n),lty=2)
+
+plot(dffits(mod),main="dffits")
+abline(h=c(-2*sqrt(p/n),0,2*sqrt(p/n)),lty=2)
+
+
+#Diagnosticos de R
+oldpar <- par( mfrow=c(2,2))
+plot(mod,ask=F)
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("g)","")
+
+#Diagnosticos: Colinealidad
+vif(mod)
+
+# RESUMEN DEL MODELO
+summary(mod)
+
+#Calculos opcionales: Intervalos de confiança de los parametros
+confint(mod,level=0.99)
+
+write("___________________________________________________________________","")
+write("e)","")
+
+#Calculos opcionales: Para algunos casos predeterminados IC de E(Y)
+(C0<-data.frame(cbind(W=c(65,75,65),A=c(15,15,12),H=c(150,150,150)), row.names=1:3))
+predict(mod, C0, interval="confidence", level=.95, se.fit=T)
+
+#Calculos opcionales: Para algunos casos predeterminados I:Prdiccion de Y
+predict(mod, C0, interval="prediction", level=.95, se.fit=F)
+
+#Calculos opcionales: SS1 Test de los parametros con ordenacions predeterminada
+anova(mod)
+#Nota: SS3, los tests (F) coinciden con los del resumen (t), F=t^2
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("h), i)","")
+
+#Canvios lineales en la variables independiente:
+#centrar los datos, solo canvia el termino independiente
+summary(lm(C~I(W-mean(W))+I(A-mean(A))+I(H-mean(H)),COL))
+# o bien, si W=65, A=15 y H=150 son proximos a las medias:
+summary(lm(C~I(W-65)+I(A-15)+I(H-150),COL))
+
+#Canvios lineales en la variables independiente:
+#canvio en alguna variable, por ejemplo, exceso de peso, 
+# peso patron 0.5*H-10, WE=W-(0.5*H-10)
+summary(mod2<-lm(C~I(W-0.5*H+10)+A+H,COL))
+vif(mod2)
+#Nota: Solo canvia algun parametro y la colinealidad
+
+#Canvios lineales en la variables independiente:
+#eliminar alguna variable independiente no significativa y/o con mucha colinealidat
+#por ejemplo H, si ya se utiliza el exceso de peso
+summary(mod3<-lm(C~I(W-0.5*H+10)+A,COL))
+vif(mod3)
+
+```
+
 ### Exercise 4
-    
+
+```{r exercise4, echo=TRUE}
+dd <- read.csv2("dcrown.csv")
+library(car)
+
+dd$RP<-dd$PB/dd$PT
+scatterplotMatrix(dd,smooth=F,diagonal=F)
+cor(dd)
+scatterplotMatrix(log(dd),smooth=F,diagonal=F)
+cor(log(dd))
+
+write("___________________________________________________________________","")
+write("a)","")
+
+summary(modA<-lm(DCrown~I(PB/PT)+PT+HT+A,dd))
+
+
+plot(predict(modA),resid(modA),pch=3)
+abline(h=0,lty=2)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modA,ask=F)
+par(oldpar)
+
+plot(rstudent(modA),pch=3)
+abline(h=c(-3,-2,0,2,3),lty=2)
+
+vif(modA)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+summary(modB<-lm(log(DCrown)~log(PB/PT)+log(PT)+log(HT)+log(A),dd))
+
+plot(predict(modB),resid(modB),pch=3)
+abline(h=0,lty=2)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modB,ask=F)
+par(oldpar)
+
+plot(rstudent(modB),pch=3)
+abline(h=c(-3,-2,0,2,3),lty=2)
+
+vif(modB)
+
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+summary(modA2<-lm(DCrown~log(PB/PT)+log(PT)+log(HT)+log(A),dd))
+
+
+plot(predict(modA2),resid(modA2),pch=3)
+abline(h=0,lty=2)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modA2,ask=F)
+par(oldpar)
+
+plot(rstudent(modA2),pch=3)
+abline(h=c(-3,-2,0,2,3),lty=2)
+
+vif(modA2)
+
+write("___________________________________________________________________","")
+write("b2)","")
+
+summary(modB2<-lm(log(DCrown)~I(PB/PT)+PT+HT+A,dd))
+
+plot(predict(modB2),resid(modB2),pch=3)
+abline(h=0,lty=2)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modB2,ask=F)
+par(oldpar)
+
+plot(rstudent(modB2),pch=3)
+abline(h=c(-3,-2,0,2,3),lty=2)
+
+vif(modB2)
+
+write("___________________________________________________________________","")
+write("a)+b) => c)","")
+
+oldpar<-par(mfrow=c(2,2))
+plot(modA,which=1,main="model A")
+plot(modB,which=1,main="model A2")
+plot(modA2,which=1,main="model B")
+plot(modB2,which=1,main="model B2")
+par(oldpar)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modA,which=2,main="model A")
+plot(modB,which=2,main="model A2")
+plot(modA2,which=2,main="model B")
+plot(modB2,which=2,main="model B2")
+par(oldpar)
+
+oldpar<-par(mfrow=c(2,2))
+plot(modA,which=3,main="model A")
+plot(modB,which=3,main="model A2")
+plot(modA2,which=3,main="model B")
+plot(modB2,which=3,main="model B2")
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("predictions)","")
+
+
+dp<-data.frame(PT=c(0.9,0.2,0.45),PB=c(1.3,0.3,0.65),HT=c(3.5,2,2.4),A=c(22,8,8))
+
+predict(modA,dp,interval="prediction",level=0.95)
+exp(predict(modB,dp,interval="prediction",level=0.95))
+predict(modA2,dp,interval="prediction",level=0.95)
+exp(predict(modB2,dp,interval="prediction",level=0.95))
+```
+
 ### Exercise 5
+
+```{r exercise5, echo=TRUE}
+COL <- read.csv2("./Data/COL.csv")
+p<-4
+n<-dim(COL)[1]
+library(car)
+
+mod<-lm(C~W+A+H,COL)
+mod0<-lm(C~1,COL)
+
+##### write("Matriu","")
+
+x<-as.matrix(cbind(1,COL[,c(3,1,2)]))
+y<-COL$C
+n<-dim(x)[1]
+p<-dim(x)[2]
+
+
+##### write("Paràmetres","")
+
+(xtx<-t(x)%*%x)
+(xty<-t(x)%*%y)
+(xtxi<-solve(xtx))
+(b<-xtxi%*%xty)
+
+mod$coef
+summary(mod)$cov
+
+##### write("Residuals i predits","")
+
+yp<-x%*%b
+r<-y-yp
+plot(yp,r)
+points(predict(mod),resid(mod),col="red",pch="+")
+abline(h=0,lty=2)
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("ANOVA i SE","")
+(MDF<-dim(x)[2]-1)
+(EDF<-dim(x)[1]-dim(x)[2])
+(MSS<-(t(yp-mean(y))%*%(yp-mean(y)))[1,1])
+(sum((yp-mean(y))^2))
+(ESS<-(t(y-yp)%*%(y-yp))[1,1])
+sum((y-yp)^2)
+(MMS<-MSS/MDF)
+(EMS<-ESS/EDF)
+(SE<-sqrt(EMS))
+(Fvalue<-MMS/EMS)
+(Pvalue<-1-pf(Fvalue,MDF,EDF))
+-pf(Fvalue,MDF,EDF,log=T)
+TSS<-MSS+ESS
+TDF<-MDF+EDF
+TMS<-TSS/TDF
+print(c(TMS,var(y)))
+(R2<-MSS/(MSS+ESS)) # 1-ESS/TSS
+(R2adj<-1-EMS/(TMS))
+
+summary(mod)
+anova(mod0,mod)
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("Estimació paràmetres","")
+
+(vb<-xtxi*EMS)
+(vcov(mod))
+(sb<-sqrt(diag(vb)))
+icb<-cbind(b,b-qt(0.975,EDF)*sb,b+qt(0.975,EDF)*sb)
+colnames(icb)<-c("b","inf","sup")
+print(icb)
+confint(mod)
+(tb0<-b/sb)
+(pt(-abs(tb0),EDF)*2)
+summary(mod)
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("Estimació i predicció de y","")
+##### write("Per exemple, quan W=65, A=15 i H=150","")
+
+x0<-c(1,65,15,150)
+(yp0<-(x0%*%b)[1,1])
+(syp0<-sqrt((x0%*%vb%*%x0)[1,1]))
+(icyp0<-c(yp0-qt(0.975,EDF)*syp0,yp0+qt(0.975,EDF)*syp0))
+(predict(mod, data.frame(W=65,A=15, H=150, row.names="x0"), interval="confidence", level=.95, se.fit=TRUE))
+(rpyp0<-c(yp0-qt(0.975,EDF)*sqrt(EMS+syp0^2),yp0+qt(0.975,EDF)*sqrt(EMS+syp0^2)))
+(predict(mod, data.frame(W=65,A=15, H=150, row.names="x0"), interval="prediction", level=.95))
+##### write("test, per exemple yp0=200","")
+(t0<-(yp0-200)/syp0)
+(2*pt(-abs(t0),EDF))
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("SS1 i SS3","")
+
+tb0^2
+(summary(mod)$coef[,3])^2
+
+anova(mod)
+Anova(mod,ty=3)
+
+##### write("SS1","")
+
+anova(mod)
+mod10<-lm(C~W,COL)
+mod20<-lm(C~W+A,COL)
+#anova(mod0,mod10)
+sum((predict(mod0)-predict(mod10))^2)
+#anova(mod10,mod20)
+sum((predict(mod10)-predict(mod20))^2)
+#anova(mod20,mod)
+sum((predict(mod20)-predict(mod))^2)
+sum((predict(mod)-y)^2)
+
+##### write("SS3","")
+
+modnc<-lm(C~0+W+A+H,COL)
+mod1<-lm(C~A+H,COL)
+mod2<-lm(C~W+H,COL)
+mod3<-lm(C~W+A,COL) #és el mateix que mod30
+Anova(mod,ty=3)
+#anova(mod1,mod)
+#anova(mod2,mod)
+#anova(mod3,mod)
+sum((predict(modnc)-predict(mod))^2)
+sum((predict(mod1)-predict(mod))^2)
+sum((predict(mod2)-predict(mod))^2)
+sum((predict(mod3)-predict(mod))^2)
+sum((y-predict(mod))^2)
+
+
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("residuals estandaritzats, valors hat i distància de Cooks","")
+
+hat<-x%*%xtxi%*%t(x)
+vary<-hat*EMS
+varr<-EMS-vary
+rs<-r/sqrt(diag(varr))
+plot(1:n,rs,main="Residuals estandaritzats")
+points(1:n,rstandard(mod),col="red",pch="+")
+abline(h=c(-2,0,2),lty=2)
+
+plot(1:n,diag(hat),main="valors hat")
+points(1:n,hatvalues(mod),col="red",pch="+")
+abline(h=c(0,2*mean(diag(hat))),lty=2)
+
+cd<-rs^2/(p)*diag(hat)/(1-diag(hat))
+plot(1:n,cd,main="distància de Cooks")
+points(1:n,cooks.distance(mod),col="red",pch="+")
+abline(h=c(0,4/n),lty=2)
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("residuals studentitzats, dffits i dfbetes","")
+##### write("comprovarem matricialment només per una dada, per exemple la 82, i parcialment","")
+
+no<-82
+modno<-lm(C~W+A+H,COL[-no,])
+SEno<-summary(modno)$sigma
+c(rstudent(mod)[no],rstandard(mod)[no]*SE/SEno)
+plot(1:n,rstudent(mod),main="residuals studentitzats")
+abline(h=c(-2,0,2),lty=2)
+xno<-x[no,]
+c(dffits(mod)[no],(mod$fitted.values[no]-xno%*%modno$coef)/sqrt(hatvalues(mod)[no])/SEno)
+plot(1:n,dffits(mod),main="dffits")
+abline(h=c(-2*sqrt(p/n),0,2*sqrt(p/n)),lty=2)
+rbind(dfbetas(mod)[no,],t(b-modno$coef)/(sqrt(diag(vcov(mod)))/SE*SEno))
+plot(1:n,dfbetas(mod)[,1],main="dfbetas int")
+abline(h=c(-2/sqrt(n),0,2/sqrt(n)),lty=2)
+plot(1:n,dfbetas(mod)[,2],main="dfbetas W")
+abline(h=c(-2/sqrt(n),0,2/sqrt(n)),lty=2)
+plot(1:n,dfbetas(mod)[,3],main="dfbetas A")
+abline(h=c(-2/sqrt(n),0,2/sqrt(n)),lty=2)
+plot(1:n,dfbetas(mod)[,4],main="dfbetas H")
+abline(h=c(-2/sqrt(n),0,2/sqrt(n)),lty=2)
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("colinealitat: tolerància i VIF","")
+
+(tol<-c(W=1-summary(lm(W~A+H,COL))$r.squared,E=1-summary(lm(A~W+H,COL))$r.squared,
+       H=1-summary(lm(H~W+A,COL))$r.squared))
+(cbind(vif=vif(mod),"1/tol"=1/tol))
+
+##### write("","")
+##### write("__________________________________________________________","")
+##### write("","")
+##### write("canvis lineals","")
+
+c<-diag(1,4,4)
+c[1,2]<-10
+c[4,2]<--.5
+COL$WE<-COL$W-0.5*COL$H+10
+modc<-lm(C~WE+A+H,COL)
+summary(modc)
+summary(mod)
+anova(modc,mod)
+vif(modc)
+vif(mod)
+summary(lm(C~I(W+10*H)+A+H,COL))
+summary(lm(C~I(W-mean(W))+I(A-mean(A))+I(H-mean(H)),COL))
+confint(lm(C~I(W-mean(W))+I(A-mean(A))+I(H-mean(H)),COL))
+confint(mod)
+summary(lm(C~I(W-0.5*H+10)+I(A-15)+I(H-150),COL))
+confint(lm(C~I(W-0.5*H+10)+I(A-15)+I(H-150),COL))
+summary(lm(C~I(W-0.5*H+10)+I(A-15),COL))
+```
+
     
 ## One Way Anova
   
 ### Exercise 6
     
+```{r exercise6, echo=TRUE}
+dd<-read.csv2("./Data/ADG.csv")
+#setwd("~/ASSIGNATURES/200641 - MODELS LINEALS I LINEALS GENERALITZATS/")
+#dd <- read.csv2("ADG.csv")
+library(car)
+library(emmeans)
+library(tables)
+library("RcmdrMisc")
+
+is.factor(dd$DOSE)
+dd$DOSE<-as.factor(dd$DOSE)
+
+# Descriptiva
+
+tabular(DOSE~ADG*((n=1)+mean+sd),dd)
+
+with(dd, plotMeans(ADG, DOSE, error.bars="conf.int",level=0.95, connect=TRUE))
+
+write("___________________________________________________________________","")
+write("a)","")
+
+mod<-lm(ADG~DOSE,dd)
+(emmip(mod,~DOSE,CIs=T))
+
+summary(mod)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+anova(mod)
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("c)","")
+
+emm<-emmeans(mod,~DOSE)
+emm
+pairs(emm)
+CLD(emm,alpha=0.01)
+plot(emm,level=0.99)
+confint(emm,level=0.99)
+
+write("___________________________________________________________________","")
+write("d)","")
+
+plot(predict(mod),resid(mod))
+abline(h=0,lty=2)
+
+plot(rstudent(mod))
+abline(h=c(-2,0,2),lty=2)
+
+plot(mod,ask=F)
+
+predict(mod)
+resid(mod)
+hatvalues(mod)
+dffits(mod)
+
+leveneTest(mod)
+leveneTest(ADG~DOSE,dd)
+bartlett.test(ADG~DOSE,dd)
+fligner.test(ADG~DOSE,dd)
+
+#options(contrasts = c("contr.treatment", "contr.treatment"))
+mod<-lm(ADG~DOSE,dd,x=T)
+mod$x
+emmeans(mod,~DOSE)
+
+#summary(mod<-lm(ADG~DOSE,dd,contrasts=list(DOSE="contr.treatment"),x=T))
+
+options(contrasts = c("contr.sum", "contr.treatment"))
+mod1<-lm(ADG~DOSE,dd,x=T)
+mod1$x
+emmeans(mod1,~DOSE)
+
+options(contrasts = c("contr.helmert", "contr.treatment"))
+mod2<-lm(ADG~DOSE,dd,x=T)
+mod2$x
+emmeans(mod2,~DOSE)
+
+```
+
 ### Exercise 7
     
+```{r exercise7, echo=TRUE}
+dd<-read.csv2("./Data/Sole.csv")
+library(car)
+library(emmeans)
+library(tables)
+
+#a) Quality
+
+# Descriptiva
+
+tabular(ORIGIN~Quality*((n=1)+mean+sd),dd)
+scatterplot(Quality~ORIGIN,dd)
+
+write("___________________________________________________________________","")
+write("a1)","")
+
+summary(mod<-lm(Quality~ORIGIN,dd))
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("a3)","")
+
+(emm<-emmeans(mod,~ORIGIN))
+
+pairs(emm)
+CLD(emm)
+plot(emm)
+
+write("___________________________________________________________________","")
+write("a4)","")
+
+plot(mod,ask=F)
+
+leveneTest(mod)
+
+
+#b) CSI
+
+# Descriptiva
+tabular(ORIGIN~CSI*((n=1)+mean+sd),dd)
+scatterplot(CSI~ORIGIN,dd)
+
+write("___________________________________________________________________","")
+write("CSI b1)","")
+
+summary(mod<-lm(CSI~ORIGIN,dd))
+
+write("___________________________________________________________________","")
+write("CSI b2)","")
+
+Anova(mod,ty=3)
+
+write("___________________________________________________________________","")
+write("CSI b3)","")
+
+(emm<-emmeans(mod,~ORIGIN))
+
+pairs(emm)
+cld(emm)
+plot(emm)
+
+write("___________________________________________________________________","")
+write("CSI b4)","")
+
+plot(mod,ask=F)
+leveneTest(mod)
+
+#pH
+
+write("___________________________________________________________________","")
+write("pH","")
+
+
+tabular(ORIGIN~pH*((n=1)+mean+sd),dd)
+scatterplot(pH~ORIGIN,dd)
+
+summary(mod<-lm(pH~ORIGIN,dd))
+Anova(mod,ty=3)
+(emm<-emmeans(mod,~ORIGIN))
+
+pairs(emm)
+cld(emm)
+plot(emm)
+plot(mod,ask=F)
+
+leveneTest(mod)
+
+#Humidity
+
+write("___________________________________________________________________","")
+write("Humidity","")
+
+
+tabular(ORIGIN~Humidity*((n=1)+mean+sd),dd)
+scatterplot(Humidity~ORIGIN,dd)
+
+summary(mod<-lm(Humidity~ORIGIN,dd))
+Anova(mod,ty=3)
+(emm<-emmeans(mod,~ORIGIN))
+
+pairs(emm)
+cld(emm)
+plot(emm)
+plot(mod,ask=F)
+
+leveneTest(mod)
+
+#Proteins
+
+write("___________________________________________________________________","")
+write("Proteins","")
+
+
+tabular(ORIGIN~Proteins*((n=1)+mean+sd),dd)
+scatterplot(Proteins~ORIGIN,dd)
+
+summary(mod<-lm(Proteins~ORIGIN,dd))
+Anova(mod,ty=3)
+(emm<-emmeans(mod,~ORIGIN))
+
+pairs(emm)
+cld(emm)
+plot(emm)
+plot(mod,ask=F)
+
+leveneTest(mod)
+
+```
+
 ### Exercise 8
     
+```{r exercise8, echo=TRUE}
+#options(contrasts = c("contr.sum", "contr.treatment"))
+dd<-read.csv2("./Data/ADG.csv")
+library(car)
+library(emmeans)
+is.factor(dd$DOSE)
+dd$DOSE<-as.factor(dd$DOSE)
+
+
+write("___________________________________________________________________","")
+write("a)","")
+
+(mod0<-lm(ADG~0+DOSE,x=T,dd))
+(mod1<-lm(ADG~DOSE,x=T,dd,contrasts=list(DOSE="contr.treatment")))
+(mod2<-lm(ADG~DOSE,x=T,dd,contrasts=list(DOSE="contr.sum")))
+(mod3<-lm(ADG~DOSE,x=T,dd,contrasts=list(DOSE="contr.helmert")))
+(mod4<-lm(ADG~DOSE,x=T,dd,contrasts=list(DOSE="contr.SAS")))
+
+write("___________________________________________________________________","")
+write("b)","")
+
+(emmeans(mod0,~DOSE))
+(emmeans(mod1,~DOSE))
+(emmeans(mod2,~DOSE))
+(emmeans(mod3,~DOSE))
+(emmeans(mod4,~DOSE))
+
+write("___________________________________________________________________","")
+write("Matrix","")
+
+mod0$x
+mod1$x
+mod2$x
+mod3$x
+mod4$x
+
+contr.treatment(5)
+contr.sum(5)
+contr.helmert(5)
+contr.SAS(5)
+
+```
+
 ## Two way and more than Two way ANOVA
   
 ### Exercise 9
     
+```{r exercise9, echo=TRUE}
+dd<-read.csv2("./Data/PATE.csv")
+library(car)
+library(emmeans)
+library(tables)
+dd$per<-as.factor(dd$per)
+dd$pate<-as.factor(dd$pate)
+
+names(dd)
+head(dd)
+
+# Descriptiva
+
+tabular(pate~color*((n=1)+mean+sd),dd)
+tabular(pate~mean*color*per,dd)
+
+
+write("___________________________________________________________________","")
+write("a), b)","")
+
+
+summary(mcol<-lm(color~pate+per,dd))
+summary(mcol0<-lm(color~pate,dd))
+Anova(mcol,ty=3)
+Anova(mcol0,ty=3)
+anova(mcol)
+anova(mcol0)
+emmeans(mcol,~pate)
+emmeans(mcol0,~pate)
+CLD(emmeans(mcol,~pate),Letters=letters,reversed=T)
+CLD(emmeans(mcol0,~pate),Letters=letters,reversed=T)
+
+CLD(emmeans(mcol,~pate),Letters=letters,reversed=T,alpha=0.01)
+
+write("===================================================================","")
+write("c)","")
+
+plot(predict(mcol),rstandard(mcol))
+abline(h=c(-2,0,2),lty=2)
+
+plot(as.vector(dd$pate),rstudent(mcol))
+abline(h=c(-2,0,2),lty=2)
+qqPlot(mcol)
+qqPlot(mcol,simulate=F,envelope=F)
+
+oldpar <- par( mfrow=c(2,2))
+plot(mcol,ask=F)
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("Optional","")
+
+# Opcional Matrices
+
+ddo<-dd[order(dd$pate),]
+mcol<-lm(color~pate+per,ddo,x=T)
+mcol$x
+lm(color~pate+per,ddo,x=T,contrasts=list(per="contr.sum",pate="contr.sum"))$x
+
+for (v in names(dd)[c(-1,-2)]){
+  write("___________________________________________________________________","")
+  write(v,"")
+  
+  m1<-lm(as.formula(paste0(v,"~per+pate")),data=dd)
+  oldpar <- par( mfrow=c(2,2))
+  plot(m1,ask=F)
+  par(oldpar)
+  m11<-lm(as.formula(paste0(v,"~pate")),data=dd)
+  print(anova(m1))
+  print(anova(m11))
+  print(CLD(emmeans(m1,~pate)))
+  print(CLD(emmeans(m11,~pate)))
+}
+
+
+```
+
 ### Exercise 10
-    
+
+```{r exercise10, echo=TRUE}
+dd <- read.csv2("cheese.csv")
+library(tables)
+library(emmeans)
+library(car)
+library(RcmdrMisc)
+
+# Descriptiva
+
+tabular((COW+GOAT+SHEEP)*(THERMIC+1)~(CaCl2+1)*mean,dd)
+tabular((COW+GOAT+SHEEP)*(THERMIC)~(CaCl2)*sd,dd)
+tabular((COW+GOAT+SHEEP)*(THERMIC+1)~(CaCl2+1)*(n=1),dd)
+tabular(THERMIC~COW*CaCl2*mean,dd)
+
+with(dd, plotMeans(COW, THERMIC, CaCl2, error.bars="conf.int", level=0.95, connect=TRUE))
+with(dd, plotMeans(COW, CaCl2, THERMIC, error.bars="conf.int", level=0.95, connect=TRUE))
+
+with(dd, plotMeans(GOAT, THERMIC, CaCl2, error.bars="conf.int", level=0.95, connect=TRUE))
+with(dd, plotMeans(GOAT, CaCl2, THERMIC, error.bars="conf.int", level=0.95, connect=TRUE))
+
+with(dd, plotMeans(SHEEP, THERMIC, CaCl2, error.bars="conf.int", level=0.95, connect=TRUE))
+with(dd, plotMeans(SHEEP, CaCl2, THERMIC, error.bars="conf.int", level=0.95, connect=TRUE))
+
+#====================================
+write("___________________________________________________________________","")
+write("COW a)","")
+
+summary(mc<-lm(COW~THERMIC*CaCl2,dd))
+(emmip(mc,THERMIC~CaCl2,CIs=TRUE))
+(emmip(mc,CaCl2~THERMIC,CIs=TRUE))
+
+anova(mc)
+Anova(mc)
+#Anova(mc,ty=2)
+CLD(emmeans(mc,~THERMIC*CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(mc,~THERMIC|CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(mc,~CaCl2|THERMIC),Letters=letters,reversed=T)
+CLD(emmeans(mc,~CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(mc,~THERMIC),Letters=letters,reversed=T)
+
+write("___________________________________________________________________","")
+write("COW b)","")
+
+plot(predict(mc),resid(mc))
+abline(h=0,lty=2)
+plot(rstudent(mc))
+abline(h=c(-2,0,2),lty=2)
+oldpar <- par( mfrow=c(2,2))
+plot(mc)
+plot(lm(COW~THERMIC+CaCl2,dd))
+par(oldpar)
+#====================================
+write("___________________________________________________________________","")
+write("GOAT a)","")
+
+summary(mg<-lm(GOAT~THERMIC*CaCl2,dd))
+(emmip(mg,THERMIC~CaCl2,CIs=TRUE))
+(emmip(mg,CaCl2~THERMIC,CIs=TRUE))
+#anova(mg)
+Anova(mg)
+pairs(emmeans(mg,~THERMIC*CaCl2))
+CLD(emmeans(mg,~THERMIC*CaCl2),Letters=letters,reversed=T,alpha=0.1)
+#CLD(emmeans(mg,~THERMIC|CaCl2),Letters=letters,reversed=T)
+#CLD(emmeans(mg,~CaCl2|THERMIC),Letters=letters,reversed=T)
+
+summary(mg0<-lm(GOAT~THERMIC,dd))
+(emmip(mg0,~THERMIC,CIs=TRUE))
+Anova(mg0)
+pairs(emmeans(mg0,~THERMIC))
+
+summary(mga<-lm(GOAT~THERMIC+CaCl2,dd))
+(emmip(mga,CaCl2~THERMIC,CIs=TRUE))
+Anova(mga)
+pairs(emmeans(mga,~THERMIC))
+pairs(emmeans(mga,~CaCl2))
+
+
+write("___________________________________________________________________","")
+write("GOAT b)","")
+
+oldpar <- par( mfrow=c(2,2))
+plot(mg)
+plot(mg0)
+plot(mga)
+par(oldpar)
+#====================================
+write("___________________________________________________________________","")
+write("SHEEP a)","")
+
+summary(ms<-lm(SHEEP~THERMIC*CaCl2,dd))
+(emmip(ms,THERMIC~CaCl2,CIs=TRUE))
+(emmip(ms,CaCl2~THERMIC,CIs=TRUE))
+#anova(ms)
+Anova(ms)
+CLD(emmeans(ms,~THERMIC*CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(ms,~THERMIC|CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(ms,~CaCl2|THERMIC),Letters=letters,reversed=T)
+CLD(emmeans(ms,~CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(ms,~THERMIC),Letters=letters,reversed=T)
+
+summary(ms0<-lm(SHEEP~THERMIC+CaCl2,dd))
+(emmip(ms0,THERMIC~CaCl2,CIs=TRUE))
+(emmip(ms0,CaCl2~THERMIC,CIs=TRUE))
+Anova(ms0)
+CLD(emmeans(ms0,~CaCl2),Letters=letters,reversed=T)
+CLD(emmeans(ms0,~THERMIC),Letters=letters,reversed=T)
+
+write("___________________________________________________________________","")
+write("SHEEP b)","")
+
+oldpar <- par( mfrow=c(2,2))
+plot(ms)
+plot(ms0)
+par(oldpar)
+
+```
+
 ### Exercise 11
     
+```{r exercise11, echo=TRUE}
+
+```
+
 ### Exercise 12
     
+```{r exercise12, echo=TRUE}
+
+```
+
 ### Exercise 13
     
+```{r exercise13, echo=TRUE}
+
+```
+
 ## ANCOVA: Analysis of covariance 
   
 ### Exercise 14
     
+```{r exercise14, echo=TRUE}
+dd<-read.csv2("comp line.csv")
+dd$M<-as.factor(dd$M)
+#options(contrasts = c("contr.sum", "contr.treatment"))
+library(emmeans)
+library(car)
+#names(dd)
+head(dd)
+
+# Descriptiva
+
+sp(P~C|M,smooth=F,dat=dd)
+abline(v=c(90,105,120),lty=2,col="blue")
+
+write("___________________________________________________________________","")
+write("a)","")
+
+summary(mP<-lm(P~C+M+M:C,dd))
+anova(lm(P~C,dd),mP)
+
+# Diagnostics
+plot(fitted(mP),resid(mP))
+abline(h=0,lty=2)
+oldpar <- par( mfrow=c(2,2))
+plot(mP,ask=F)
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+anova(lm(P~C+M,dd),mP)
+Anova(mP)
+
+(emmp<-emtrends(mP,~M,var="C"))
+pairs(emmp)
+
+write("___________________________________________________________________","")
+write("c) 3 formas alternativas","")
+
+anova(lm(P~C+M:C,dd),mP)
+
+mP3<-lm(P~C*M,dd,contrasts=list(M="contr.sum")) #Para poder utilizar SS3
+Anova(mP3,ty=3)
+
+pairs(emmeans(mP,~M|C,at=list(C=c(0))))
+
+write("==================================================","")
+write("Tipos de sumas de quadrados, tests asociados","")
+
+Anova(mP)
+Anova(lm(P~C+M,dd)) # Las mismas sumas de cuadrados
+
+Anova(mP3,ty=3) # SI!
+Anova(mP,ty=3) # NO!
+
+anova(mP) # Dependen del orden
+anova(lm(P~M*C,dd))
+
+write("==================================================","")
+
+
+write("___________________________________________________________________","")
+write("d)","")
+
+(emm<-emmeans(mP,~M|C,at=list(C=c(90,105,120))))
+pairs(emm)
+
+
+write("___________________________________________________________________","")
+# Modelo aditivo
+
+mP2<-lm(P~M+C,dd)
+plot(fitted(mP2),resid(mP2))
+abline(h=0,lty=2)
+oldpar <- par( mfrow=c(2,2))
+plot(mP2,ask=F)
+par(oldpar)
+
+Anova(mP2)
+(emm2<-emmeans(mP2,~M|C,at=list(C=c(90,105,120))))
+pairs(emm2)
+
+
+write("___________________________________________________________________","")
+write("Modelo PP","")
+write("___________________________________________________________________","")
+
+sp(PP~C|M,smooth=F,dat=dd)
+abline(v=c(90,105,120),lty=2,col="blue")
+
+write("___________________________________________________________________","")
+write("a)","")
+
+summary(mPP<-lm(PP~M+C+M:C,dd))
+anova(lm(PP~C,dd),mPP)
+
+# Diagnostics
+plot(fitted(mPP),resid(mPP))
+abline(h=0,lty=2)
+oldpar <- par( mfrow=c(2,2))
+plot(mPP,ask=F)
+par(oldpar)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+anova(lm(PP~C+M,dd),mPP)
+Anova(mPP)
+
+(emmpp<-emtrends(mPP,~M,var="C"))
+pairs(emmpp)
+
+write("___________________________________________________________________","")
+write("c) 3 formas alternativas","")
+
+anova(lm(PP~C+M:C,dd),mPP)
+
+mPP3<-lm(PP~C*M,dd,contrasts=list(M="contr.sum")) #Para poder utilizar SS3
+Anova(mPP3,ty=3)
+
+pairs(emmeans(mPP,~M|C,at=list(C=c(0))))
+
+
+write("___________________________________________________________________","")
+write("d)","")
+
+(emm2<-emmeans(mPP,~M|C,at=list(C=c(90,105,120))))
+pairs(emm2)
+
+
+# Modelo aditivo
+mPP2<-lm(PP~M+C,dd)
+plot(fitted(mPP2),resid(mPP2))
+abline(h=0,lty=2)
+oldpar <- par( mfrow=c(2,2))
+plot(mPP2,ask=F)
+par(oldpar)
+
+Anova(mPP2)
+(emm3<-emmeans(mPP2,~M|C,at=list(C=c(90,105,120))))
+pairs(emm3)
+
+
+
+
+
+```
+
 ### Exercise 15
-    
+  
+```{r exercise15, echo=TRUE}
+
+```
+
 ### Exercise 16
+
+```{r exercise16, echo=TRUE}
+
+```
 
 # Generalized Linear Models
   
@@ -65,30 +1246,912 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Exercise 17
 
+```{r exercise17, echo=TRUE}
+
+```
+
 ## Continuous models
 
 ### Exercise 18
 
+```{r exercise18, echo=TRUE}
+library(car)
+dd <- read.csv2("diaryp.csv")
+dd$lDays<-log(dd$Days)
+
+sp(PROD~Days, smooth=F, boxplots=F, data=dd)
+
+with(dd,plot(Days,exp(predict(lm(log(PROD)~Days+I(log(Days))))),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+write("___________________________________________________________________","")
+write("a1)","")
+
+summary(m1<-lm(log(PROD)~Days+lDays,data=dd))
+with(dd,plot(Days,exp(predict(m1)),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+plot(m1,which=1)
+plot(dd$Days,m1$res)
+abline(h=0,lty=2)
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+summary(m1nl<-nls(PROD~exp(a+b*Days+c*lDays),start=list(a=3,b=-0.01,c=.2),data=dd))
+
+with(dd,plot(Days,predict(m1nl),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+plot(dd$Days,dd$PROD)
+lines(dd$Days,predict(m1nl))
+plot(dd$Days,resid(m1nl))
+abline(h=0,lty=2)
+
+write("___________________________________________________________________","")
+write("b1)","")
+
+summary(mg<-glm(PROD~Days+lDays,family=Gamma(link="log"),data=dd))
+summary(glm(PROD~Days+lDays,family=quasi(link="log",var="mu^2"),data=dd))
+
+with(dd,plot(Days,predict(mg,ty="response"),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+residualPlot(mg)
+plot(dd$Days,resid(mg))
+abline(h=0,lty=2)
+
+plot(resid(mg,ty="deviance"))
+points(resid(mg,ty="pearson"),col="red",pch="+")
+
+write("___________________________________________________________________","")
+write("b2)","")
+
+summary(mn<-glm(PROD~Days+lDays,family=gaussian(link="log"),data=dd))
+summary(glm(PROD~Days+lDays,family=quasi(link="log",var="constant"),data=dd))
+with(dd,plot(Days,predict(mn,type = "response"),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+plot(mn,which=1)
+plot(dd$Days,resid(mn))
+abline(h=0,lty=2)
+
+write("___________________________________________________________________","")
+write("b3)","")
+
+summary(mq<-glm(PROD~Days+lDays,family=quasi(link="log",var="mu"),data=dd))
+summary(glm(PROD~Days+lDays,family=poisson(link="log"),data=dd))
+summary(glm(PROD~Days+lDays,family=quasipoisson(link="log"),data=dd))
+with(dd,plot(Days,predict(mq,type = "response"),ty="l",ylim=c(min(PROD),max(PROD))))
+with(dd,points(Days,PROD,col="red",pch="+"))
+
+plot(mq,which=1)
+plot(dd$Days,resid(mq))
+abline(h=0,lty=2)
+residualPlots(mq)
+
+write("___________________________________________________________________","")
+write("       EXTRA","")
+write("___________________________________________________________________","")
+
+
+# mv
+c(mg=logLik(mg),mn=logLik(mn))
+
+# R2
+c(mg=1-mg$dev/mg$null.dev,mn=1-mn$dev/mn$null.dev,mq=1-mq$dev/mq$null.dev)
+
+
+plot(rstudent(mg,ty="deviance"))
+points(rstudent(mg,ty="pearson"),col="red",pch="+")
+abline(h=c(-2,0,2),lty=2)
+
+plot(rstudent(mn,ty="deviance"))
+points(rstudent(mn,ty="pearson"),col="red",pch="+")
+abline(h=c(-2,0,2),lty=2)
+
+plot(rstudent(mq,ty="deviance"))
+points(rstudent(mq,ty="pearson"),col="red",pch="+")
+abline(h=c(-2,0,2),lty=2)
+
+sp(sqrt(abs(resid(mg,ty="deviance")))~predict(mg),boxplots=F,smooth=F)
+sp(sqrt(abs(resid(mg,ty="pearson")))~predict(mg),boxplots=F,smooth=F)
+
+sp(sqrt(abs(resid(mn,ty="deviance")))~predict(mn),boxplots=F,smooth=F)
+sp(sqrt(abs(resid(mn,ty="pearson")))~predict(mn),boxplots=F,smooth=F)
+
+sp(sqrt(abs(resid(mq,ty="deviance")))~predict(mg),boxplots=F,smooth=F)
+sp(sqrt(abs(resid(mq,ty="pearson")))~predict(mg),boxplots=F,smooth=F)
+```
+
 ### Exercise 19
+
+```{r exercise19, echo=TRUE}
+library(RcmdrMisc)
+library(emmeans)
+
+dd <- read.csv2("ci.csv")
+library(tables)
+
+#DESCRIPTIVA
+
+cv<-function(x) {sd(x)/mean(x)}
+tabular(CI*SWEET~((n=1)+mean+sd+cv),dd)
+
+with(dd,plotMeans(CI,SWEET,error.bars="conf.int",level=0.95))
+
+write("___________________________________________________________________","")
+write("a)","")
+
+summary(m1<-glm(CI~SWEET,family=inverse.gaussian,data=dd))
+(emmip(m1,~SWEET,CIs=T,type="response"))
+(emmip(m1,~SWEET,CIs=T))
+
+summary(m1)$family
+logLik(m1)
+(scale<-sqrt(summary(m1)$disp))
+sum(residuals(m1,type="pearson")^2)
+sum(residuals(m1,type="pearson")^2)/m1$df.residual
+sum(residuals(m1,type="deviance")^2)
+sum(residuals(m1,type="deviance")^2)/m1$df.residual
+residualPlot(m1)
+Anova(m1,test="F")
+(em1<-emmeans(m1,~SWEET))
+summary(em1,ty="response")
+pairs(em1)
+CLD(em1)
+CLD(em1,ty="response")
+
+write("___________________________________________________________________","")
+write("b)","")
+
+summary(m2<-glm(CI~SWEET,family=inverse.gaussian(link=identity),data=dd))
+(emmip(m2,~SWEET,CIs=T,type="response"))
+(emmip(m2,~SWEET,CIs=T))
+
+summary(m2)$family
+logLik(m2)
+(scale<-sqrt(summary(m2)$disp))
+plot(m2,which=1)
+Anova(m2,type=3,test="F")
+(em2<-emmeans(m2,~SWEET))
+#pairs(em2)
+CLD(em2)
+
+write("___________________________________________________________________","")
+write("c)","")
+
+summary(m3<-glm(CI~SWEET,family=quasi(link=identity,var=mu^3),data=dd))
+(emmip(m3,~SWEET,CIs=T,type="response"))
+(emmip(m3,~SWEET,CIs=T))
+
+summary(m3)$family
+logLik(m3)
+(scale<-sqrt(summary(m3)$disp))
+plot(m3,which=1)
+Anova(m3,type=3,test="F")
+(em3<-emmeans(m3,~SWEET))
+#pairs(em3)
+CLD(em3)
+
+
+write("___________________________________________________________________","")
+write("d) inverse.gaussian => Var=mu^3","")
+
+em1
+summary(em1,ty="response")
+em2
+em3
+
+
+```
 
 ### Exercise 20
 
+```{r exercise20, echo=TRUE}
+library(emmeans)
+dd<-read.csv2("area.csv")
+head(dd)
+library(RcmdrMisc)
+library(tables)
+library(car)
+
+#DESCRIPTIVA
+
+cv<-function(x) {sd(x)/mean(x)}
+tabular(AREA*SPECIES*COMPOST~((n=1)+mean+sd+cv),dd)
+tabular(log(AREA)*SPECIES*COMPOST~((n=1)+mean+sd+cv),dd)
+with(dd,plotMeans(AREA,SPECIES,COMPOST,error.bars="conf.int",level=0.95))
+with(dd,plotMeans(AREA,COMPOST,SPECIES,error.bars="conf.int",level=0.95))
+
+
+write("___________________________________________________________________","")
+write("a1)","")
+
+summary(m01<-lm(AREA~SPECIES+COMPOST,data=dd))
+(emmip(m01,SPECIES~COMPOST,CIs=T))
+(emmip(m01,COMPOST~SPECIES,CIs=T))
+
+plot(predict(m01),resid(m01))
+abline(h=0,lty=2)
+
+leveneTest(m01)
+Treat<-factor(paste(dd$SPECIES,dd$COMPOST))
+leveneTest(resid(m01)~Treat)
+
+Anova(m01)
+#Anova(lm(AREA~SPECIES*COMPOST,data=dd))
+(em01<-emmeans(m01,~SPECIES+COMPOST))
+CLD(em01)
+plot(m01,which=1)
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+summary(m02<-lm(log(AREA)~SPECIES+COMPOST,data=dd))
+(emmip(m02,SPECIES~COMPOST,CIs=T))
+(emmip(m02,COMPOST~SPECIES,CIs=T))
+
+plot(predict(m02),resid(m02))
+abline(h=0,lty=2)
+
+
+Anova(m02)
+Anova(lm(log(AREA)~SPECIES*COMPOST,data=dd))
+(em02<-emmeans(m02,~SPECIES+COMPOST))
+CLD(em02)
+plot(m02,which=1)
+
+write("___________________________________________________________________","")
+write("Extra a3)","")
+
+summary(m03<-lm(log(AREA)~SPECIES*COMPOST,data=dd))
+(emmip(m03,SPECIES~COMPOST,CIs=T))
+(emmip(m03,COMPOST~SPECIES,CIs=T))
+
+Anova(m03)
+(em03<-emmeans(m03,~SPECIES*COMPOST))
+CLD(em03)
+plot(m03,which=1)
+
+#glm
+
+write("___________________________________________________________________","")
+write("b1)","")
+
+summary(m1<-glm(AREA~SPECIES+COMPOST,family=gaussian(link="identity"),data=dd))
+(emmip(m1,SPECIES~COMPOST,CIs=T))
+(emmip(m1,COMPOST~SPECIES,CIs=T))
+
+logLik(m1)
+(scale<-sqrt(summary(m1)$disp))
+sum(residuals(m1,type="pearson")^2)
+sum(residuals(m1,type="deviance")^2)
+plot(m1,which=1)
+Anova(m1,test="F")
+(em1<-emmeans(m1,~SPECIES+COMPOST))
+CLD(em1)
+#pairs(emn1)
+
+# Extra
+Anova(m12<-glm(AREA~SPECIES*COMPOST,family=gaussian(link="identity"),data=dd),test="F")
+
+write("___________________________________________________________________","")
+write("b2)","")
+
+summary(m2<-glm(AREA~SPECIES+COMPOST,family=Gamma(link="identity"),data=dd))
+(emmip(m2,SPECIES~COMPOST,CIs=T))
+(emmip(m2,COMPOST~SPECIES,CIs=T))
+m0<-glm(AREA~1,family=Gamma(link="identity"),data=dd)
+anova(m0,m2,test="F")
+residualPlot(m2,smooth=F)
+
+leveneTest(resid(m2)~Treat)
+
+Anova(m2,test="F")
+m2f<-glm(AREA~SPECIES*COMPOST,family=Gamma(link="identity"),data=dd)
+Anova(m2f,test="F")
+(em2<-emmeans(m2,~SPECIES+COMPOST))
+CLD(em2)
+
+summary(m2l<-glm(AREA~SPECIES*COMPOST,family=Gamma,data=dd))
+(emmip(m2l,SPECIES~COMPOST,CIs=T))
+(emmip(m2l,COMPOST~SPECIES,CIs=T))
+residualPlot(m2l,smooth=F)
+Anova(m2l,test="F")
+
+
+
+# quasi
+write("___________________________________________________________________","")
+write("c)","")
+
+summary(m3<-glm(AREA~SPECIES+COMPOST,family=quasi(link="identity",var="mu^2"),data=dd))
+(emmip(m3,SPECIES~COMPOST,CIs=T))
+(emmip(m3,COMPOST~SPECIES,CIs=T))
+
+plot(m3,which=1)
+Anova(m3,test="F")
+Anova(glm(AREA~SPECIES*COMPOST,family=quasi(link="identity",var="mu^2"),data=dd),test="F")
+(em3<-emmeans(m3,~SPECIES*COMPOST))
+CLD(em3)
+
+# Extra
+summary(m4<-glm(AREA~SPECIES+COMPOST,family=quasi(link="identity",var="mu^3"),data=dd))
+(emmip(m4,SPECIES~COMPOST,CIs=T))
+(emmip(m4,COMPOST~SPECIES,CIs=T))
+
+plot(m4,which=1)
+Anova(m4,test="F")
+Anova(glm(AREA~SPECIES*COMPOST,family=quasi(link="identity",var="mu^2"),data=dd),test="F")
+(em4<-emmeans(m4,~SPECIES*COMPOST))
+CLD(em4)
+
+write("___________________________________________________________________","")
+write("d)","")
+
+# mv
+c(m01=logLik(m01),m02=logLik(m02),m03=logLik(m03),m1=logLik(m1),m2=logLik(m02),m3=logLik(m3))
+
+# R2
+c(m01=summary(m01)$r.squared,m02=summary(m02)$r.squared,m03=summary(m03)$r.squared,
+  m1=1-m1$dev/m1$null.dev,m2=1-m2$dev/m2$null.dev,m3=1-m3$dev/m3$null.dev)
+
+# R2 adj
+c(m01=summary(m01)$adj.r.squared,m02=summary(m02)$adj.r.squared,m03=summary(m03)$adj.r.squared,
+  m1=1-(m1$dev/m1$df.residual)/(m1$null.dev/m1$df.null),
+  m2=1-(m2$dev/m2$df.residual)/(m2$null.dev/m2$df.null),
+  m3=1-(m3$dev/m3$df.residual)/(m3$null.dev/m3$df.null))
+
+```
+
 ### Exercise 21
+
+```{r exercise21, echo=TRUE}
+dd<-read.csv2("vitc.csv")
+library(RcmdrMisc)
+library(emmeans)
+library(tables)
+
+
+#DESCRIPTIVA
+
+scatterplot(log(vitc)~week|treat,smooth=F, data=dd)
+
+write("___________________________________________________________________","")
+write("a)","")
+# Gamma
+
+summary(mg<-glm(vitc~week*treat,family=Gamma(link="log"),data=dd))
+sp(predict(mg)~dd$week|dd$treat,smooth=F)
+points(dd$week,log(dd$vitc),pch="+",col=dd$treat)
+
+plot(mg,which=1)
+residualPlot(mg,smooth=F)
+
+sp(predict(mg,ty="response"),sqrt(abs(resid(mg,ty="deviance"))),smooth=F,boxplot=F)
+
+
+Anova(mg,test.statistic="F")
+anova(glm(vitc~week+week:treat,family=Gamma(link="log"),data=dd),mg,test="F")
+CLD(emmg<-emmeans(mg,~treat|week,at=list(week=c(0,12))))
+summary(emmg,ty="response")
+CLD(emmgp<-emtrends(mg,~treat,var="week"))
+
+write("___________________________________________________________________","")
+write("b)","")
+# logNormal
+
+summary(lm(log(vitc)~week*treat,data=dd))
+summary(mln<-glm(log(vitc)~week*treat,family=gaussian,data=dd))
+sp(predict(mln)~dd$week|dd$treat,smooth=F)
+points(dd$week,log(dd$vitc),pch="+",col=dd$treat)
+
+residualPlot(mln)
+
+sp(predict(mln),sqrt(abs(resid(mln))),smooth=F,boxplot=F)
+
+Anova(mln)
+
+CLD(emmln<-emmeans(mln,~treat|week,at=list(week=c(0,12))))
+CLD(emmlnp<-emtrends(mln,~treat,var="week"))
+
+
+write("___________________________________________________________________","")
+write("c)","")
+# Normal
+
+summary(mn<-glm(vitc~week*treat,family=gaussian(link="log"),data=dd))
+sp(predict(mn)~dd$week|dd$treat,smooth=F)
+points(dd$week,log(dd$vitc),pch="+",col=dd$treat)
+
+residualPlot(mn)
+
+sp(predict(mn,ty="response"),sqrt(abs(resid(mn,ty="deviance"))),smooth=F,boxplot=F)
+
+Anova(mn,test.statistic="F")
+
+CLD(emmn<-emmeans(mn,~treat|week,at=list(week=c(0,12))))
+summary(emmn,ty="response")
+CLD(emmnp<-emtrends(mn,~treat,var="week"))
+
+
+write("___________________________________________________________________","")
+write("d)","")
+# Var=mu
+
+summary(mq<-glm(vitc~week*treat,family=quasi(link="log",var=mu),data=dd))
+sp(predict(mq)~dd$week|dd$treat,smooth=F)
+points(dd$week,log(dd$vitc),pch="+",col=dd$treat)
+
+residualPlot(mq)
+
+sp(predict(mq,ty="response"),sqrt(abs(resid(mq,ty="deviance"))),smooth=F,boxplot=F)
+
+Anova(mq,test.statistic="F")
+
+CLD(emmq<-emmeans(mq,~treat|week,at=list(week=c(0,12))))
+summary(emmq,ty="response")
+CLD(emmqp<-emtrends(mq,~treat,var="week"))
+
+write("___________________________________________________________________","")
+write("e)","")
+
+# mv
+c(mg=logLik(mg),mln=logLik(mln),mn=logLik(mn),mq=logLik(mq))
+
+# AIC
+c(mg=AIC(mg),mn=AIC(mln),mn=AIC(mn),mq=AIC(mq))
+
+# R2
+c(mg=1-mg$dev/mg$null.dev,mln=1-mln$dev/mln$null.dev,mn=1-mn$dev/mn$null.dev,mq=1-mq$dev/mq$null.dev)
+
+oldpar<-par(mfrow=c(2,2))
+plot(mg,ask=F)
+plot(mln,ask=F)
+plot(mn,ask=F)
+plot(mq,ask=F)
+par(oldpar)
+
+
+```
 
 ## Binomial and Poisson models 
 
 ### Exercise 22
 
+```{r exercise22, echo=TRUE}
+dd<-read.csv2("./Data/clusters.csv")
+dd<-dd[order(dd$Distance),]
+library(car)
+
+write("___________________________________________________________________","")
+write("a)","")
+
+sp(Cancers~Distance,smooth=F,boxplot=F,dat=dd)
+
+write("___________________________________________________________________","")
+write("b)","")
+
+summary(m1<-glm(Cancers~Distance,family=poisson,data=dd))
+m0<-glm(Cancers~1,family=poisson,data=dd)
+anova(m0,m1,test="Chisq")
+Anova(m1)
+
+(PS<-sum(residuals(m1,type="pearson")^2))
+PS/m1$df.res
+# P value
+2*min(pchisq(PS,m1$df.res),1-pchisq(PS,m1$df.res))
+# IC
+c(qchisq(0.025,m1$df.res),qchisq(0.975,m1$df.res))/m1$df.res
+
+#plot(dd$Distance,rstandard(m1,type='pearson'))
+#abline(h=c(-3,-2,0,2,3),lty=2)
+plot(dd$Distance,rstudent(m1,type='pearson'))
+abline(h=c(-3,-2,0,2,3),lty=2)
+residualPlot(m1,smooth=F)
+
+plot(dd$Distance,dd$Cancers)
+lines(dd$Distance,predict(m1,ty="response"),col="red")
+
+write("___________________________________________________________________","")
+write("c)","")
+
+summary(m2<-glm(Cancers~Distance,family=poisson(link=identity),data=dd))
+m02<-glm(Cancers~1,family=poisson(link=identity),data=dd)
+anova(m02,m2,test="Chisq")
+
+(PS2<-sum(residuals(m2,type="pearson")^2))
+PS2/m2$df.res
+# P value
+2*min(pchisq(PS2,m2$df.res),1-pchisq(PS2,m2$df.res))
+# IC
+c(qchisq(0.025,m2$df.res),qchisq(0.975,m2$df.res))/m1$df.res
+
+#plot(dd$Distance,rstandard(m2,type='pearson'))
+#abline(h=c(-3,-2,0,2,3),lty=2)
+plot(dd$Distance,rstudent(m2,type='pearson'))
+abline(h=c(-3,-2,0,2,3),lty=2)
+residualPlot(m2,smooth=F)
+
+plot(dd$Distance,dd$Cancers,xlim=c(0,250),ylim=c(-1,6),pch=3,cex=.7)
+lines(0:250,exp(coef(m1)[1]+coef(m1)[2]*(0:250)),col="blue")
+lines(0:250,(coef(m2)[1]+coef(m2)[2]*(0:250)),col="red")
+abline(h=0,col="grey")
+abline(v=0,col="grey")
+
+# Opcional
+
+write("___________________________________________________________________","")
+write("d)","")
+
+
+summary(mq<-glm(Cancers~Distance,family=quasipoisson,data=dd))
+m0q<-glm(Cancers~1,family=quasipoisson,data=dd)
+anova(m0q,mq,test="Chisq")
+
+(PSq<-sum(residuals(mq,type="pearson")^2))
+PSq/mq$df.res
+
+
+#plot(dd$Distance,rstandard(mq,type='pearson'))
+#abline(h=c(-3,-2,0,2,3),lty=2)
+plot(dd$Distance,rstudent(mq,type='pearson'))
+abline(h=c(-3,-2,0,2,3),lty=2)
+residualPlot(mq,smooth=F)
+
+
+
+```
+
 ### Exercise 23
+
+```{r exercise23, echo=TRUE}
+dd<-read.csv2("./Data/insecticide.csv")
+library(RcmdrMisc)
+library(car)
+
+write("___________________________________________________________________","")
+write("a)","")
+
+scatterplot(DIED/T~log(DOSE),smooth=F,boxplots=F,data=dd)
+scatterplot(qnorm(DIED/T)~log(DOSE),smooth=F,boxplots=F,data=dd[2:10,])
+
+summary(m0<-lm(qnorm(DIED/T)~log(DOSE),data=dd[which(dd$DIED>0),]))
+
+residualPlot(m0,smooth=F)
+
+with(dd,plot(log(DOSE),DIED/T))
+with(dd[2:10,],lines(log(DOSE),pnorm(predict(m0))))
+
+plot(predict(m0),resid(m0))
+abline(h=0,lty=2)
+
+
+write("___________________________________________________________________","")
+write("b)","")
+
+# probit
+summary(m1<-glm(cbind(DIED,T-DIED)~log(DOSE),family=binomial(link="probit"),data=dd))
+
+PS<-sum(residuals(m1,type="pearson")^2)
+PS/m1$df.res
+
+residualPlot(m1,smooth=F)
+
+plot(log(dd$DOSE),dd$DIED/dd$T)
+lines(log(dd$DOSE),predict(m1,type="response"))
+
+plot(log(dd$DOSE),resid(m1,type="pearson"))
+abline(h=0,lty=2)
+
+pd<-(0:100)
+pih<-predict(m1,data.frame(DOSE=pd),type="response",se.fit=T)
+plot(dd$DOSE,dd$DIED/dd$T,ylim=c(0,1))
+lines(pd,pih$fit)
+lines(pd,pih$fit+1.96*pih$se,col="red")
+lines(pd,pih$fit-1.96*pih$se,col="red")
+abline(h=c(0,1),lty=2)
+
+pd<-exp(seq(from=min(log(dd$DOSE)),to=max(log(dd$DOSE)),length.out = 50))
+pih<-predict(m1,data.frame(DOSE=pd),type="response",se.fit=T)
+plot(log(dd$DOSE),dd$DIED/dd$T,ylim=c(0,1))
+lines(log(pd),pih$fit)
+lines(log(pd),pih$fit+1.96*pih$se,col="red")
+lines(log(pd),pih$fit-1.96*pih$se,col="red")
+abline(h=c(0,1),lty=2)
+
+# logit
+summary(m2<-glm(cbind(DIED,T-DIED)~log(DOSE),family=binomial(link="logit"),data=dd))
+
+PS<-sum(residuals(m2,type="pearson")^2)
+PS/m2$df.res
+
+residualPlot(m2,smooth=F)
+
+plot(log(dd$DOSE),dd$DIED/dd$T)
+lines(log(dd$DOSE),predict(m2,type="response"))
+
+plot(log(dd$DOSE),resid(m2,type="pearson"))
+abline(h=0,lty=2)
+
+# cloglog
+summary(m3<-glm(cbind(DIED,T-DIED)~log(DOSE),family=binomial(link="cloglog"),data=dd))
+
+(PS<-sum(residuals(m3,type="pearson")^2))
+PS/m3$df.residual
+
+sum(residuals(m3,type="deviance")^2)/m3$df.residual
+
+residualPlot(m3,smooth=F)
+
+plot(log(dd$DOSE),dd$DIED/dd$T)
+lines(log(dd$DOSE),predict(m3,type="response"))
+
+plot(log(dd$DOSE),resid(m3,type="pearson"))
+abline(h=0,lty=2)
+
+# optional cloglog quasi
+summary(m4<-glm(cbind(DIED,T-DIED)~log(DOSE),family=quasibinomial(link="cloglog"),data=dd))
+
+(PS<-sum(residuals(m4,type="pearson")^2))
+PS/m4$df.residual
+
+sum(residuals(m4,type="deviance")^2)/m4$df.residual
+
+residualPlot(m4,smooth=F)
+
+plot(log(dd$DOSE),dd$DIED/dd$T)
+lines(log(dd$DOSE),predict(m4,type="response"))
+
+plot(log(dd$DOSE),resid(m4,type="pearson"))
+abline(h=0,lty=2)
+
+#glm(cbind(DIED,T-DIED)~log(DOSE),family=binomial(link="identity"),data=dd)
+# Extras
+
+m1$deviance
+m2$deviance
+m3$deviance
+m4$deviance
+
+m1$deviance/m1$df.residual
+m2$deviance/m2$df.residual
+m3$deviance/m3$df.residual
+m4$deviance/m4$df.residual
+
+logLik(m1)
+logLik(m2)
+logLik(m3)
+logLik(m4)
+
+# Coef.Distribució
+1-m1$deviance/m1$null.deviance
+1-m2$deviance/m2$null.deviance
+1-m3$deviance/m3$null.deviance
+1-m4$deviance/m4$null.deviance
+
+
+```
 
 ### Exercise 24
 
+```{r exercise24, echo=TRUE}
+dd<-read.csv2("./Data/flowers.csv")
+library(car)
+library(emmeans)
+library(tables)
+
+#Descriptiva
+
+cv<-function(x) {sd(x)/mean(x)}
+
+tabular(SUBSTRAT~FLOWERS*((n=1)+mean+sd+cv),dd)
+tabular(SUBSTRAT~sqrt(FLOWERS+3/8)*((n=1)+mean+sd+cv),dd)
+
+write("___________________________________________________________________","")
+write("a1)","")
+
+m0<-lm(FLOWERS~SUBSTRAT,data=dd)
+anova(m0)
+(emm<-emmeans(m0,~SUBSTRAT))
+CLD(emm)
+plot(m0,which=1)
+
+fligner.test(FLOWERS~SUBSTRAT,dd)
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+m01<-lm(sqrt(FLOWERS+3/8)~SUBSTRAT,data=dd)
+anova(m01)
+(emm<-emmeans(m01,~SUBSTRAT))
+CLD(emm)
+#plot(m01,which=1)
+residualPlot(m01,smooth=F)
+
+#fligner.test(sqrt(FLOWERS+3/8)~SUBSTRAT,dd)
+leveneTest(sqrt(FLOWERS+3/8)~SUBSTRAT,dd)
+
+write("___________________________________________________________________","")
+write("b1)","")
+
+summary(m1<-glm(FLOWERS~SUBSTRAT,family=poisson,data=dd))
+logLik(m1)
+sum(residuals(m1,type="pearson")^2)/m1$df.res
+
+residualPlot(m1,smooth=F)
+
+Anova(m1,test="LR")
+(emm<-emmeans(m1,~SUBSTRAT))
+summary(emm,type="response")
+CLD(emm)
+
+write("___________________________________________________________________","")
+write("b2)","")
+
+summary(m2<-glm(FLOWERS~SUBSTRAT,family=poisson(link=identity),data=dd))
+logLik(m2)
+sum(residuals(m2,type="pearson")^2)/m1$df.res
+
+residualPlot(m2,smooth=F)
+
+Anova(m2,test="LR")
+(emm<-emmeans(m2,~SUBSTRAT))
+summary(emm,type="response")
+CLD(emm)
+
+# Extres
+anova(m1,test="LRT")
+anova(m1,test="Chisq")
+Anova(m1,test="LR",ty=3)
+
+```
+
 ### Exercise 25
 
+```{r exercise25, echo=TRUE}
+options(contrasts = c("contr.helmert", "contr.treatment"))
+library(RcmdrMisc)
+library(emmeans)
+library(tables)
+dd<-read.csv2("./Data/seeds.csv")
+
+dd$PRE<-as.factor(dd$PRE)
+dd$TEMP<-as.factor(dd$TEMP)
+
+
+#DESCRIPTIVA
+
+cv<-function(x) {sd(x)/mean(x)}
+tabular((GN/TN)*PRE~((n=1)+mean+sd+cv)*TEMP,dd)
+
+with(dd,plotMeans(GN/TN, TEMP, PRE, error.bars="conf.int", level=0.95))
+with(dd,plotMeans(GN/TN, PRE, TEMP, error.bars="conf.int", level=0.95))
+
+write("___________________________________________________________________","")
+write("a1)","")
+
+summary(m0<-lm(GN/TN~PRE*TEMP,data=dd))
+(emmip(m0,PRE~TEMP,CIs=TRUE))
+(emmip(m0,TEMP~PRE,CIs=TRUE))
+
+Anova(m0)
+emmeans(m0,~PRE*TEMP)
+pairs(emmeans(m0,~PRE|TEMP))
+pairs(emmeans(m0,~PRE*TEMP))
+
+#plot(m0,which=1)
+residualPlot(m0,smooth=F)
+
+write("___________________________________________________________________","")
+write("a2)","")
+
+summary(m01<-lm(asin(sqrt((GN+3/8)/(TN+3/4)))~PRE*TEMP,data=dd))
+(emmip(m01,PRE~TEMP,CIs=TRUE))
+(emmip(m01,TEMP~PRE,CIs=TRUE))
+
+Anova(m01,type=3)
+emmeans(m01,~PRE*TEMP)
+pairs(emmeans(m01,~PRE|TEMP))
+pairs(emmeans(m01,~PRE*TEMP))
+
+#plot(m01,which=1)
+residualPlot(m01,smooth=F)
+
+write("___________________________________________________________________","")
+write("b1)","")
+
+summary(m1<-glm(cbind(GN,TN-GN)~PRE*TEMP,family=binomial,data=dd))
+(emmip(m1,PRE~TEMP,CIs=TRUE))
+(emmip(m1,TEMP~PRE,CIs=TRUE))
+
+logLik(m1)
+sum(residuals(m1,type="pearson")^2)/m1$df.res
+
+#plot(m1,which=1)
+residualPlot(m1,smooth=)
+Anova(m1,test="LR")
+
+(emm<-emmeans(m1,~PRE|TEMP))
+summary(emm,type="response")
+CLD(emm)
+CLD(emmeans(m1,~PRE*TEMP))
+
+write("___________________________________________________________________","")
+write("b2)","")
+
+summary(m2<-glm(cbind(GN,TN-GN)~PRE*TEMP,family=binomial(link="probit"),data=dd))
+(emmip(m2,PRE~TEMP,CIs=TRUE))
+(emmip(m2,TEMP~PRE,CIs=TRUE))
+
+logLik(m2)
+sum(residuals(m2,type="pearson")^2)/m2$df.res
+
+#plot(m2,which=1)
+residualPlot(m2,smooth=F)
+Anova(m2,test="LR")
+
+(emm<-emmeans(m2,~PRE|TEMP))
+summary(emm,type="response")
+CLD(emm)
+CLD(emmeans(m2,~PRE*TEMP))
+
+# Extra
+
+summary(m3<-glm(cbind(GN,TN-GN)~PRE*TEMP,family=binomial(link="identity"),data=dd))
+(emmip(m3,PRE~TEMP,CIs=TRUE))
+(emmip(m3,TEMP~PRE,CIs=TRUE))
+
+logLik(m3)
+sum(residuals(m3,type="pearson")^2)/m3$df.res
+
+#plot(m3,which=1)
+residualPlot(m3,smooth=F)
+Anova(m3,test="LR")
+
+(emm<-emmeans(m3,~PRE|TEMP))
+summary(emm,type="response")
+CLD(emm)
+CLD(emmeans(m3,~PRE*TEMP))
+
+# quiasi
+
+summary(m4<-glm(cbind(GN,TN-GN)~PRE*TEMP,family=quasibinomial(),data=dd))
+(emmip(m4,PRE~TEMP,CIs=TRUE))
+(emmip(m4,TEMP~PRE,CIs=TRUE))
+
+logLik(m4)
+sum(residuals(m4,type="pearson")^2)/m4$df.res
+
+#plot(m4,which=1)
+residualPlot(m4,smooth=F)
+Anova(m4,test="LR")
+
+(emm<-emmeans(m4,~PRE|TEMP))
+summary(emm,type="response")
+CLD(emm)
+CLD(emmeans(m4,~PRE*TEMP))
+
+
+```
+
 ### Exercise 26
+
+```{r exercise26, echo=TRUE}
+
+```
 
 ## Advanced exercises
 
 ### Exercise 27
 
+```{r exercise27, echo=TRUE}
+
+```
+
 ### Exercise 28
+
+```{r exercise28, echo=TRUE}
+
+```

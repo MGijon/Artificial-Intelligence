@@ -1,0 +1,197 @@
+\documentclass[english,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Exercises},
+            pdfauthor={Manuel Gijón Agudo},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=english]{babel}
+\else
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\fi
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Exercises}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Manuel Gijón Agudo}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{8/12/2018}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Linear Models}\label{linear-models}
+
+\subsection{Linear Regression}\label{linear-regression}
+
+\subsubsection{Exercise 1}\label{exercise-1}
+
+It is well known that the excess of weight is one of the factors that
+has a negative influence in the cholesterol level of human beings. In an
+experiment with children from 9 to 20 years old, measures of their
+cholesterol level (C), the weight (W) the height (H) and the age (A)
+have been recorded. The data appear in file COL.csv. 1. Compute the
+regression line for modeling the cholesterol as a function of weight. 2.
+Plot the regression line jointly with the confidence intervals and the
+prediction intervals. 3. Perform the appropriate plots to check: 1.
+Tendency and homogeneity of variances. Plot the residuals as a function
+of the predicted values. 2. Outliers. Plot the studentized residuals as
+a function of any of the predictors, observation number \ldots{} jointly
+with the horizontal lines at −2 and 2. 3. Influence values. Plot the
+dffits as a function of any of the following variables: predicted
+values, observation number \ldots{}; jointly with the horizontal lines
+at \(2 \sqrt(\frac{p}{n})\)
+
+\subsubsection{Exercise 2}\label{exercise-2}
+
+\subsubsection{Exercise 3}\label{exercise-3}
+
+\subsubsection{Exercise 4}\label{exercise-4}
+
+\subsubsection{Exercise 5}\label{exercise-5}
+
+\subsection{One Way Anova}\label{one-way-anova}
+
+\subsubsection{Exercise 6}\label{exercise-6}
+
+\subsubsection{Exercise 7}\label{exercise-7}
+
+\subsubsection{Exercise 8}\label{exercise-8}
+
+\subsection{Two way and more than Two way
+ANOVA}\label{two-way-and-more-than-two-way-anova}
+
+\subsubsection{Exercise 9}\label{exercise-9}
+
+\subsubsection{Exercise 10}\label{exercise-10}
+
+\subsubsection{Exercise 11}\label{exercise-11}
+
+\subsubsection{Exercise 12}\label{exercise-12}
+
+\subsubsection{Exercise 13}\label{exercise-13}
+
+\subsection{ANCOVA: Analysis of
+covariance}\label{ancova-analysis-of-covariance}
+
+\subsubsection{Exercise 14}\label{exercise-14}
+
+\subsubsection{Exercise 15}\label{exercise-15}
+
+\subsubsection{Exercise 16}\label{exercise-16}
+
+\section{Generalized Linear Models}\label{generalized-linear-models}
+
+\subsection{General formulation}\label{general-formulation}
+
+\subsubsection{Exercise 17}\label{exercise-17}
+
+\subsection{Continuous models}\label{continuous-models}
+
+\subsubsection{Exercise 18}\label{exercise-18}
+
+\subsubsection{Exercise 19}\label{exercise-19}
+
+\subsubsection{Exercise 20}\label{exercise-20}
+
+\subsubsection{Exercise 21}\label{exercise-21}
+
+\subsection{Binomial and Poisson
+models}\label{binomial-and-poisson-models}
+
+\subsubsection{Exercise 22}\label{exercise-22}
+
+\subsubsection{Exercise 23}\label{exercise-23}
+
+\subsubsection{Exercise 24}\label{exercise-24}
+
+\subsubsection{Exercise 25}\label{exercise-25}
+
+\subsubsection{Exercise 26}\label{exercise-26}
+
+\subsection{Advanced exercises}\label{advanced-exercises}
+
+\subsubsection{Exercise 27}\label{exercise-27}
+
+\subsubsection{Exercise 28}\label{exercise-28}
+
+
+\end{document}
