@@ -1,5 +1,6 @@
 from sklearn import datasets
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 bh = datasets.load_boston()
@@ -23,7 +24,7 @@ plt.hist(y, 50)
 plt.title('Boston Houses Prices')
 plt.ylabel('Prices')
 plt.xlabel('')
-plt.savefig('Boston_house_prices_data_exploration_1.png')
+#plt.savefig('Boston_house_prices_data_exploration_1.png')
 plt.show()
 
 # Scatterplot Crim/Age/Dis vs. prices
@@ -52,12 +53,7 @@ for i in range(X.shape[1]):
 
 print(Correlations_matrix)
 
-# eliminate the 1's from the diagonal
-for i in range(X.shape[1])_
-    Correlations_matrix[i, i] = 0
 
-# look for the maximun value:
-# tengo que usar reshape y buscar los valores, o puedo directamente??
 '''
 
 
