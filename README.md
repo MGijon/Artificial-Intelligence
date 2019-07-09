@@ -1,4 +1,4 @@
-# Machine-Learning
+# Artificial Intelligence
 This code is just for my own learning purpose.
 
 ***
@@ -19,4 +19,3 @@ This code is just for my own learning purpose.
 
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
 
-8. **Standford Coursera**: Coursera material

@@ -256,7 +256,7 @@ vif(mod3)
 ### Exercise 4
 
 ```{r exercise4, echo=TRUE}
-dd <- read.csv2("dcrown.csv")
+dd <- read.csv2("./Data/dcrown.csv")
 library(car)
 
 dd$RP<-dd$PB/dd$PT
@@ -942,7 +942,7 @@ for (v in names(dd)[c(-1,-2)]){
 ### Exercise 10
 
 ```{r exercise10, echo=TRUE}
-dd <- read.csv2("cheese.csv")
+dd <- read.csv2("./Data/cheese.csv")
 library(tables)
 library(emmeans)
 library(car)
@@ -1081,7 +1081,7 @@ par(oldpar)
 ### Exercise 14
     
 ```{r exercise14, echo=TRUE}
-dd<-read.csv2("comp line.csv")
+dd<-read.csv2("./Data/comp line.csv")
 dd$M<-as.factor(dd$M)
 #options(contrasts = c("contr.sum", "contr.treatment"))
 library(emmeans)
@@ -1256,7 +1256,7 @@ pairs(emm3)
 
 ```{r exercise18, echo=TRUE}
 library(car)
-dd <- read.csv2("diaryp.csv")
+dd <- read.csv2("./Data/diaryp.csv")
 dd$lDays<-log(dd$Days)
 
 sp(PROD~Days, smooth=F, boxplots=F, data=dd)
@@ -1370,7 +1370,7 @@ sp(sqrt(abs(resid(mq,ty="pearson")))~predict(mg),boxplots=F,smooth=F)
 library(RcmdrMisc)
 library(emmeans)
 
-dd <- read.csv2("ci.csv")
+dd <- read.csv2("./Data/ci.csv")
 library(tables)
 
 #DESCRIPTIVA
@@ -1450,7 +1450,7 @@ em3
 
 ```{r exercise20, echo=TRUE}
 library(emmeans)
-dd<-read.csv2("area.csv")
+dd<-read.csv2("./Data/area.csv")
 head(dd)
 library(RcmdrMisc)
 library(tables)
@@ -1608,7 +1608,7 @@ c(m01=summary(m01)$adj.r.squared,m02=summary(m02)$adj.r.squared,m03=summary(m03)
 ### Exercise 21
 
 ```{r exercise21, echo=TRUE}
-dd<-read.csv2("vitc.csv")
+dd<-read.csv2("./Data/vitc.csv")
 library(RcmdrMisc)
 library(emmeans)
 library(tables)
