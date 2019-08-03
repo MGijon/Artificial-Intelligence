@@ -7,7 +7,7 @@
 1. **Data Exploration**:
     Examples of data exploration.
 
-2. **Clasification - Supervised Learning**:
+2. **Supervised Learning**:
 
 ··* Linear regression
 ⋅⋅* Logistic regression
@@ -15,7 +15,7 @@
 ⋅⋅* PCA
 ⋅⋅* Random forest
 
-3. **Clustering - Unsupervised Learning**:
+3. **Unsupervised Learning**:
 
 ⋅⋅* Density based
 ⋅⋅* Hierarchy

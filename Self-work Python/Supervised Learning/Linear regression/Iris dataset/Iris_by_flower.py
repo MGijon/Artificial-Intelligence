@@ -1,13 +1,14 @@
 '''
-    Regression models for each caracteristic (sepal and petal size) or each flower, not a
-    classification problem.
+    Regression models for each caracteristic (sepal and petal size) or each flower.
 '''
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
+import os
 
 iris = datasets.load_iris()
 
@@ -16,7 +17,6 @@ Y = iris.target
 
 flowers = iris.target_names
 features = iris.feature_names
-features
 # print(X[:, :2]) # two first features: sepal length (cm) and sepal width (cm)
 
 ## ===== ##
@@ -42,7 +42,7 @@ plt.legend()
 plt.xlabel('Sepal length (cm)')
 plt.ylabel('Sepal Width (cm)')
 plt.title('Iris: Sepal size')
-#plt.savefig('Iris sepal size')
+#plt.savefig('Images/Iris sepal size')
 plt.show()
 
 # ------ #
@@ -68,7 +68,7 @@ plt.plot(SL_Setosa_test, prediction, color = 'r', label = 'Predict values')
 plt.title('')
 plt.legend()
 plt.title('Sepal Setosa size regression')
-#plt.savefig('Sepal Setosa regression')
+#plt.savefig('Images/Sepal Setosa regression')
 plt.show()
 
 # ---------- #
@@ -93,7 +93,7 @@ plt.plot(SL_Versicolor_test, prediction, color = 'r', label = 'Predict values')
 plt.title('')
 plt.legend()
 plt.title('Sepal Versicolor size regression')
-#plt.savefig('Sepal Versicolor regression')
+#plt.savefig('Images/Sepal Versicolor regression')
 plt.show()
 
 
@@ -119,7 +119,7 @@ plt.plot(SL_Virginica_test, prediction, color = 'r', label = 'Predict values')
 plt.title('')
 plt.legend()
 plt.title('Sepal Virginica size regression')
-#plt.savefig('Sepal Virginica regression')
+#plt.savefig('Images/Sepal Virginica regression')
 plt.show()
 
 
@@ -149,7 +149,7 @@ plt.legend()
 plt.xlabel('Petal length (cm)')
 plt.ylabel('Petal Width (cm)')
 plt.title('Iris: Petal size')
-#plt.savefig('Iris petal size')
+#plt.savefig('Images/Iris petal size')
 plt.show()
 
 
@@ -175,7 +175,7 @@ plt.scatter(PL_Setosa_test, PW_Setosa_test, color = 'b', label = 'Data values')
 plt.plot(PL_Setosa_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Setosa size regression')
-#plt.savefig('Petal Setosa regression')
+#plt.savefig('Images/Petal Setosa regression')
 plt.show()
 
 # ---------- #
@@ -199,7 +199,7 @@ plt.scatter(PL_Versicolor_test, PW_Versicolor_test, color = 'b', label = 'Data v
 plt.plot(PL_Versicolor_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Versicolor size regression')
-#plt.savefig('Petal Versicolor regression')
+#plt.savefig('Images/Petal Versicolor regression')
 plt.show()
 
 # --------- #
@@ -223,5 +223,5 @@ plt.scatter(PL_Virginica_test, PW_Virginica_test, color = 'b', label = 'Data val
 plt.plot(PL_Virginica_test, prediction, color = 'r', label = 'Predict values')
 plt.legend()
 plt.title('Petal Virginica size regression')
-#plt.savefig('Petal Virginica regression')
+#plt.savefig('ImagesPetal Virginica regression')
 plt.show()
