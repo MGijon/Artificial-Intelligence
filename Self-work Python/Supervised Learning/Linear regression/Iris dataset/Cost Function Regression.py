@@ -30,7 +30,7 @@ sepal_width_Virginica = X[:, 1][100:150]
 #print(np.corrcoef(sepal_length_Versicolor, sepal_width_Versicolor)) # 0.52591072
 #print(np.corrcoef(sepal_length_Virginica, sepal_width_Virginica)) # 0.45722782
 
-## Let's tray to predict the value of Sepal Lenght for the Setosa with the data of Sepal Width (Setosa)
+## Let's try to predict the value of Sepal Lenght for the Setosa with the data of Sepal Width (Setosa)
 ## and study the efect of the Learning Rate on the Gradient Descent Algorithem for the Linear Regression.
 ## ------------------------------------------------------------------------------------------------------
 
@@ -69,8 +69,35 @@ plt.plot(iterations, data_theta1, label="Slop")
 plt.title("Gradient Descent algorithm for Linear Regression")
 plt.xlabel("Number of iterations")
 plt.legend()
-plt.savefig("Images/GDConvergence")
+#plt.savefig("Images/GDConvergence")
 plt.show()
 
+
+## Let's print the Cost Function
+## -----------------------------
+
+
+def cost_function(theta0, theta1, m=len(X)):
+	constant = 1 / (2 * m) 
+	cost = 0
+	for observation in range(0, len(X)):
+			cost += np.power((theta0 + theta1*X[observation]) - Y[observation], 2)
+
+
+	return cost*constant
+
+
+cost_function_values = []
+
+for i in range(batch):
+	cost_function_values.append(cost_function(data_theta0[i], data_theta1[i]))
+
+plt.figure(figsize=(20, 14))
+plt.plot(iterations, cost_function_values)
+plt.title("Cost Funcion evolution applying GD for Linear Regression")
+plt.xlabel("Number of iterations")
+plt.legend()
+plt.savefig("Images/Cost Function")
+plt.show()
 
 
