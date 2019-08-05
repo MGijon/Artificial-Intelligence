@@ -44,3 +44,7 @@ plt.xticks(())
 plt.yticks(())
 plt.savefig("Images/iris_Sepal_LR.png")
 plt.show()
+
+
+# https://seaborn.pydata.org/generated/seaborn.scatterplot.html
+# https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
