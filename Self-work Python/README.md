@@ -11,13 +11,13 @@
 
 ··* Linear regression
 ⋅⋅* Logistic regression
-⋅⋅* Decision tree
-⋅⋅* PCA
-⋅⋅* Random forest
+⋅⋅* Decision tree (cooming soon)
+⋅⋅* PCA (cooming soon)
+⋅⋅* Random forest (cooming soon)
 
 3. **Unsupervised Learning**:
 
-⋅⋅* Density based
-⋅⋅* Hierarchy
-⋅⋅* K.means
-⋅⋅* PAM
+⋅⋅* Density based (cooming soon)
+⋅⋅* Hierarchy (cooming soon)
+⋅⋅* K.means (cooming soon)
+⋅⋅* PAM (cooming soon)

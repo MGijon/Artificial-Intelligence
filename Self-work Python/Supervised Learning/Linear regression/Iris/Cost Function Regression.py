@@ -63,7 +63,7 @@ iterations = [x for x in range(0, batch)]
 data_theta0 = [x[1] for x in parameters]
 data_theta1 = [x[2] for x in parameters]
 
-plt.figure(figsize=(20, 14))
+#plt.figure(figsize=(20, 14))
 plt.plot(iterations, data_theta0, label="Intercept")
 plt.plot(iterations, data_theta1, label="Slop")
 plt.title("Gradient Descent algorithm for Linear Regression")
@@ -83,7 +83,6 @@ def cost_function(theta0, theta1, m=len(X)):
 	for observation in range(0, len(X)):
 			cost += np.power((theta0 + theta1*X[observation]) - Y[observation], 2)
 
-
 	return cost*constant
 
 
@@ -92,12 +91,12 @@ cost_function_values = []
 for i in range(batch):
 	cost_function_values.append(cost_function(data_theta0[i], data_theta1[i]))
 
-plt.figure(figsize=(20, 14))
+#plt.figure(figsize=(20, 14))
 plt.plot(iterations, cost_function_values)
 plt.title("Cost Funcion evolution applying GD for Linear Regression")
 plt.xlabel("Number of iterations")
 plt.legend()
-plt.savefig("Images/Cost Function")
+#plt.savefig("Images/Cost Function")
 plt.show()
 
 
