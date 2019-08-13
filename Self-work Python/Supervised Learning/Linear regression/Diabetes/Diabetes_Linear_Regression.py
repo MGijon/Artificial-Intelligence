@@ -3,9 +3,19 @@ import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
+def preprocess_and_split(data):
+
+    return None
+
+def execute_lineal_regression(X, y):
+
+    return X, y
 
 if __name__ == '__main__':
     diabetes = datasets.load_diabetes()
+
+    preprocess_and_split(data = diabetes)
+
     X = diabetes.data[:, np.newaxis, 2]
     X_train = X[:-20]
     X_test = X[-20:]
