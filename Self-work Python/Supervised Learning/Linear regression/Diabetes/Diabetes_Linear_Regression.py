@@ -3,39 +3,36 @@ import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
-def preprocess_and_split(data):
-
-    return None
+def preprocess_and_split(dataset):
+    # in this case, there wont be pre-processino
+    X = dataset.data[:, np.newaxis, 2]
+    y = dataset.target
+    # split the data
+    X_train = X[:-20]
+    X_test = X[-20:]
+    y_train = y[:-20]
+    y_test = y[-20:]
+    return X_train, y_train, X_test, y_test
 
 def execute_lineal_regression(X, y):
-
-    return X, y
+    # regression object
+    regression = linear_model.LinearRegression()
+    # training
+    regression.fit(X, y)
+    # prediction
+    prediction = regression.predict(X_test)
+    return regression, prediction
 
 if __name__ == '__main__':
     diabetes = datasets.load_diabetes()
 
-    preprocess_and_split(data = diabetes)
+    X_train, y_train, X_test, y_test = preprocess_and_split(dataset = diabetes)
 
-    X = diabetes.data[:, np.newaxis, 2]
-    X_train = X[:-20]
-    X_test = X[-20:]
-    y_train = diabetes.target[:-20]
-    y_test = diabetes.target[-20:]
-
-    # regression object
-    regression = linear_model.LinearRegression()
-
-    # training
-    regression.fit(X_train, y_train)
-
-    # prediction
-    y_pred = regression.predict(X_test)
+    regression, y_pred = execute_lineal_regression(X=X_train, y=y_train)
 
     # plotting
     print('Coeficients: \n', regression.coef_)  # [ 938.23786125]
-
     print("Mean squared error: \n %.2f" % mean_squared_error(y_test, y_pred))  # 2548.07
-
     print('Variance Score: \n %.2f' % r2_score(y_test, y_pred))  # 0.47
 
     plt.scatter(X_test, y_test, color='b', label='Data values')
