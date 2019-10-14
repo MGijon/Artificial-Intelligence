@@ -13,6 +13,9 @@ This code is just for my own learning purpose.
 
 4. **Embeddings** : different examples and self-work with embeddings.
 
-5. **Standford Standford Machine Learning course** (Coursera, [link](https://www.coursera.org/learn/machine-learning?)).
+5. **Standford Standford Machine Learning course** (Coursera, [link](https://www.coursera.org/learn/machine-learning?)). October 2019 - Now
+
+6. **Curso de Machine Learning Aplicado con Python** (Platzi, [link](https://platzi.com/clases/scikit/)). October 2019 - Now
+
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
 
