@@ -15,9 +15,11 @@ This code is just for my own learning purpose.
 
 5. **Standford Standford Machine Learning course** (Coursera, [link](https://www.coursera.org/learn/machine-learning?)). October 2019 - Now
 
-6. **Curso de Machine Learning Aplicado con Python** (Platzi, [link](https://platzi.com/clases/scikit/)). October 2019 - Now
+6. **Curso de Machine Learning Aplicado con Python** (Platzi, [link](https://platzi.com/clases/scikit/)). October 2019.
 
-7. **Curso de Introducción al Deep Learninig** (Platzi, [link](https://platzi.com/cursos/ia/)).
+7. **Curso de Introducción al Deep Learninig** (Platzi, [link](https://platzi.com/cursos/ia/)). October 2019 - Now.
+
+***
 
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
 
