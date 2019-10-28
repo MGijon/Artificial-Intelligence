@@ -93,8 +93,3 @@ for i in range(0, len(theta_0_vals)):
                               theta=theta_temporal)
 
 plotJ(x=theta_0_vals, y=theta_1_vals, z=J)
-
-
-
-## Estoy ya muy cansado de esta mierda y quierp irme a casa a mastu****
-## quiero irme a casa de una maldita vez
