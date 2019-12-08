@@ -17,8 +17,9 @@ This code is just for my own learning purpose.
 
 6. **Curso de Machine Learning Aplicado con Python** (Platzi, [link](https://platzi.com/clases/scikit/)). October 2019.
 
-7. **Curso de Introducción al Deep Learninig** (Platzi, [link](https://platzi.com/cursos/ia/)). October 2019 - Now.
+7. **Deeplearning.ai Neural Networks and Deep Learning** (Coursera, [link](https://www.coursera.org/learn/neural-networks-deep-learning?)). November - December 2019.
 
+8. **Curso de Introducción al Deep Learninig** (Platzi, [link](https://platzi.com/cursos/ia/)). Cooming soon...
 ***
 
    [My profile in Kaggle](https://www.kaggle.com/mgijon)
